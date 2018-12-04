@@ -5,13 +5,17 @@
 #include "observer.h"
 #include "subject.h"
 #include "client.h"
+#include <QImageReader>
+#include <QDebug>
+
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-    qDebug() << "test";
+
+    qDebug() << "testing---------------";
 
     Singleton::GetInstance()->singlePrint();
 
@@ -23,7 +27,9 @@ int main(int argc, char *argv[])
     subject->notify();
     subject->notify();
 
-    qDebug() << "main end";
+    //qDebug() << "main end";
+    qDebug() << "Supported formats:" << QImageReader::supportedImageFormats();
+
 
 
     return a.exec();

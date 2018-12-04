@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,12 +29,14 @@ SOURCES += main.cpp\
     singleton.cpp \
     subject.cpp \
     observer.cpp \
-    client.cpp
+    client.cpp \
+    serialport.cpp
 
 HEADERS  += mainwindow.h \
     singleton.h \
     subject.h \
     observer.h \
-    client.h
+    client.h \
+    serialport.h
 
 FORMS    += mainwindow.ui
