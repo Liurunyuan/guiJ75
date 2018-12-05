@@ -3,12 +3,14 @@
 
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QDebug>
 
 
 class Serialport : public QSerialPort
 {
 public:
     Serialport();
+    void scanPort();
 };
 
 #endif // SERIALPORT_H

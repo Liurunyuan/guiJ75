@@ -7,13 +7,17 @@
 #include "client.h"
 #include <QImageReader>
 #include <QDebug>
+#include "serialport.h"
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    //MainWindow::getInstance()->show();
     MainWindow w;
     w.show();
+
+    MainWindow::getInstance()->testPrint();
 
     qDebug() << "testing---------------";
 
@@ -26,6 +30,9 @@ int main(int argc, char *argv[])
     subject->notify();
     subject->notify();
     subject->notify();
+
+    Serialport *serial = new Serialport();
+    serial->scanPort();
 
     //qDebug() << "main end";
     qDebug() << "Supported formats:" << QImageReader::supportedImageFormats();

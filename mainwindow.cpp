@@ -32,3 +32,19 @@ void MainWindow::paintEvent(QPaintEvent *event)
     qDebug() << "paint event";
     p.drawPixmap(0,0,width(), height(), QPixmap("/home/pi/Pictures/heike2.jpg"));
 }
+
+MainWindow* MainWindow::getInstance()
+{
+    if(mainWindow == NULL)
+    {
+        mainWindow = new MainWindow();
+    }
+    return mainWindow;
+
+}
+void MainWindow::testPrint()
+{
+    qDebug() << "test print";
+}
+
+MainWindow* MainWindow::mainWindow = NULL;
