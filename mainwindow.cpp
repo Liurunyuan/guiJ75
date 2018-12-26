@@ -110,7 +110,6 @@ MainWindow::~MainWindow()
 void MainWindow::paintEvent(QPaintEvent *event)
 {
     QPainter p(this);
-    qDebug() << "paint event";
     p.drawPixmap(0,0,width(), height(), QPixmap("/home/pi/Pictures/heike2.jpg"));
 }
 
@@ -131,7 +130,6 @@ void MainWindow::testPrint()
 void MainWindow::refreshLCD()
 {
     ++num_lcd;
-    qDebug() << "refresh";
     QDateTime dateTime = QDateTime::currentDateTime();
     ui->lcdNumber->display(dateTime.toString("yyyy-MM-dd HH:mm:ss.zzz"));
 }

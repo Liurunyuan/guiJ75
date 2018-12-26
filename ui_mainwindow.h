@@ -122,10 +122,10 @@ public:
         lcdNumber->setFrameShadow(QFrame::Raised);
         testbtn = new QPushButton(centralWidget);
         testbtn->setObjectName(QStringLiteral("testbtn"));
-        testbtn->setGeometry(QRect(220, 370, 101, 31));
+        testbtn->setGeometry(QRect(140, 380, 71, 31));
         widget = new QCustomPlot(centralWidget);
         widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(300, 100, 341, 181));
+        widget->setGeometry(QRect(240, 100, 561, 431));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));

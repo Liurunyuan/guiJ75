@@ -70,8 +70,6 @@ void Serialport::readData()
         readComData.append(tmp);
         if(readComData.contains(tail))
         {
-
-            qDebug() << "we find the tail of data strcture";
             //ui->textEditReceive->setText(byteArray.split('#').at(0));
             //readComData = readComData.right(readComData.length()-readComData.indexOf(tail)-1);
         }
@@ -91,4 +89,19 @@ QByteArray Serialport::getDisplayArray()
 QVector<QString> Serialport::getAvailablePort()
 {
     return availablePort;
+}
+
+int Serialport::calCrc(int crc, const char *buf, int len)
+{
+    int x;
+    int i;
+
+    for(i = 0; i < len; ++i)
+    {
+        x = ((crc >> 8) ^ buf[i]) & 0xff;
+        x ^= x >> 4;
+        crc = (crc << 8) ^ (x << 12) ^ (x << 5) ^ x;
+        crc &= 0xffff;
+    }
+    return crc;
 }
