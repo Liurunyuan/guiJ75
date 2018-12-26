@@ -31,8 +31,10 @@ void MainWindow::initialUI()
     connect(timer1, SIGNAL(timeout()), this, SLOT(refreshLCD()));
     timer1->start();
 
-
-    num_lcd = 0;
+    timer2 = new QTimer(this);
+    timer2->setInterval(10);
+    connect(timer2, SIGNAL(timeout()), this, SLOT(updatePlot()));
+    timer2->start();
 
     // 设置能显示的位数
     ui->lcdNumber->setDigitCount(25);
@@ -43,6 +45,27 @@ void MainWindow::initialUI()
     // 设置样式
     //ui->lcdNumber->setStyleSheet("border: 1px solid green; color: green; background: silver;");
     ui->lcdNumber->setStyleSheet("background-color: rgb(255, 255, 255, 10);color: white;");
+}
+
+void MainWindow::updatePlot()
+{
+    static int x = 0;
+    static int y = 0;
+    QByteArray tmp;
+    if(this->serialPort->isReadQEmpty())
+    {
+        return;
+    }
+    tmp = this->serialPort->getDisplayArray();
+    qDebug() << tmp.toHex();
+    y = tmp[12];
+
+    qDebug() << "on test button clicked";
+    ui->widget->graph(0)->addData(x,y);
+    ui->widget->graph(0)->rescaleAxes(true);
+    ui->widget->xAxis->setRange(x, 8, Qt::AlignRight);
+    ui->widget->replot();
+    ++x;
 }
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -99,11 +122,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     updateSerialInfo();
+
+    task1 = new MyThread();
+    task1->start();
+//    mThread1 = new QThread(this);
+//    //this->moveToThread(mThread1);
+
+//    connect(mThread1, SIGNAL(started()),this,SLOT(display()));
+//    mThread1->start();
 }
 
 MainWindow::~MainWindow()
 {
     delete timer1;
+    delete timer2;
     delete ui;
 }
 
@@ -129,7 +161,6 @@ void MainWindow::testPrint()
 
 void MainWindow::refreshLCD()
 {
-    ++num_lcd;
     QDateTime dateTime = QDateTime::currentDateTime();
     ui->lcdNumber->display(dateTime.toString("yyyy-MM-dd HH:mm:ss.zzz"));
 }
@@ -158,12 +189,28 @@ void MainWindow::on_testbtn_clicked()
 {
     static int x = 0;
     static int y = 0;
+    QByteArray tmp;
+    if(this->serialPort->isReadQEmpty())
+    {
+        return;
+    }
+    tmp = this->serialPort->getDisplayArray();
+    qDebug() << tmp.toHex();
+    y = tmp[12];
+
     qDebug() << "on test button clicked";
     ui->widget->graph(0)->addData(x,y);
     ui->widget->graph(0)->rescaleAxes(true);
     ui->widget->xAxis->setRange(x, 8, Qt::AlignRight);
     ui->widget->replot();
-
     ++x;
-    ++y;
+    //++y;
+}
+
+void MainWindow::display()
+{
+    while(1){
+        qDebug() << "mThread1";
+        QThread::sleep(3);
+    }
 }

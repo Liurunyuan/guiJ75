@@ -11,6 +11,8 @@
 #include <QString>
 #include <QByteArray>
 
+const char packageHead[2] = {0x5a, 0x5a};
+const char packageTail[2] = {0xa5, 0xa5};
 
 class Serialport : public QSerialPort
 {
@@ -24,13 +26,13 @@ public:
     int calCrc(int crc, const char* buf, int len);
     QByteArray getDisplayArray();
     QVector<QString> getAvailablePort();
+    int isReadQEmpty();
 private slots:
     void readData();
 
 private:
     QVector<QString> availablePort;
     QByteArray readComData;
-    QByteArray tail;
     QQueue<QByteArray> readStringQ;
 };
 

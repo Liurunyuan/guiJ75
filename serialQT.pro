@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     observer.cpp \
     client.cpp \
     serialport.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    mythread.cpp
 
 HEADERS  += mainwindow.h \
     singleton.h \
@@ -39,6 +40,7 @@ HEADERS  += mainwindow.h \
     observer.h \
     client.h \
     serialport.h \
-    qcustomplot.h
+    qcustomplot.h \
+    mythread.h
 
 FORMS    += mainwindow.ui

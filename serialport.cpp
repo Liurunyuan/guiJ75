@@ -4,10 +4,6 @@
 Serialport::Serialport()
 {
     readComData.clear();
-    tail.push_back(0xa5);
-    tail.push_back(0xa5);
-
-
     //readStringQ.clear();
 }
 
@@ -63,15 +59,25 @@ bool Serialport::configPort(bool isOpen, QString portName)
 
 void Serialport::readData()
 {
+    int headpos = -1;
+    int tailpos = -1;
     QByteArray tmp = this->readAll();
     if(!tmp.isEmpty())
     {
-        readStringQ.enqueue(tmp);
+
         readComData.append(tmp);
-        if(readComData.contains(tail))
+        headpos = readComData.indexOf(packageHead);
+        tailpos = readComData.indexOf(packageTail);
+        if((headpos != -1) && (tailpos != -1))
         {
+//            qDebug() << "length = " << readComData.length();
+//            qDebug() << "head position =" << readComData.indexOf(packageHead);
+//            qDebug() << "tail position =" << readComData.indexOf(packageTail);
+//            qDebug() << readComData.toHex();
+
             //ui->textEditReceive->setText(byteArray.split('#').at(0));
-            //readComData = readComData.right(readComData.length()-readComData.indexOf(tail)-1);
+            readStringQ.enqueue(readComData);
+            readComData = readComData.right(readComData.length()-readComData.indexOf(packageTail)-2);
         }
     }
 }
@@ -89,6 +95,11 @@ QByteArray Serialport::getDisplayArray()
 QVector<QString> Serialport::getAvailablePort()
 {
     return availablePort;
+}
+
+int Serialport::isReadQEmpty()
+{
+    return readStringQ.isEmpty();
 }
 
 int Serialport::calCrc(int crc, const char *buf, int len)
