@@ -31,11 +31,7 @@ int main(int argc, char *argv[])
     subject->notify();
     subject->notify();
 
-    Serialport *serial = new Serialport();
-    serial->scanPort();
-
-    //qDebug() << "main end";
-    qDebug() << "Supported formats:" << QImageReader::supportedImageFormats();
+//    qDebug() << "Supported formats:" << QImageReader::supportedImageFormats();
 
 
 

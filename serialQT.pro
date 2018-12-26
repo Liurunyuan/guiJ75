@@ -7,7 +7,7 @@
 QT       += core gui
 QT       += serialport
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = serialQT
 TEMPLATE = app
@@ -30,13 +30,15 @@ SOURCES += main.cpp\
     subject.cpp \
     observer.cpp \
     client.cpp \
-    serialport.cpp
+    serialport.cpp \
+    qcustomplot.cpp
 
 HEADERS  += mainwindow.h \
     singleton.h \
     subject.h \
     observer.h \
     client.h \
-    serialport.h
+    serialport.h \
+    qcustomplot.h
 
 FORMS    += mainwindow.ui
