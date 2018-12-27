@@ -55,7 +55,8 @@ SOURCES       = main.cpp \
 		observer.cpp \
 		client.cpp \
 		serialport.cpp \
-		qcustomplot.cpp moc_mainwindow.cpp \
+		qcustomplot.cpp \
+		mythread.cpp moc_mainwindow.cpp \
 		moc_serialport.cpp \
 		moc_qcustomplot.cpp
 OBJECTS       = main.o \
@@ -66,6 +67,7 @@ OBJECTS       = main.o \
 		client.o \
 		serialport.o \
 		qcustomplot.o \
+		mythread.o \
 		moc_mainwindow.o \
 		moc_serialport.o \
 		moc_qcustomplot.o
@@ -136,14 +138,16 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		observer.h \
 		client.h \
 		serialport.h \
-		qcustomplot.h main.cpp \
+		qcustomplot.h \
+		mythread.h main.cpp \
 		mainwindow.cpp \
 		singleton.cpp \
 		subject.cpp \
 		observer.cpp \
 		client.cpp \
 		serialport.cpp \
-		qcustomplot.cpp
+		qcustomplot.cpp \
+		mythread.cpp
 QMAKE_TARGET  = serialQT
 DESTDIR       = 
 TARGET        = serialQT
@@ -304,8 +308,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h singleton.h subject.h observer.h client.h serialport.h qcustomplot.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp singleton.cpp subject.cpp observer.cpp client.cpp serialport.cpp qcustomplot.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h singleton.h subject.h observer.h client.h serialport.h qcustomplot.h mythread.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp singleton.cpp subject.cpp observer.cpp client.cpp serialport.cpp qcustomplot.cpp mythread.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -336,6 +340,7 @@ compiler_moc_header_make_all: moc_mainwindow.cpp moc_serialport.cpp moc_qcustomp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_serialport.cpp moc_qcustomplot.cpp
 moc_mainwindow.cpp: serialport.h \
+		mythread.h \
 		mainwindow.h \
 		/usr/lib/arm-linux-gnueabihf/qt5/bin/moc
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/serialQT -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtPrintSupport -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtSerialPort -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/6 -I/usr/include/arm-linux-gnueabihf/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/arm-linux-gnueabihf/6/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/6/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include mainwindow.h -o moc_mainwindow.cpp
@@ -370,6 +375,7 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 
 main.o: main.cpp mainwindow.h \
 		serialport.h \
+		mythread.h \
 		singleton.h \
 		observer.h \
 		subject.h \
@@ -378,7 +384,9 @@ main.o: main.cpp mainwindow.h \
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
 		serialport.h \
-		ui_mainwindow.h
+		mythread.h \
+		ui_mainwindow.h \
+		qcustomplot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 singleton.o: singleton.cpp singleton.h
@@ -398,11 +406,15 @@ client.o: client.cpp client.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o client.o client.cpp
 
 serialport.o: serialport.cpp serialport.h \
-		mainwindow.h
+		mainwindow.h \
+		mythread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o serialport.o serialport.cpp
 
 qcustomplot.o: qcustomplot.cpp qcustomplot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qcustomplot.o qcustomplot.cpp
+
+mythread.o: mythread.cpp mythread.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mythread.o mythread.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

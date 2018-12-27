@@ -2,95 +2,39 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 
-void MainWindow::updateSerialInfo()
-{
-    serialPort = new Serialport();
-    serialPort->scanPort();
 
-    for(auto it : serialPort->getAvailablePort())
-    {
-        ui->comBox->addItem(it);
-    }
-}
-
-void MainWindow::initialUI()
-{
-//    ui->sendButton->setIcon(QIcon("/home/pi/Pictures/heike1.jpg"));
-//    ui->sendButton->setIconSize(QSize(101, 30));
-
-    ui->txDataInput->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
-    ui->rxDataDisplay->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
-    //ui->txDataInput->setTextColor(QColor("green"));
-    ui->txDataInput->append("<font color=\"#00FF00\">绿色字体</font> ");
-
-
-    ui->lcdNumber->show();
-
-    timer1 = new QTimer(this);
-    timer1->setInterval(1000);
-    connect(timer1, SIGNAL(timeout()), this, SLOT(refreshLCD()));
-    timer1->start();
-
-    timer2 = new QTimer(this);
-    timer2->setInterval(10);
-    connect(timer2, SIGNAL(timeout()), this, SLOT(updatePlot()));
-    timer2->start();
-
-    // 设置能显示的位数
-    ui->lcdNumber->setDigitCount(25);
-    // 设置显示的模式为十进制
-    ui->lcdNumber->setMode(QLCDNumber::Dec);
-    // 设置显示外观
-    ui->lcdNumber->setSegmentStyle(QLCDNumber::Flat);
-    // 设置样式
-    //ui->lcdNumber->setStyleSheet("border: 1px solid green; color: green; background: silver;");
-    ui->lcdNumber->setStyleSheet("background-color: rgb(255, 255, 255, 10);color: white;");
-}
-
-void MainWindow::updatePlot()
-{
-    static int x = 0;
-    static int y = 0;
-    QByteArray tmp;
-    if(this->serialPort->isReadQEmpty())
-    {
-        return;
-    }
-    tmp = this->serialPort->getDisplayArray();
-    qDebug() << tmp.toHex();
-    y = tmp[12];
-
-    qDebug() << "on test button clicked";
-    ui->widget->graph(0)->addData(x,y);
-    ui->widget->graph(0)->rescaleAxes(true);
-    ui->widget->xAxis->setRange(x, 8, Qt::AlignRight);
-    ui->widget->replot();
-    ++x;
-}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->rxDataDisplay->show();
     this->setGeometry(100,50,1100,600);
-
     this->menuBar()->hide();
+
+    task1 = new MyThread();
+    task1->start();
 
     initialUI();
 
-    QVector<double> x(101),y(101);
-                //图形为y=x^3
-    for(int i=0;i<101;i++)
-    {
-        //x[i] = i/5.0-10;
-        //y[i] = x[i]*x[i]*x[i];//qPow(x[i],3)
-        x[i] = i;
-        y[i] = x[i];
-    }
+    initTimer1();
 
-    //ui->widget->setBackground(QBrush(Qt::black));
+    initTimer2();
+
+    updateSerialInfo();
+
+
+}
+
+MainWindow::~MainWindow()
+{
+    delete timer1;
+    delete timer2;
+    delete ui;
+}
+
+void MainWindow::initCustomPlot()
+{
     ui->widget->show();
     //ui->widget->legend->setVisible(true);
     //ui->widget->xAxis->setLabel("x");
@@ -116,29 +60,101 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->widget->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->widget->yAxis2, SLOT(setRange(QCPRange)));
 
     ui->widget->setFixedSize(550,400);
-    //ui->widget->graph(0)->setLineStyle(QCPGraph::lsNone);
-    //ui->widget->graph(0)->setName("曲线");
-    //ui->widget->graph(0)->setData(x,y);
-
-
-    updateSerialInfo();
-
-    task1 = new MyThread();
-    task1->start();
-//    mThread1 = new QThread(this);
-//    //this->moveToThread(mThread1);
-
-//    connect(mThread1, SIGNAL(started()),this,SLOT(display()));
-//    mThread1->start();
+    ui->widget->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
 }
-
-MainWindow::~MainWindow()
+void MainWindow::updateSerialInfo()
 {
-    delete timer1;
-    delete timer2;
-    delete ui;
+    serialPort = new Serialport();
+    serialPort->scanPort();
+
+    for(auto it : serialPort->getAvailablePort())
+    {
+        ui->comBox->addItem(it);
+    }
 }
 
+void MainWindow::initLcdNum()
+{
+    ui->lcdNumber->setDigitCount(25);
+    // 设置显示的模式为十进制
+    ui->lcdNumber->setMode(QLCDNumber::Dec);
+    // 设置显示外观
+    ui->lcdNumber->setSegmentStyle(QLCDNumber::Flat);
+    // 设置样式
+    //ui->lcdNumber->setStyleSheet("border: 1px solid green; color: green; background: silver;");
+    ui->lcdNumber->setStyleSheet("background-color: rgb(255, 255, 255, 10);color: white;");
+    ui->lcdNumber->show();
+}
+
+void MainWindow::initTimer1()
+{
+    timer1 = new QTimer(this);
+    timer1->setInterval(1000);
+    connect(timer1, SIGNAL(timeout()), this, SLOT(refreshLCD()));
+    timer1->start();
+}
+
+void MainWindow::initTimer2()
+{
+    timer2 = new QTimer(this);
+    timer2->setInterval(10);
+    connect(timer2, SIGNAL(timeout()), this, SLOT(updatePlot()));
+    timer2->start();
+}
+
+void MainWindow::initTxDataDisplay()
+{
+    ui->txDataInput->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
+    ui->txDataInput->append("<font color=\"#00FF00\">绿色字体</font> ");
+}
+
+void MainWindow::initRxDataDisplay()
+{
+    ui->rxDataDisplay->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
+    ui->rxDataDisplay->show();
+}
+
+void MainWindow::initialUI()
+{
+//    ui->sendButton->setIcon(QIcon("/home/pi/Pictures/heike1.jpg"));
+//    ui->sendButton->setIconSize(QSize(101, 30));
+
+    initTxDataDisplay();
+
+    initRxDataDisplay();
+
+    initLcdNum();
+
+    initCustomPlot();
+}
+
+void MainWindow::updatePlot()
+{
+    static int x = 0;
+    static int y = 0;
+    QByteArray tmp;
+    if(this->serialPort->isReadQEmpty())
+    {
+        return;
+    }
+    tmp = this->serialPort->getDisplayArray();
+    qDebug() << tmp.toHex();
+
+    int len = 0;
+    len = tmp[2];
+    for(int i = 0; i < len; ++i)
+    {
+        //TODO need to fix later
+    }
+    y = tmp[12];
+
+    qDebug() << "on test button clicked";
+    ui->widget->graph(0)->addData(x,y);
+    ui->widget->graph(0)->rescaleAxes(true);
+    ui->widget->xAxis->setRange(x, 8, Qt::AlignRight);
+    ui->widget->replot();
+    ++x;
+}
 void MainWindow::paintEvent(QPaintEvent *event)
 {
     QPainter p(this);
@@ -153,10 +169,6 @@ MainWindow* MainWindow::getInstance()
     }
     return mainWindow;
 
-}
-void MainWindow::testPrint()
-{
-    qDebug() << "test print";
 }
 
 void MainWindow::refreshLCD()
@@ -187,30 +199,5 @@ void MainWindow::on_openButton_clicked()
 
 void MainWindow::on_testbtn_clicked()
 {
-    static int x = 0;
-    static int y = 0;
-    QByteArray tmp;
-    if(this->serialPort->isReadQEmpty())
-    {
-        return;
-    }
-    tmp = this->serialPort->getDisplayArray();
-    qDebug() << tmp.toHex();
-    y = tmp[12];
 
-    qDebug() << "on test button clicked";
-    ui->widget->graph(0)->addData(x,y);
-    ui->widget->graph(0)->rescaleAxes(true);
-    ui->widget->xAxis->setRange(x, 8, Qt::AlignRight);
-    ui->widget->replot();
-    ++x;
-    //++y;
-}
-
-void MainWindow::display()
-{
-    while(1){
-        qDebug() << "mThread1";
-        QThread::sleep(3);
-    }
 }
