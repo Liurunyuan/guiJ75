@@ -385,8 +385,7 @@ main.o: main.cpp mainwindow.h \
 mainwindow.o: mainwindow.cpp mainwindow.h \
 		serialport.h \
 		mythread.h \
-		ui_mainwindow.h \
-		qcustomplot.h
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 singleton.o: singleton.cpp singleton.h

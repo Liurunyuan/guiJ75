@@ -50,6 +50,16 @@ private slots:
     void on_openButton_clicked();
     void on_testbtn_clicked();
 
+    void on_actionAbout_how_to_use_triggered();
+
+    void on_checkBox_2_clicked();
+
+    void on_checkBox_3_clicked();
+
+    void on_checkBox_4_clicked();
+
+    void on_checkBox_5_clicked();
+
 private:
     static MainWindow* mainWindow;
     Ui::MainWindow *ui;
