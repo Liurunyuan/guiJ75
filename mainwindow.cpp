@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     updateSerialInfo();
 
+    ui->dockWidget->setMinimumSize(150,100);
+
 
 }
 
