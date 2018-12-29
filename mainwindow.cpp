@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     updateSerialInfo();
 
+    //ui->frame->setGeometry(100,100);
+
     ui->dockWidget->setMinimumSize(150,300);
     ui->dockWidget->setWindowTitle("com port config");
     ui->dockWidget->setStyleSheet("QDockWidget {background-color:white;}");
@@ -454,5 +456,57 @@ void MainWindow::on_actionDisplacement_triggered()
     else
     {
         qDebug() << "cancle displacement";
+    }
+}
+
+void MainWindow::on_actionMotor_speed_triggered()
+{
+    if(ui->actionDisplacement->isChecked() == true)
+    {
+        qDebug() << "ask for motor speed";
+
+    }
+    else
+    {
+        qDebug() << "cancle motor speed";
+    }
+}
+
+void MainWindow::on_actionMotor_accel_triggered()
+{
+    if(ui->actionDisplacement->isChecked() == true)
+    {
+        qDebug() << "ask for motor accel";
+
+    }
+    else
+    {
+        qDebug() << "cancle motor accel";
+    }
+}
+
+void MainWindow::on_actionCurrent_triggered()
+{
+    if(ui->actionDisplacement->isChecked() == true)
+    {
+        qDebug() << "ask for system current";
+
+    }
+    else
+    {
+        qDebug() << "cancle system current";
+    }
+}
+
+void MainWindow::on_actionBus_voltage_triggered()
+{
+    if(ui->actionDisplacement->isChecked() == true)
+    {
+        qDebug() << "ask for bus voltage";
+
+    }
+    else
+    {
+        qDebug() << "cancle bus voltage";
     }
 }

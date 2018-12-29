@@ -67,6 +67,14 @@ private slots:
 
     void on_actionDisplacement_triggered();
 
+    void on_actionMotor_speed_triggered();
+
+    void on_actionMotor_accel_triggered();
+
+    void on_actionCurrent_triggered();
+
+    void on_actionBus_voltage_triggered();
+
 private:
     static MainWindow* mainWindow;
     Ui::MainWindow *ui;
