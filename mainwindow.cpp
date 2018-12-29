@@ -435,7 +435,7 @@ void MainWindow::on_actionDisplacement_triggered()
         send_data.push_back((char)0);//serial number
         send_data.push_back((char)0);//serial number
 
-        send_data.push_back((char)1);//index
+        send_data.push_back((char)2);//index
         send_data.push_back((char)1);//data highaskDisplacement
         send_data.push_back((char)1);//data low
 
