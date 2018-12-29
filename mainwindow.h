@@ -12,6 +12,7 @@
 #include <QThread>
 
 #include "mythread.h"
+const  char askDisplacement[5] = {0x5a,0x5a,0x00,0x00,0xa5};
 
 namespace Ui {
 class MainWindow;
@@ -60,6 +61,12 @@ private slots:
 
     void on_checkBox_5_clicked();
 
+    void on_actionCurve_config_triggered();
+
+    void on_actionSystem_config_triggered();
+
+    void on_actionDisplacement_triggered();
+
 private:
     static MainWindow* mainWindow;
     Ui::MainWindow *ui;
@@ -67,6 +74,8 @@ private:
     QTimer *timer1;
     QTimer *timer2;
     MyThread* task1;
+
+    QQueue<QByteArray> sendStringQ;
 };
 
 

@@ -21,7 +21,7 @@ public:
     Serialport();
     void scanPort();
     bool configPort(bool, QString);
-
+    void sendStringEnquque(QByteArray);
     void sendData(QByteArray);
     int calCrc(int crc, const char* buf, int len);
     QByteArray getDisplayArray();
@@ -34,6 +34,8 @@ private:
     QVector<QString> availablePort;
     QByteArray readComData;
     QQueue<QByteArray> readStringQ;
+    QQueue<QByteArray> sendStringQ;
+
 };
 
 #endif // SERIALPORT_H

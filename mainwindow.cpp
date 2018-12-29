@@ -23,9 +23,26 @@ MainWindow::MainWindow(QWidget *parent) :
 
     updateSerialInfo();
 
-    ui->dockWidget->setMinimumSize(150,100);
+    ui->dockWidget->setMinimumSize(150,300);
+    ui->dockWidget->setWindowTitle("com port config");
+    ui->dockWidget->setStyleSheet("QDockWidget {background-color:white;}");
+    ui->systemconfig->setMinimumSize(150,300);
+    ui->systemconfig->setStyleSheet("QDockWidget {background-color:red;"
+                                    "color:red;"
+                                    "border:2px outset white;"
+                                    "}");
+    //ui->systemconfig->setFeatures(QDockWidget::NoDockWidgetFeatures);
+    addDockWidget(Qt::RightDockWidgetArea, ui->dockWidget);
 
+    ui->label->setStyleSheet("QLabel{color: red;}");
+    ui->label_2->setStyleSheet("QLabel{color: red;}");
+    ui->label_3->setStyleSheet("QLabel{color: red;}");
+    ui->label_4->setStyleSheet("QLabel{color: red;}");
+    ui->label_5->setStyleSheet("QLabel{color: red;}");
 
+//    ui->label_5->setStyleSheet("QLabel{color: rgb(0,255,255);"
+//                               "background-color: white;"
+//                               "}");
 }
 
 MainWindow::~MainWindow()
@@ -124,7 +141,6 @@ void MainWindow::initCustomPlot()
     ui->widget->yAxis->grid()->setZeroLinePen(Qt::NoPen);
     ui->widget->xAxis->setUpperEnding(QCPLineEnding::esSpikeArrow);
     ui->widget->yAxis->setUpperEnding(QCPLineEnding::esSpikeArrow);
-
 
     QLinearGradient plotGradient;
     plotGradient.setStart(0, 0);
@@ -374,5 +390,69 @@ void MainWindow::on_checkBox_5_clicked()
     else
     {
         ui->widget->graph(3)->setVisible(false);
+    }
+}
+
+void MainWindow::on_actionCurve_config_triggered()
+{
+    if(ui->actionCurve_config->isChecked() == true)
+    {
+        addDockWidget(Qt::RightDockWidgetArea, ui->systemconfig);
+        qDebug() << "curve config";
+        ui->systemconfig->show();
+    }
+    else
+    {
+        ui->systemconfig->hide();
+    }
+
+}
+
+void MainWindow::on_actionSystem_config_triggered()
+{
+    if(ui->actionSystem_config->isChecked() == true)
+    {
+        addDockWidget(Qt::RightDockWidgetArea, ui->dockWidget);
+        qDebug() << "curve config";
+        ui->dockWidget->show();
+    }
+    else
+    {
+        ui->dockWidget->hide();
+    }
+}
+
+void MainWindow::on_actionDisplacement_triggered()
+{
+    if(ui->actionDisplacement->isChecked() == true)
+    {
+        qDebug() << "ask for displacement";
+        QByteArray send_data;
+        send_data.append(packageHead);//head
+
+        send_data.push_back((char)1);//len
+
+        send_data.push_back((char)0);//serial number
+        send_data.push_back((char)0);//serial number
+
+        send_data.push_back((char)1);//index
+        send_data.push_back((char)1);//data highaskDisplacement
+        send_data.push_back((char)1);//data low
+
+        send_data.push_back((char)0);//crc
+        send_data.push_back((char)0);//crc
+
+        send_data.append(packageTail);//tail
+        send_data.append(askDisplacement);
+
+        qDebug() << send_data.toHex();
+
+        sendStringQ.enqueue(send_data);
+        this->serialPort->sendStringEnquque(send_data);
+        this->serialPort->sendData(send_data);
+    }
+    else
+    {
+        qDebug() << "cancle displacement";
     }
 }

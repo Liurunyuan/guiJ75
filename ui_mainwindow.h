@@ -18,7 +18,6 @@
 #include <QtWidgets/QDockWidget>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
-#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
@@ -46,35 +45,32 @@ public:
     QAction *actionMotor_accel;
     QAction *actionCurrent;
     QAction *actionBus_voltage;
+    QAction *actionSystem_config;
+    QAction *actionCurve_config;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QSplitter *splitter;
     QCustomPlot *widget;
     QFrame *frame;
-    QPushButton *testbtn;
-    QTextBrowser *rxDataDisplay;
+    QGridLayout *gridLayout_3;
     QPushButton *pushButton;
     QTextEdit *txDataInput;
-    QLCDNumber *lcdNumber;
-    QWidget *widget1;
-    QHBoxLayout *horizontalLayout;
+    QPushButton *testbtn;
+    QTextBrowser *rxDataDisplay;
     QVBoxLayout *verticalLayout_2;
     QPushButton *sendButton;
     QPushButton *clearButton;
     QCheckBox *hexBox;
-    QVBoxLayout *verticalLayout;
-    QCheckBox *checkBox_2;
-    QCheckBox *checkBox_3;
-    QCheckBox *checkBox_4;
-    QCheckBox *checkBox_5;
+    QLCDNumber *lcdNumber;
     QMenuBar *menuBar;
     QMenu *menuHelp;
     QMenu *menuLine_select;
+    QMenu *menuDockwidget;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
     QDockWidget *dockWidget;
     QWidget *dockWidgetContents;
-    QWidget *widget2;
+    QWidget *layoutWidget;
     QGridLayout *gridLayout_2;
     QLabel *label;
     QComboBox *comBox;
@@ -87,6 +83,14 @@ public:
     QLabel *label_5;
     QComboBox *checkBox;
     QPushButton *openButton;
+    QDockWidget *systemconfig;
+    QWidget *dockWidgetContents_2;
+    QWidget *layoutWidget1;
+    QVBoxLayout *verticalLayout;
+    QCheckBox *checkBox_2;
+    QCheckBox *checkBox_3;
+    QCheckBox *checkBox_4;
+    QCheckBox *checkBox_5;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -100,14 +104,32 @@ public:
         actionAbout_how_to_use->setChecked(false);
         actionDisplacement = new QAction(MainWindow);
         actionDisplacement->setObjectName(QStringLiteral("actionDisplacement"));
+        actionDisplacement->setCheckable(true);
+        actionDisplacement->setChecked(true);
         actionMotor_speed = new QAction(MainWindow);
         actionMotor_speed->setObjectName(QStringLiteral("actionMotor_speed"));
+        actionMotor_speed->setCheckable(true);
+        actionMotor_speed->setChecked(true);
         actionMotor_accel = new QAction(MainWindow);
         actionMotor_accel->setObjectName(QStringLiteral("actionMotor_accel"));
+        actionMotor_accel->setCheckable(true);
+        actionMotor_accel->setChecked(true);
         actionCurrent = new QAction(MainWindow);
         actionCurrent->setObjectName(QStringLiteral("actionCurrent"));
+        actionCurrent->setCheckable(true);
+        actionCurrent->setChecked(true);
         actionBus_voltage = new QAction(MainWindow);
         actionBus_voltage->setObjectName(QStringLiteral("actionBus_voltage"));
+        actionBus_voltage->setCheckable(true);
+        actionBus_voltage->setChecked(true);
+        actionSystem_config = new QAction(MainWindow);
+        actionSystem_config->setObjectName(QStringLiteral("actionSystem_config"));
+        actionSystem_config->setCheckable(true);
+        actionSystem_config->setChecked(true);
+        actionCurve_config = new QAction(MainWindow);
+        actionCurve_config->setObjectName(QStringLiteral("actionCurve_config"));
+        actionCurve_config->setCheckable(true);
+        actionCurve_config->setChecked(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -122,85 +144,62 @@ public:
         splitter->addWidget(widget);
         frame = new QFrame(splitter);
         frame->setObjectName(QStringLiteral("frame"));
+        frame->setMaximumSize(QSize(16777215, 200));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
-        testbtn = new QPushButton(frame);
-        testbtn->setObjectName(QStringLiteral("testbtn"));
-        testbtn->setGeometry(QRect(20, 30, 71, 31));
-        rxDataDisplay = new QTextBrowser(frame);
-        rxDataDisplay->setObjectName(QStringLiteral("rxDataDisplay"));
-        rxDataDisplay->setGeometry(QRect(150, 20, 221, 51));
+        gridLayout_3 = new QGridLayout(frame);
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         pushButton = new QPushButton(frame);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(20, 70, 101, 31));
+
+        gridLayout_3->addWidget(pushButton, 1, 0, 1, 1);
+
         txDataInput = new QTextEdit(frame);
         txDataInput->setObjectName(QStringLiteral("txDataInput"));
-        txDataInput->setGeometry(QRect(150, 80, 221, 51));
-        lcdNumber = new QLCDNumber(frame);
-        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
-        lcdNumber->setGeometry(QRect(560, 210, 291, 41));
-        lcdNumber->setFrameShape(QFrame::NoFrame);
-        lcdNumber->setFrameShadow(QFrame::Raised);
-        widget1 = new QWidget(frame);
-        widget1->setObjectName(QStringLiteral("widget1"));
-        widget1->setGeometry(QRect(560, 20, 196, 141));
-        horizontalLayout = new QHBoxLayout(widget1);
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+
+        gridLayout_3->addWidget(txDataInput, 1, 1, 2, 1);
+
+        testbtn = new QPushButton(frame);
+        testbtn->setObjectName(QStringLiteral("testbtn"));
+
+        gridLayout_3->addWidget(testbtn, 0, 0, 1, 1);
+
+        rxDataDisplay = new QTextBrowser(frame);
+        rxDataDisplay->setObjectName(QStringLiteral("rxDataDisplay"));
+
+        gridLayout_3->addWidget(rxDataDisplay, 0, 1, 1, 1);
+
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        sendButton = new QPushButton(widget1);
+        sendButton = new QPushButton(frame);
         sendButton->setObjectName(QStringLiteral("sendButton"));
         sendButton->setStyleSheet(QStringLiteral("background: transparent;"));
         sendButton->setFlat(true);
 
         verticalLayout_2->addWidget(sendButton);
 
-        clearButton = new QPushButton(widget1);
+        clearButton = new QPushButton(frame);
         clearButton->setObjectName(QStringLiteral("clearButton"));
 
         verticalLayout_2->addWidget(clearButton);
 
-        hexBox = new QCheckBox(widget1);
+        hexBox = new QCheckBox(frame);
         hexBox->setObjectName(QStringLiteral("hexBox"));
 
         verticalLayout_2->addWidget(hexBox);
 
 
-        horizontalLayout->addLayout(verticalLayout_2);
+        gridLayout_3->addLayout(verticalLayout_2, 0, 2, 3, 1);
 
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        checkBox_2 = new QCheckBox(widget1);
-        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
-        checkBox_2->setChecked(true);
+        lcdNumber = new QLCDNumber(frame);
+        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
+        lcdNumber->setFrameShape(QFrame::NoFrame);
+        lcdNumber->setFrameShadow(QFrame::Raised);
 
-        verticalLayout->addWidget(checkBox_2);
-
-        checkBox_3 = new QCheckBox(widget1);
-        checkBox_3->setObjectName(QStringLiteral("checkBox_3"));
-        checkBox_3->setChecked(true);
-
-        verticalLayout->addWidget(checkBox_3);
-
-        checkBox_4 = new QCheckBox(widget1);
-        checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
-        checkBox_4->setChecked(true);
-
-        verticalLayout->addWidget(checkBox_4);
-
-        checkBox_5 = new QCheckBox(widget1);
-        checkBox_5->setObjectName(QStringLiteral("checkBox_5"));
-        checkBox_5->setChecked(true);
-
-        verticalLayout->addWidget(checkBox_5);
-
-
-        horizontalLayout->addLayout(verticalLayout);
+        gridLayout_3->addWidget(lcdNumber, 2, 3, 1, 1);
 
         splitter->addWidget(frame);
 
@@ -214,6 +213,8 @@ public:
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuLine_select = new QMenu(menuBar);
         menuLine_select->setObjectName(QStringLiteral("menuLine_select"));
+        menuDockwidget = new QMenu(menuBar);
+        menuDockwidget->setObjectName(QStringLiteral("menuDockwidget"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -228,63 +229,63 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
         dockWidget->setSizePolicy(sizePolicy);
-        dockWidget->setMinimumSize(QSize(0, 0));
+        dockWidget->setMinimumSize(QSize(73, 41));
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QStringLiteral("dockWidgetContents"));
-        widget2 = new QWidget(dockWidgetContents);
-        widget2->setObjectName(QStringLiteral("widget2"));
-        widget2->setGeometry(QRect(0, 10, 134, 181));
-        gridLayout_2 = new QGridLayout(widget2);
+        layoutWidget = new QWidget(dockWidgetContents);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(0, 10, 134, 181));
+        gridLayout_2 = new QGridLayout(layoutWidget);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget2);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QStringLiteral("label"));
 
         gridLayout_2->addWidget(label, 0, 0, 1, 1);
 
-        comBox = new QComboBox(widget2);
+        comBox = new QComboBox(layoutWidget);
         comBox->setObjectName(QStringLiteral("comBox"));
 
         gridLayout_2->addWidget(comBox, 0, 1, 1, 1);
 
-        label_2 = new QLabel(widget2);
+        label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout_2->addWidget(label_2, 1, 0, 1, 1);
 
-        baudBox = new QComboBox(widget2);
+        baudBox = new QComboBox(layoutWidget);
         baudBox->setObjectName(QStringLiteral("baudBox"));
 
         gridLayout_2->addWidget(baudBox, 1, 1, 1, 1);
 
-        label_3 = new QLabel(widget2);
+        label_3 = new QLabel(layoutWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
 
         gridLayout_2->addWidget(label_3, 2, 0, 1, 1);
 
-        stopBox = new QComboBox(widget2);
+        stopBox = new QComboBox(layoutWidget);
         stopBox->setObjectName(QStringLiteral("stopBox"));
 
         gridLayout_2->addWidget(stopBox, 2, 1, 1, 1);
 
-        label_4 = new QLabel(widget2);
+        label_4 = new QLabel(layoutWidget);
         label_4->setObjectName(QStringLiteral("label_4"));
 
         gridLayout_2->addWidget(label_4, 3, 0, 1, 1);
 
-        dataBox = new QComboBox(widget2);
+        dataBox = new QComboBox(layoutWidget);
         dataBox->setObjectName(QStringLiteral("dataBox"));
 
         gridLayout_2->addWidget(dataBox, 3, 1, 1, 1);
 
-        label_5 = new QLabel(widget2);
+        label_5 = new QLabel(layoutWidget);
         label_5->setObjectName(QStringLiteral("label_5"));
 
         gridLayout_2->addWidget(label_5, 4, 0, 1, 1);
 
-        checkBox = new QComboBox(widget2);
+        checkBox = new QComboBox(layoutWidget);
         checkBox->setObjectName(QStringLiteral("checkBox"));
 
         gridLayout_2->addWidget(checkBox, 4, 1, 1, 1);
@@ -294,9 +295,48 @@ public:
         openButton->setGeometry(QRect(4, 200, 131, 31));
         dockWidget->setWidget(dockWidgetContents);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidget);
+        systemconfig = new QDockWidget(MainWindow);
+        systemconfig->setObjectName(QStringLiteral("systemconfig"));
+        dockWidgetContents_2 = new QWidget();
+        dockWidgetContents_2->setObjectName(QStringLiteral("dockWidgetContents_2"));
+        layoutWidget1 = new QWidget(dockWidgetContents_2);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(0, 10, 101, 124));
+        verticalLayout = new QVBoxLayout(layoutWidget1);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        checkBox_2 = new QCheckBox(layoutWidget1);
+        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
+        checkBox_2->setChecked(true);
+
+        verticalLayout->addWidget(checkBox_2);
+
+        checkBox_3 = new QCheckBox(layoutWidget1);
+        checkBox_3->setObjectName(QStringLiteral("checkBox_3"));
+        checkBox_3->setChecked(true);
+
+        verticalLayout->addWidget(checkBox_3);
+
+        checkBox_4 = new QCheckBox(layoutWidget1);
+        checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
+        checkBox_4->setChecked(true);
+
+        verticalLayout->addWidget(checkBox_4);
+
+        checkBox_5 = new QCheckBox(layoutWidget1);
+        checkBox_5->setObjectName(QStringLiteral("checkBox_5"));
+        checkBox_5->setChecked(true);
+
+        verticalLayout->addWidget(checkBox_5);
+
+        systemconfig->setWidget(dockWidgetContents_2);
+        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(2), systemconfig);
 
         menuBar->addAction(menuHelp->menuAction());
         menuBar->addAction(menuLine_select->menuAction());
+        menuBar->addAction(menuDockwidget->menuAction());
         menuHelp->addAction(actionAbout_how_to_use);
         menuHelp->addSeparator();
         menuLine_select->addAction(actionDisplacement);
@@ -308,6 +348,9 @@ public:
         menuLine_select->addAction(actionCurrent);
         menuLine_select->addSeparator();
         menuLine_select->addAction(actionBus_voltage);
+        menuDockwidget->addAction(actionSystem_config);
+        menuDockwidget->addSeparator();
+        menuDockwidget->addAction(actionCurve_config);
 
         retranslateUi(MainWindow);
 
@@ -323,17 +366,16 @@ public:
         actionMotor_accel->setText(QApplication::translate("MainWindow", "motor accel", Q_NULLPTR));
         actionCurrent->setText(QApplication::translate("MainWindow", "current", Q_NULLPTR));
         actionBus_voltage->setText(QApplication::translate("MainWindow", "bus voltage", Q_NULLPTR));
-        testbtn->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
+        actionSystem_config->setText(QApplication::translate("MainWindow", "system config", Q_NULLPTR));
+        actionCurve_config->setText(QApplication::translate("MainWindow", "curve config", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
+        testbtn->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
         sendButton->setText(QApplication::translate("MainWindow", "send", Q_NULLPTR));
         clearButton->setText(QApplication::translate("MainWindow", "clear", Q_NULLPTR));
         hexBox->setText(QApplication::translate("MainWindow", "hex", Q_NULLPTR));
-        checkBox_2->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
-        checkBox_3->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
-        checkBox_4->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
-        checkBox_5->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
         menuHelp->setTitle(QApplication::translate("MainWindow", "help", Q_NULLPTR));
         menuLine_select->setTitle(QApplication::translate("MainWindow", "line select", Q_NULLPTR));
+        menuDockwidget->setTitle(QApplication::translate("MainWindow", "dockwidget", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "com", Q_NULLPTR));
         label_2->setText(QApplication::translate("MainWindow", "baud", Q_NULLPTR));
         baudBox->clear();
@@ -357,6 +399,10 @@ public:
          << QApplication::translate("MainWindow", "none", Q_NULLPTR)
         );
         openButton->setText(QApplication::translate("MainWindow", "open", Q_NULLPTR));
+        checkBox_2->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
+        checkBox_3->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
+        checkBox_4->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
+        checkBox_5->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
     } // retranslateUi
 
 };

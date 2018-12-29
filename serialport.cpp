@@ -57,6 +57,11 @@ bool Serialport::configPort(bool isOpen, QString portName)
     }
 }
 
+void Serialport::sendStringEnquque(QByteArray sdata)
+{
+    sendStringQ.enqueue(sdata);
+}
+
 void Serialport::readData()
 {
     int headpos = -1;
