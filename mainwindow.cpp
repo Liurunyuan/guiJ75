@@ -33,13 +33,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->dockWidget->setMinimumSize(150,300);
     ui->dockWidget->setWindowTitle("com port config");
     ui->dockWidget->setStyleSheet("QDockWidget {background-color:white;}");
+
     ui->systemconfig->setMinimumSize(150,300);
     ui->systemconfig->setStyleSheet("QDockWidget {background-color:red;"
                                     "color:red;"
                                     "border:2px outset white;"
                                     "}");
     //ui->systemconfig->setFeatures(QDockWidget::NoDockWidgetFeatures);
-    addDockWidget(Qt::RightDockWidgetArea, ui->dockWidget);
+
+    ui->xComConfigDockWidget->setMinimumSize(150,300);
+    ui->xComConfigDockWidget->setWindowTitle("com port config");
+    ui->xComConfigDockWidget->setStyleSheet("QDockWidget {background-color:white;}");
+    addDockWidget(Qt::LeftDockWidgetArea, ui->dockWidget);
+    addDockWidget(Qt::LeftDockWidgetArea, ui->xComConfigDockWidget);
 
     ui->label->setStyleSheet("QLabel{color: red;}");
     ui->label_2->setStyleSheet("QLabel{color: red;}");
@@ -168,11 +174,19 @@ void MainWindow::initCustomPlot()
 void MainWindow::updateSerialInfo()
 {
     serialPort = new Serialport();
+    serialPortX = new Serialport();
+
     serialPort->scanPort();
+    serialPortX->scanPort();
 
     for(auto it : serialPort->getAvailablePort())
     {
         ui->comBox->addItem(it);
+    }
+
+    for(auto it : serialPortX->getAvailablePort())
+    {
+        ui->comBox_2->addItem(it);
     }
 }
 
@@ -318,16 +332,41 @@ void MainWindow::on_openButton_clicked()
 {
     if(ui->openButton->text() == "open")
     {
-        if(serialPort->configPort(true,ui->comBox->currentText()));
+        if(serialPort->configPort(true,ui->comBox->currentText()) == true)
         {
            ui->openButton->setText("close");
+        }
+        else
+        {
         }
     }
     else
     {
-        if(serialPort->configPort(false,ui->comBox->currentText()));
+        if(serialPort->configPort(false,ui->comBox->currentText()))
         {
            ui->openButton->setText("open");
+        }
+    }
+}
+
+void MainWindow::on_openButton_2_clicked()
+{
+    if(ui->openButton_2->text() == "open")
+    {
+        if(serialPortX->configPort(true,ui->comBox_2->currentText()))
+        {
+           ui->openButton_2->setText("close");
+        }
+        else
+        {
+
+        }
+    }
+    else
+    {
+        if(serialPortX->configPort(false,ui->comBox_2->currentText()))
+        {
+           ui->openButton_2->setText("open");
         }
     }
 }
@@ -628,3 +667,5 @@ void MainWindow::on_actionBus_voltage_triggered()
         this->serialPort->sendData(send_data);
     }
 }
+
+

@@ -112,10 +112,13 @@ private slots:
 
     void on_actionBus_voltage_triggered();
 
+    void on_openButton_2_clicked();
+
 private:
     static MainWindow* mainWindow;
     Ui::MainWindow *ui;
     Serialport* serialPort;
+    Serialport* serialPortX;
     QTimer *timer1;
     QTimer *timer2;
     MyThread* task1;

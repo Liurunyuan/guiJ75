@@ -90,6 +90,21 @@ public:
     QCheckBox *checkBox_3;
     QCheckBox *checkBox_4;
     QCheckBox *checkBox_5;
+    QDockWidget *xComConfigDockWidget;
+    QWidget *dockWidgetContents_3;
+    QWidget *layoutWidget_2;
+    QGridLayout *gridLayout_3;
+    QLabel *label_6;
+    QComboBox *comBox_2;
+    QLabel *label_7;
+    QComboBox *baudBox_2;
+    QLabel *label_8;
+    QComboBox *stopBox_2;
+    QLabel *label_9;
+    QComboBox *dataBox_2;
+    QLabel *label_10;
+    QComboBox *checkBox_6;
+    QPushButton *openButton_2;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -341,6 +356,73 @@ public:
 
         systemconfig->setWidget(dockWidgetContents_2);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(2), systemconfig);
+        xComConfigDockWidget = new QDockWidget(MainWindow);
+        xComConfigDockWidget->setObjectName(QStringLiteral("xComConfigDockWidget"));
+        dockWidgetContents_3 = new QWidget();
+        dockWidgetContents_3->setObjectName(QStringLiteral("dockWidgetContents_3"));
+        layoutWidget_2 = new QWidget(dockWidgetContents_3);
+        layoutWidget_2->setObjectName(QStringLiteral("layoutWidget_2"));
+        layoutWidget_2->setGeometry(QRect(0, 10, 134, 181));
+        gridLayout_3 = new QGridLayout(layoutWidget_2);
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        gridLayout_3->setContentsMargins(0, 0, 0, 0);
+        label_6 = new QLabel(layoutWidget_2);
+        label_6->setObjectName(QStringLiteral("label_6"));
+
+        gridLayout_3->addWidget(label_6, 0, 0, 1, 1);
+
+        comBox_2 = new QComboBox(layoutWidget_2);
+        comBox_2->setObjectName(QStringLiteral("comBox_2"));
+
+        gridLayout_3->addWidget(comBox_2, 0, 1, 1, 1);
+
+        label_7 = new QLabel(layoutWidget_2);
+        label_7->setObjectName(QStringLiteral("label_7"));
+
+        gridLayout_3->addWidget(label_7, 1, 0, 1, 1);
+
+        baudBox_2 = new QComboBox(layoutWidget_2);
+        baudBox_2->setObjectName(QStringLiteral("baudBox_2"));
+
+        gridLayout_3->addWidget(baudBox_2, 1, 1, 1, 1);
+
+        label_8 = new QLabel(layoutWidget_2);
+        label_8->setObjectName(QStringLiteral("label_8"));
+
+        gridLayout_3->addWidget(label_8, 2, 0, 1, 1);
+
+        stopBox_2 = new QComboBox(layoutWidget_2);
+        stopBox_2->setObjectName(QStringLiteral("stopBox_2"));
+
+        gridLayout_3->addWidget(stopBox_2, 2, 1, 1, 1);
+
+        label_9 = new QLabel(layoutWidget_2);
+        label_9->setObjectName(QStringLiteral("label_9"));
+
+        gridLayout_3->addWidget(label_9, 3, 0, 1, 1);
+
+        dataBox_2 = new QComboBox(layoutWidget_2);
+        dataBox_2->setObjectName(QStringLiteral("dataBox_2"));
+
+        gridLayout_3->addWidget(dataBox_2, 3, 1, 1, 1);
+
+        label_10 = new QLabel(layoutWidget_2);
+        label_10->setObjectName(QStringLiteral("label_10"));
+
+        gridLayout_3->addWidget(label_10, 4, 0, 1, 1);
+
+        checkBox_6 = new QComboBox(layoutWidget_2);
+        checkBox_6->setObjectName(QStringLiteral("checkBox_6"));
+
+        gridLayout_3->addWidget(checkBox_6, 4, 1, 1, 1);
+
+        openButton_2 = new QPushButton(dockWidgetContents_3);
+        openButton_2->setObjectName(QStringLiteral("openButton_2"));
+        openButton_2->setGeometry(QRect(10, 190, 131, 31));
+        xComConfigDockWidget->setWidget(dockWidgetContents_3);
+        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), xComConfigDockWidget);
 
         menuBar->addAction(menuHelp->menuAction());
         menuBar->addAction(menuLine_select->menuAction());
@@ -411,6 +493,29 @@ public:
         checkBox_3->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
         checkBox_4->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
         checkBox_5->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
+        label_6->setText(QApplication::translate("MainWindow", "com", Q_NULLPTR));
+        label_7->setText(QApplication::translate("MainWindow", "baud", Q_NULLPTR));
+        baudBox_2->clear();
+        baudBox_2->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "9600", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "115200", Q_NULLPTR)
+        );
+        label_8->setText(QApplication::translate("MainWindow", "stop", Q_NULLPTR));
+        stopBox_2->clear();
+        stopBox_2->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "1", Q_NULLPTR)
+        );
+        label_9->setText(QApplication::translate("MainWindow", "data", Q_NULLPTR));
+        dataBox_2->clear();
+        dataBox_2->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "8", Q_NULLPTR)
+        );
+        label_10->setText(QApplication::translate("MainWindow", "check", Q_NULLPTR));
+        checkBox_6->clear();
+        checkBox_6->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "none", Q_NULLPTR)
+        );
+        openButton_2->setText(QApplication::translate("MainWindow", "open", Q_NULLPTR));
     } // retranslateUi
 
 };

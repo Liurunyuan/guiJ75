@@ -45,7 +45,8 @@ bool Serialport::configPort(bool isOpen, QString portName)
         }
         else
         {
-            QMessageBox::about(NULL, "提示", "串口没有打开！");
+            QMessageBox::about(NULL, "提示", "串口已经被占用，请重新选择串口号！");
+            qDebug() << "return false";
             return false;
         }
     }
