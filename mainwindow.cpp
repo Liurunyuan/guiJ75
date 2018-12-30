@@ -23,6 +23,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     updateSerialInfo();
 
+    this->curveCommand = 0;
+//    this->curveComm.all.high8 = 0;
+//    this->curveComm.all.low8 = 0;
+    this->curveComm.all = 0;
+
     //ui->frame->setGeometry(100,100);
 
     ui->dockWidget->setMinimumSize(150,300);
@@ -426,87 +431,200 @@ void MainWindow::on_actionSystem_config_triggered()
 
 void MainWindow::on_actionDisplacement_triggered()
 {
+    qint16 crc;
+    QByteArray send_data;
     if(ui->actionDisplacement->isChecked() == true)
     {
         qDebug() << "ask for displacement";
-        QByteArray send_data;
-        send_data.append(packageHead);//head
+        this->curveComm.bit.displacemet = 1;
 
-        send_data.push_back((char)1);//len
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
 
-        send_data.push_back((char)0);//serial number
-        send_data.push_back((char)0);//serial number
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
 
-        send_data.push_back((char)2);//index
-        send_data.push_back((char)1);//data highaskDisplacement
-        send_data.push_back((char)1);//data low
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
 
-        send_data.push_back((char)0);//crc
-        send_data.push_back((char)0);//crc
-
-        send_data.append(packageTail);//tail
-        send_data.append(askDisplacement);
+        send_data.append(curve,12);
 
         qDebug() << send_data.toHex();
-
-        sendStringQ.enqueue(send_data);
-        this->serialPort->sendStringEnquque(send_data);
         this->serialPort->sendData(send_data);
     }
     else
     {
         qDebug() << "cancle displacement";
+        this->curveComm.bit.displacemet = 0;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+
+        qDebug() << send_data.toHex();
+
+        this->serialPort->sendData(send_data);
     }
 }
 
 void MainWindow::on_actionMotor_speed_triggered()
 {
-    if(ui->actionDisplacement->isChecked() == true)
+    qint16 crc;
+    QByteArray send_data;
+    if(ui->actionMotor_speed->isChecked() == true)
     {
         qDebug() << "ask for motor speed";
+        this->curveComm.bit.speed = 1;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
 
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
     }
     else
     {
         qDebug() << "cancle motor speed";
+
+        this->curveComm.bit.speed = 0;
+
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
     }
 }
 
 void MainWindow::on_actionMotor_accel_triggered()
 {
-    if(ui->actionDisplacement->isChecked() == true)
+    qint16 crc;
+    QByteArray send_data;
+    if(ui->actionMotor_accel->isChecked() == true)
     {
         qDebug() << "ask for motor accel";
+        this->curveComm.bit.accel = 1;
+        curve[7] = (qint8)this->curveComm.half.low8;
+        curve[6] = (qint8)this->curveComm.half.high8;
 
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
     }
     else
     {
         qDebug() << "cancle motor accel";
+        this->curveComm.bit.accel = 0;
+        curve[7] = (qint8)this->curveComm.half.low8;
+        curve[6] = (qint8)this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
     }
 }
 
 void MainWindow::on_actionCurrent_triggered()
 {
-    if(ui->actionDisplacement->isChecked() == true)
+    qint16 crc;
+    QByteArray send_data;
+    if(ui->actionCurrent->isChecked() == true)
     {
         qDebug() << "ask for system current";
+
+        this->curveComm.bit.current = 1;
+        curve[7] = (qint8)this->curveComm.half.low8;
+        curve[6] = (qint8)this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
 
     }
     else
     {
         qDebug() << "cancle system current";
+
+        this->curveComm.bit.current = 0;
+        curve[7] = (qint8)this->curveComm.half.low8;
+        curve[6] = (qint8)this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
     }
 }
 
 void MainWindow::on_actionBus_voltage_triggered()
 {
-    if(ui->actionDisplacement->isChecked() == true)
+    qint16 crc;
+    QByteArray send_data;
+    if(ui->actionBus_voltage->isChecked() == true)
     {
         qDebug() << "ask for bus voltage";
+
+        this->curveComm.bit.voltage = 1;
+        curve[7] = (qint8)this->curveComm.half.low8;
+        curve[6] = (qint8)this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
 
     }
     else
     {
         qDebug() << "cancle bus voltage";
+        this->curveComm.bit.voltage = 0;
+        curve[7] = (qint8)this->curveComm.half.low8;
+        curve[6] = (qint8)this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
     }
 }

@@ -12,12 +12,49 @@
 #include <QThread>
 
 #include "mythread.h"
-const  char askDisplacement[5] = {0x5a,0x5a,0x00,0x00,0xa5};
+//char curve[12] = {0x5a,0x5a,0x01,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0xa5,0xa5};
+
 
 namespace Ui {
+
 class MainWindow;
+
 }
 
+typedef struct _Curve
+{
+    qint16 torque: 1;
+    qint16 speed: 1;
+    qint16 displacemet: 1;
+    qint16 current: 1;
+    qint16 voltage: 1;
+    qint16 ff: 1;
+    qint16 temperature: 1;
+    qint16 accel: 1;
+
+    qint16 z: 1;
+    qint16 x: 1;
+    qint16 c: 1;
+    qint16 v: 1;
+    qint16 k: 1;
+    qint16 f: 1;
+    qint16 p: 1;
+    qint16 o: 1;
+}Curve;
+
+typedef struct
+{
+    qint16 low8 : 8;
+    qint16 high8 :8;
+
+}Var16Bit;
+
+typedef union
+{
+    Var16Bit half;
+    qint16 all;
+    Curve bit;
+}CurveStr;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -82,8 +119,11 @@ private:
     QTimer *timer1;
     QTimer *timer2;
     MyThread* task1;
+    qint16 curveCommand;
 
     QQueue<QByteArray> sendStringQ;
+    char curve[12] = {0x5a,0x5a,0x01,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0xa5,0xa5};
+    CurveStr curveComm;
 };
 
 
