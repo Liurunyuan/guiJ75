@@ -170,6 +170,8 @@ public:
 
         rxDataDisplay = new QTextBrowser(frame);
         rxDataDisplay->setObjectName(QStringLiteral("rxDataDisplay"));
+        sizePolicy.setHeightForWidth(rxDataDisplay->sizePolicy().hasHeightForWidth());
+        rxDataDisplay->setSizePolicy(sizePolicy);
 
         gridLayout->addWidget(rxDataDisplay, 0, 1, 3, 1);
 
