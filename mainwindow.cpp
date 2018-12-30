@@ -32,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->dockWidget->setMinimumSize(150,300);
     ui->dockWidget->setWindowTitle("com port config");
+
+
+
     ui->dockWidget->setStyleSheet("QDockWidget {background-color:white;}");
 
     ui->systemconfig->setMinimumSize(150,300);
@@ -52,6 +55,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->label_3->setStyleSheet("QLabel{color: red;}");
     ui->label_4->setStyleSheet("QLabel{color: red;}");
     ui->label_5->setStyleSheet("QLabel{color: red;}");
+
+    ui->label_6->setStyleSheet("QLabel{color: blue;}");
 
 //    ui->label_5->setStyleSheet("QLabel{color: rgb(0,255,255);"
 //                               "background-color: white;"
