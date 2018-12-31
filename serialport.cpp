@@ -70,7 +70,6 @@ void Serialport::readData()
     QByteArray tmp = this->readAll();
     if(!tmp.isEmpty())
     {
-
         readComData.append(tmp);
         headpos = readComData.indexOf(packageHead);
         tailpos = readComData.indexOf(packageTail);
@@ -81,7 +80,6 @@ void Serialport::readData()
 //            qDebug() << "tail position =" << readComData.indexOf(packageTail);
 //            qDebug() << readComData.toHex();
 
-            //ui->textEditReceive->setText(byteArray.split('#').at(0));
             readStringQ.enqueue(readComData);
             readComData = readComData.right(readComData.length()-readComData.indexOf(packageTail)-2);
         }
@@ -106,6 +104,11 @@ QVector<QString> Serialport::getAvailablePort()
 int Serialport::isReadQEmpty()
 {
     return readStringQ.isEmpty();
+}
+
+int Serialport::getRxQLength()
+{
+    return readStringQ.length();
 }
 
 int Serialport::calCrc(int crc, const char *buf, int len)

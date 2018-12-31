@@ -27,6 +27,7 @@ public:
     QByteArray getDisplayArray();
     QVector<QString> getAvailablePort();
     int isReadQEmpty();
+    int getRxQLength();
 private slots:
     void readData();
 
