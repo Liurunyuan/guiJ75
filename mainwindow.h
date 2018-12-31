@@ -74,6 +74,7 @@ public:
     void initTimer2();
 
     void initCustomPlot();
+    void initCustomPlot2();
 
 //    void initTxDataDisplay();
 

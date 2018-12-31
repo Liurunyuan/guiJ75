@@ -26,6 +26,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
@@ -55,11 +56,15 @@ public:
     QVBoxLayout *verticalLayout_2;
     QCustomPlot *widget;
     QWidget *tab_2;
-    QPushButton *pushButton_2;
+    QHBoxLayout *horizontalLayout_2;
+    QCustomPlot *widget2;
     QFrame *frame;
     QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer;
     QPushButton *clearButton;
+    QSpacerItem *horizontalSpacer_3;
     QLCDNumber *lcdNumber;
+    QSpacerItem *horizontalSpacer_2;
     QMenuBar *menuBar;
     QMenu *menuHelp;
     QMenu *menuLine_select;
@@ -174,9 +179,18 @@ public:
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
-        pushButton_2 = new QPushButton(tab_2);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(300, 100, 101, 31));
+        horizontalLayout_2 = new QHBoxLayout(tab_2);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        widget2 = new QCustomPlot(tab_2);
+        widget2->setObjectName(QStringLiteral("widget2"));
+        widget2->setEnabled(true);
+        sizePolicy.setHeightForWidth(widget2->sizePolicy().hasHeightForWidth());
+        widget2->setSizePolicy(sizePolicy);
+
+        horizontalLayout_2->addWidget(widget2);
+
         tabWidget->addTab(tab_2, QString());
         splitter->addWidget(tabWidget);
         frame = new QFrame(splitter);
@@ -188,10 +202,18 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalSpacer = new QSpacerItem(244, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
         clearButton = new QPushButton(frame);
         clearButton->setObjectName(QStringLiteral("clearButton"));
 
         horizontalLayout->addWidget(clearButton);
+
+        horizontalSpacer_3 = new QSpacerItem(244, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_3);
 
         lcdNumber = new QLCDNumber(frame);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
@@ -204,6 +226,10 @@ public:
         lcdNumber->setFrameShadow(QFrame::Raised);
 
         horizontalLayout->addWidget(lcdNumber);
+
+        horizontalSpacer_2 = new QSpacerItem(244, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_2);
 
         splitter->addWidget(frame);
 
@@ -425,7 +451,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -443,7 +469,6 @@ public:
         actionSystem_config->setText(QApplication::translate("MainWindow", "system config", Q_NULLPTR));
         actionCurve_config->setText(QApplication::translate("MainWindow", "curve config", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", Q_NULLPTR));
-        pushButton_2->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Tab 2", Q_NULLPTR));
         clearButton->setText(QApplication::translate("MainWindow", "clear", Q_NULLPTR));
         menuHelp->setTitle(QApplication::translate("MainWindow", "help", Q_NULLPTR));

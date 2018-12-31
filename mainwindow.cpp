@@ -181,6 +181,120 @@ void MainWindow::initCustomPlot()
     //customPlot->axisRect()->setupFullAxesBox();
     ui->widget->replot();
 }
+
+void MainWindow::initCustomPlot2()
+{
+    ui->widget2->show();
+    //ui->widget->setBackground(QBrush(QColor(0, 0, 0, 20)));
+    ui->widget2->legend->setVisible(true);
+    ui->widget2->legend->setBrush(QColor(255,255,255,0));//legend背景色设为白色但背景透明，允许图像在legend区域可见
+
+    //ui->widget->xAxis->setLabel("x");
+    ui->widget2->xAxis->setRange(0,10);
+    ui->widget2->xAxis->grid();
+
+
+    //ui->widget->yAxis->setLabel("y");
+    ui->widget2->yAxis->setRange(0,5);
+
+    ui->widget2->addGraph();
+    ui->widget2->graph(0)->setPen(QPen(Qt::blue));
+    ui->widget2->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+    ui->widget2->graph(0)->rescaleAxes();
+
+
+    ui->widget2->addGraph();
+    ui->widget2->graph(1)->setPen(QPen(Qt::black));
+    ui->widget2->graph(1)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+    ui->widget2->graph(1)->rescaleAxes();
+
+    ui->widget2->addGraph();
+    ui->widget2->graph(2)->setPen(QPen(Qt::red));
+    ui->widget2->graph(2)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+    ui->widget2->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::black, 1.5), QBrush(Qt::white), 9));
+    ui->widget2->graph(2)->rescaleAxes();
+
+    ui->widget2->addGraph();
+    ui->widget2->graph(3)->setPen(QPen(Qt::yellow));
+    ui->widget2->graph(3)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+    ui->widget2->graph(3)->rescaleAxes();
+
+    ui->widget2->xAxis2->setVisible(true);
+    ui->widget2->xAxis2->setTickLabels(false);
+    ui->widget2->yAxis2->setVisible(true);
+    ui->widget2->yAxis2->setTickLabels(false);
+
+
+
+    ui->widget2->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+
+    connect(ui->widget2->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->widget2->xAxis2, SLOT(setRange(QCPRange)));
+    connect(ui->widget2->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->widget2->yAxis2, SLOT(setRange(QCPRange)));
+
+    //ui->widget->setFixedSize(1051,351);
+    //ui->widget->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
+    ui->widget2->xAxis2->setBasePen(QPen(Qt::white, 1));
+    ui->widget2->yAxis2->setBasePen(QPen(Qt::white, 1));
+    ui->widget2->xAxis2->setTickPen(QPen(Qt::white, 1));
+    ui->widget2->yAxis2->setTickPen(QPen(Qt::white, 1));
+    ui->widget2->xAxis2->setSubTickPen(QPen(Qt::white, 1));
+    ui->widget2->yAxis2->setSubTickPen(QPen(Qt::white, 1));
+    ui->widget2->xAxis2->setTickLabelColor(Qt::white);
+    ui->widget2->yAxis2->setTickLabelColor(Qt::white);
+    ui->widget2->xAxis2->grid()->setPen(QPen(QColor(140, 140, 140), 1, Qt::DotLine));
+    ui->widget2->yAxis2->grid()->setPen(QPen(QColor(140, 140, 140), 1, Qt::DotLine));
+    ui->widget2->xAxis2->grid()->setSubGridPen(QPen(QColor(80, 80, 80), 1, Qt::DotLine));
+    ui->widget2->yAxis2->grid()->setSubGridPen(QPen(QColor(80, 80, 80), 1, Qt::DotLine));
+    ui->widget2->xAxis2->grid()->setSubGridVisible(true);
+    ui->widget2->yAxis2->grid()->setSubGridVisible(true);
+    ui->widget2->xAxis2->grid()->setZeroLinePen(Qt::NoPen);
+    ui->widget2->yAxis2->grid()->setZeroLinePen(Qt::NoPen);
+//    ui->widget->xAxis2->setUpperEnding(QCPLineEnding::esSpikeArrow);
+//    ui->widget->yAxis2->setUpperEnding(QCPLineEnding::esSpikeArrow);
+
+
+    ui->widget2->xAxis->setBasePen(QPen(Qt::white, 1));
+    ui->widget2->yAxis->setBasePen(QPen(Qt::white, 1));
+    ui->widget2->xAxis->setTickPen(QPen(Qt::white, 1));
+    ui->widget2->yAxis->setTickPen(QPen(Qt::white, 1));
+    ui->widget2->xAxis->setSubTickPen(QPen(Qt::white, 1));
+    ui->widget2->yAxis->setSubTickPen(QPen(Qt::white, 1));
+    ui->widget2->xAxis->setTickLabelColor(Qt::white);
+    ui->widget2->yAxis->setTickLabelColor(Qt::white);
+    ui->widget2->xAxis->grid()->setPen(QPen(QColor(140, 140, 140), 1, Qt::DotLine));
+    ui->widget2->yAxis->grid()->setPen(QPen(QColor(140, 140, 140), 1, Qt::DotLine));
+    ui->widget2->xAxis->grid()->setSubGridPen(QPen(QColor(80, 80, 80), 1, Qt::DotLine));
+    ui->widget2->yAxis->grid()->setSubGridPen(QPen(QColor(80, 80, 80), 1, Qt::DotLine));
+    ui->widget2->xAxis->grid()->setSubGridVisible(true);
+    ui->widget2->yAxis->grid()->setSubGridVisible(true);
+    ui->widget2->xAxis->grid()->setZeroLinePen(Qt::NoPen);
+    ui->widget2->yAxis->grid()->setZeroLinePen(Qt::NoPen);
+    ui->widget2->xAxis->setUpperEnding(QCPLineEnding::esSpikeArrow);
+    ui->widget2->yAxis->setUpperEnding(QCPLineEnding::esSpikeArrow);
+
+    QLinearGradient plotGradient;
+    plotGradient.setStart(0, 0);
+    plotGradient.setFinalStop(0, 350);
+//    plotGradient.setColorAt(0, QColor(80, 80, 80));
+//    plotGradient.setColorAt(1, QColor(50, 50, 50));
+    plotGradient.setColorAt(0, QColor(100, 100, 100));
+    plotGradient.setColorAt(1, QColor(112, 122, 225));
+    ui->widget2->setBackground(plotGradient);
+    QLinearGradient axisRectGradient;
+    axisRectGradient.setStart(0, 0);
+    axisRectGradient.setFinalStop(0, 350);
+    axisRectGradient.setColorAt(0, QColor(80, 80, 80));
+    axisRectGradient.setColorAt(1, QColor(30, 30, 30));
+    ui->widget2->axisRect()->setBackground(axisRectGradient);
+
+    ui->widget2->setWindowOpacity(0.8);
+
+    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
+    timeTicker->setTimeFormat("%h:%m:%s");
+    ui->widget2->xAxis->setTicker(timeTicker);
+    //customPlot->axisRect()->setupFullAxesBox();
+    ui->widget2->replot();
+}
 void MainWindow::updateSerialInfo()
 {
     serialPort = new Serialport();
@@ -224,7 +338,7 @@ void MainWindow::initTimer1()
 void MainWindow::initTimer2()
 {
     timer2 = new QTimer(this);
-    timer2->setInterval(1);
+    timer2->setInterval(0);
     connect(timer2, SIGNAL(timeout()), this, SLOT(updatePlot()));
     timer2->start();
 }
@@ -253,6 +367,7 @@ void MainWindow::initialUI()
     initLcdNum();
 
     initCustomPlot();
+    initCustomPlot2();
 }
 
 void MainWindow::updatePlot()
@@ -264,9 +379,16 @@ void MainWindow::updatePlot()
     static int x = 0;
     static qint16 y = 0;
 
+    ui->widget->graph(2)->addData(key,88);
+
+    ui->widget->graph(2)->rescaleAxes(true);
+    ui->widget->xAxis->setRange(key, 1, Qt::AlignRight);
+    ui->widget->replot();
 
     QByteArray tmp;
-    while(this->serialPort->isReadQEmpty() != 1){
+//    while(this->serialPort->isReadQEmpty() != 1)
+    if(this->serialPort->isReadQEmpty() != 1)
+    {
         tmp = this->serialPort->getDisplayArray();
 
         int len;
@@ -315,6 +437,7 @@ void MainWindow::updatePlot()
             }
         }
         lastPointKey = key;
+
         ui->widget->xAxis->setRange(key, 160, Qt::AlignRight);
         ui->widget->replot();
         ++x;
