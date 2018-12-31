@@ -18,6 +18,7 @@
 #include <QtWidgets/QDockWidget>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
@@ -28,8 +29,6 @@
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTextBrowser>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -58,13 +57,8 @@ public:
     QWidget *tab_2;
     QPushButton *pushButton_2;
     QFrame *frame;
-    QPushButton *testbtn;
-    QTextBrowser *rxDataDisplay;
-    QPushButton *sendButton;
+    QHBoxLayout *horizontalLayout;
     QPushButton *clearButton;
-    QCheckBox *hexBox;
-    QPushButton *pushButton;
-    QTextEdit *txDataInput;
     QLCDNumber *lcdNumber;
     QMenuBar *menuBar;
     QMenu *menuHelp;
@@ -190,39 +184,27 @@ public:
         frame->setMaximumSize(QSize(16777215, 16777215));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Sunken);
-        testbtn = new QPushButton(frame);
-        testbtn->setObjectName(QStringLiteral("testbtn"));
-        testbtn->setGeometry(QRect(0, 300, 101, 31));
-        rxDataDisplay = new QTextBrowser(frame);
-        rxDataDisplay->setObjectName(QStringLiteral("rxDataDisplay"));
-        rxDataDisplay->setGeometry(QRect(120, 300, 111, 41));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(rxDataDisplay->sizePolicy().hasHeightForWidth());
-        rxDataDisplay->setSizePolicy(sizePolicy1);
-        sendButton = new QPushButton(frame);
-        sendButton->setObjectName(QStringLiteral("sendButton"));
-        sendButton->setGeometry(QRect(260, 340, 85, 31));
-        sendButton->setStyleSheet(QStringLiteral("background: transparent;"));
-        sendButton->setFlat(true);
+        horizontalLayout = new QHBoxLayout(frame);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         clearButton = new QPushButton(frame);
         clearButton->setObjectName(QStringLiteral("clearButton"));
-        clearButton->setGeometry(QRect(260, 300, 85, 31));
-        hexBox = new QCheckBox(frame);
-        hexBox->setObjectName(QStringLiteral("hexBox"));
-        hexBox->setGeometry(QRect(270, 370, 54, 26));
-        pushButton = new QPushButton(frame);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(10, 350, 101, 31));
-        txDataInput = new QTextEdit(frame);
-        txDataInput->setObjectName(QStringLiteral("txDataInput"));
-        txDataInput->setGeometry(QRect(117, 349, 121, 51));
+
+        horizontalLayout->addWidget(clearButton);
+
         lcdNumber = new QLCDNumber(frame);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
-        lcdNumber->setGeometry(QRect(858, 245, 64, 23));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(lcdNumber->sizePolicy().hasHeightForWidth());
+        lcdNumber->setSizePolicy(sizePolicy1);
         lcdNumber->setFrameShape(QFrame::NoFrame);
         lcdNumber->setFrameShadow(QFrame::Raised);
+
+        horizontalLayout->addWidget(lcdNumber);
+
         splitter->addWidget(frame);
 
         gridLayout->addWidget(splitter, 0, 0, 1, 1);
@@ -463,11 +445,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Tab 2", Q_NULLPTR));
-        testbtn->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
-        sendButton->setText(QApplication::translate("MainWindow", "send", Q_NULLPTR));
         clearButton->setText(QApplication::translate("MainWindow", "clear", Q_NULLPTR));
-        hexBox->setText(QApplication::translate("MainWindow", "hex", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
         menuHelp->setTitle(QApplication::translate("MainWindow", "help", Q_NULLPTR));
         menuLine_select->setTitle(QApplication::translate("MainWindow", "line select", Q_NULLPTR));
         menuDockwidget->setTitle(QApplication::translate("MainWindow", "dockwidget", Q_NULLPTR));

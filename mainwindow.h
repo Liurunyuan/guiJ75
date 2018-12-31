@@ -75,9 +75,9 @@ public:
 
     void initCustomPlot();
 
-    void initTxDataDisplay();
+//    void initTxDataDisplay();
 
-    void initRxDataDisplay();
+//    void initRxDataDisplay();
 
 public slots:
     void refreshLCD();

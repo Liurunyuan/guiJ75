@@ -79,119 +79,31 @@
        <property name="frameShadow">
         <enum>QFrame::Sunken</enum>
        </property>
-       <widget class="QPushButton" name="testbtn">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>300</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-       <widget class="QTextBrowser" name="rxDataDisplay">
-        <property name="geometry">
-         <rect>
-          <x>120</x>
-          <y>300</y>
-          <width>111</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="sendButton">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>340</y>
-          <width>85</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background: transparent;</string>
-        </property>
-        <property name="text">
-         <string>send</string>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="clearButton">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>300</y>
-          <width>85</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>clear</string>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="hexBox">
-        <property name="geometry">
-         <rect>
-          <x>270</x>
-          <y>370</y>
-          <width>54</width>
-          <height>26</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>hex</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>350</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-       <widget class="QTextEdit" name="txDataInput">
-        <property name="geometry">
-         <rect>
-          <x>117</x>
-          <y>349</y>
-          <width>121</width>
-          <height>51</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLCDNumber" name="lcdNumber">
-        <property name="geometry">
-         <rect>
-          <x>858</x>
-          <y>245</y>
-          <width>64</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="clearButton">
+          <property name="text">
+           <string>clear</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="lcdNumber">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>

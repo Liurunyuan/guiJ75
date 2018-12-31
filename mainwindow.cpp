@@ -229,26 +229,26 @@ void MainWindow::initTimer2()
     timer2->start();
 }
 
-void MainWindow::initTxDataDisplay()
-{
-    ui->txDataInput->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
-    ui->txDataInput->append("<font color=\"#00FF00\">绿色字体</font> ");
-}
+//void MainWindow::initTxDataDisplay()
+//{
+//    ui->txDataInput->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
+//    ui->txDataInput->append("<font color=\"#00FF00\">绿色字体</font> ");
+//}
 
-void MainWindow::initRxDataDisplay()
-{
-    ui->rxDataDisplay->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
-    ui->rxDataDisplay->show();
-}
+//void MainWindow::initRxDataDisplay()
+//{
+//    ui->rxDataDisplay->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
+//    ui->rxDataDisplay->show();
+//}
 
 void MainWindow::initialUI()
 {
 //    ui->sendButton->setIcon(QIcon("/home/pi/Pictures/heike1.jpg"));
 //    ui->sendButton->setIconSize(QSize(101, 30));
 
-    initTxDataDisplay();
+//    initTxDataDisplay();
 
-    initRxDataDisplay();
+//    initRxDataDisplay();
 
     initLcdNum();
 
