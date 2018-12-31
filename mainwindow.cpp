@@ -174,6 +174,11 @@ void MainWindow::initCustomPlot()
     ui->widget->axisRect()->setBackground(axisRectGradient);
 
     ui->widget->setWindowOpacity(0.1);
+
+    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
+    timeTicker->setTimeFormat("%h:%m:%s");
+    ui->widget->xAxis->setTicker(timeTicker);
+    //customPlot->axisRect()->setupFullAxesBox();
     ui->widget->replot();
 }
 void MainWindow::updateSerialInfo()
@@ -219,7 +224,7 @@ void MainWindow::initTimer1()
 void MainWindow::initTimer2()
 {
     timer2 = new QTimer(this);
-    timer2->setInterval(10);
+    timer2->setInterval(1);
     connect(timer2, SIGNAL(timeout()), this, SLOT(updatePlot()));
     timer2->start();
 }
@@ -252,8 +257,14 @@ void MainWindow::initialUI()
 
 void MainWindow::updatePlot()
 {
+    static QTime time(QTime::currentTime());
+    // calculate two new data points:
+    double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
+    static double lastPointKey = 0;
     static int x = 0;
     static qint16 y = 0;
+
+
     QByteArray tmp;
     while(this->serialPort->isReadQEmpty() != 1){
         tmp = this->serialPort->getDisplayArray();
@@ -271,40 +282,40 @@ void MainWindow::updatePlot()
                 yl = tmp[5 + (i * 3)];
                 y = (yh << 8) + yl;
 
-                ui->widget->graph(0)->addData(x,y);
-                ui->widget->graph(0)->rescaleAxes(true);
+                ui->widget->graph(0)->addData(key,y);
+                //ui->widget->graph(0)->rescaleAxes(true);
                 break;
             case 1:
                 yh = tmp[4 + (i * 3)];
                 yl = tmp[5 + (i * 3)];
                 y = (yh << 8) + yl;
 
-                ui->widget->graph(1)->addData(x,y);
-                ui->widget->graph(1)->rescaleAxes(true);
+                ui->widget->graph(1)->addData(key,y);
+                //ui->widget->graph(1)->rescaleAxes(true);
                 break;
             case 2:
                 yh = tmp[4 + (i * 3)];
                 yl = tmp[5 + (i * 3)];
                 y = (yh << 8) + yl;
 
-                ui->widget->graph(2)->addData(x,y);
-                ui->widget->graph(2)->rescaleAxes(true);
+                ui->widget->graph(2)->addData(key,y);
+                //ui->widget->graph(2)->rescaleAxes(true);
                 break;
             case 3:
                 yh = tmp[4 + (i * 3)];
                 yl = tmp[5 + (i * 3)];
                 y = (qint16)((yh << 8) + yl);
 
-                ui->widget->graph(3)->addData(x,y);
+                ui->widget->graph(3)->addData(key,y);
 
-                ui->widget->graph(3)->rescaleAxes(true);
+                //ui->widget->graph(3)->rescaleAxes(true);
                 break;
             default:
                 break;
             }
         }
-
-        ui->widget->xAxis->setRange(x, 160, Qt::AlignRight);
+        lastPointKey = key;
+        ui->widget->xAxis->setRange(key, 160, Qt::AlignRight);
         ui->widget->replot();
         ++x;
     }
