@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     client.cpp \
     serialport.cpp \
     qcustomplot.cpp \
-    mythread.cpp
+    mythread.cpp \
+    updateplot.cpp
 
 HEADERS  += mainwindow.h \
     singleton.h \
@@ -41,6 +42,7 @@ HEADERS  += mainwindow.h \
     client.h \
     serialport.h \
     qcustomplot.h \
-    mythread.h
+    mythread.h \
+    updateplot.h
 
 FORMS    += mainwindow.ui

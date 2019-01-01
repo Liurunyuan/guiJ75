@@ -30,6 +30,7 @@ public:
     int getRxQLength();
     bool needUnpackData();
     void unpackData();
+    
 private slots:
     void readData();
 

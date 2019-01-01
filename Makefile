@@ -56,7 +56,8 @@ SOURCES       = main.cpp \
 		client.cpp \
 		serialport.cpp \
 		qcustomplot.cpp \
-		mythread.cpp moc_mainwindow.cpp \
+		mythread.cpp \
+		updateplot.cpp moc_mainwindow.cpp \
 		moc_serialport.cpp \
 		moc_qcustomplot.cpp
 OBJECTS       = main.o \
@@ -68,6 +69,7 @@ OBJECTS       = main.o \
 		serialport.o \
 		qcustomplot.o \
 		mythread.o \
+		updateplot.o \
 		moc_mainwindow.o \
 		moc_serialport.o \
 		moc_qcustomplot.o
@@ -139,7 +141,8 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		client.h \
 		serialport.h \
 		qcustomplot.h \
-		mythread.h main.cpp \
+		mythread.h \
+		updateplot.h main.cpp \
 		mainwindow.cpp \
 		singleton.cpp \
 		subject.cpp \
@@ -147,7 +150,8 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		client.cpp \
 		serialport.cpp \
 		qcustomplot.cpp \
-		mythread.cpp
+		mythread.cpp \
+		updateplot.cpp
 QMAKE_TARGET  = serialQT
 DESTDIR       = 
 TARGET        = serialQT
@@ -308,8 +312,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h singleton.h subject.h observer.h client.h serialport.h qcustomplot.h mythread.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp singleton.cpp subject.cpp observer.cpp client.cpp serialport.cpp qcustomplot.cpp mythread.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h singleton.h subject.h observer.h client.h serialport.h qcustomplot.h mythread.h updateplot.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp singleton.cpp subject.cpp observer.cpp client.cpp serialport.cpp qcustomplot.cpp mythread.cpp updateplot.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -379,7 +383,8 @@ main.o: main.cpp mainwindow.h \
 		singleton.h \
 		observer.h \
 		subject.h \
-		client.h
+		client.h \
+		updateplot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -414,6 +419,12 @@ qcustomplot.o: qcustomplot.cpp qcustomplot.h
 
 mythread.o: mythread.cpp mythread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mythread.o mythread.cpp
+
+updateplot.o: updateplot.cpp updateplot.h \
+		mainwindow.h \
+		serialport.h \
+		mythread.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o updateplot.o updateplot.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

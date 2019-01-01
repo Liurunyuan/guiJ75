@@ -1,0 +1,27 @@
+#include "updateplot.h"
+
+updatePlot::updatePlot(MainWindow* main)
+{
+    mainPlot = main;
+}
+updatePlot::~updatePlot()
+{
+    this->requestInterruption();
+    this->quit();
+    this->wait();
+}
+
+void updatePlot::run()
+{
+    while(!isInterruptionRequested())
+    {
+        if(MainWindow::getInstance()->needToUnpack() == true)
+        {
+            MainWindow::getInstance()->unpack();
+        }
+        else
+        {
+            QThread::msleep(10);
+        }
+    }
+}

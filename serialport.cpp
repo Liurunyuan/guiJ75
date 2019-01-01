@@ -65,24 +65,10 @@ void Serialport::sendStringEnquque(QByteArray sdata)
 
 void Serialport::readData()
 {
-    int headpos = -1;
-    int tailpos = -1;
     QByteArray tmp = this->readAll();
     if(!tmp.isEmpty())
     {
         readComData.append(tmp);
-        headpos = readComData.indexOf(packageHead);
-        tailpos = readComData.indexOf(packageTail);
-        if((headpos != -1) && (tailpos != -1))
-        {
-//            qDebug() << "length = " << readComData.length();
-//            qDebug() << "head position =" << readComData.indexOf(packageHead);
-//            qDebug() << "tail position =" << readComData.indexOf(packageTail);
-//            qDebug() << readComData.toHex();
-
-            readStringQ.enqueue(readComData);
-            readComData = readComData.right(readComData.length()-readComData.indexOf(packageTail)-2);
-        }
     }
 }
 
@@ -109,6 +95,35 @@ int Serialport::isReadQEmpty()
 int Serialport::getRxQLength()
 {
     return readStringQ.length();
+}
+
+bool Serialport::needUnpackData()
+{
+    if(readComData.length() > 7)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Serialport::unpackData()
+{
+    int headpos = -1;
+    int tailpos = -1;
+
+    headpos = readComData.indexOf(packageHead);
+    tailpos = readComData.indexOf(packageTail);
+    while((headpos != -1) && (tailpos != -1))
+    {
+        readStringQ.enqueue(readComData.left(tailpos + 1));
+        qDebug() << readComData.left(tailpos + 1).toHex();
+        readComData = readComData.right(readComData.length()-readComData.indexOf(packageTail)-2);
+        headpos = readComData.indexOf(packageHead);
+        tailpos = readComData.indexOf(packageTail);
+    }
 }
 
 int Serialport::calCrc(int crc, const char *buf, int len)

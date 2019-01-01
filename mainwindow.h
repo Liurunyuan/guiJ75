@@ -76,6 +76,9 @@ public:
     void initCustomPlot();
     void initCustomPlot2();
 
+    bool needToUnpack();
+    void unpack();
+
 //    void initTxDataDisplay();
 
 //    void initRxDataDisplay();

@@ -8,12 +8,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    mainWindow = this;
     ui->setupUi(this);
     this->setGeometry(100,50,1100,600);
     this->menuBar()->show();
 
-    task1 = new MyThread();
-    task1->start();
+//    task1 = new MyThread();
+//    task1->start();
 
     initialUI();
 
@@ -24,11 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
     updateSerialInfo();
 
     this->curveCommand = 0;
-//    this->curveComm.all.high8 = 0;
-//    this->curveComm.all.low8 = 0;
-    this->curveComm.all = 0;
 
-    //ui->frame->setGeometry(100,100);
+    this->curveComm.all = 0;
 
     ui->dockWidget->setMinimumSize(150,300);
     ui->dockWidget->setWindowTitle("com port config");
@@ -295,6 +293,23 @@ void MainWindow::initCustomPlot2()
     //customPlot->axisRect()->setupFullAxesBox();
     ui->widget2->replot();
 }
+
+bool MainWindow::needToUnpack()
+{
+    if(this->serialPort->needUnpackData() == true)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void MainWindow::unpack()
+{
+    this->serialPort->unpackData();
+}
 void MainWindow::updateSerialInfo()
 {
     serialPort = new Serialport();
@@ -379,8 +394,9 @@ void MainWindow::updatePlot()
     unsigned char yl;
 
     QByteArray tmp;
-    qDebug() << this->serialPort->getRxQLength();
-    while(this->serialPort->isReadQEmpty() != 1)
+//    qDebug() << this->serialPort->getRxQLength();
+//    while(this->serialPort->isReadQEmpty() != 1)
+    if(this->serialPort->isReadQEmpty() != 1)
     {
         tmp = this->serialPort->getDisplayArray();
         len = tmp[2];
@@ -425,7 +441,7 @@ void MainWindow::updatePlot()
             }
         }
 
-        ui->widget->xAxis->setRange(key, 5, Qt::AlignRight);
+        ui->widget->xAxis->setRange(key, 160, Qt::AlignRight);
         ui->widget->replot();
         ++key;
     }

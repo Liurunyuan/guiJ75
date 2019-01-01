@@ -81,68 +81,122 @@
        <property name="frameShadow">
         <enum>QFrame::Sunken</enum>
        </property>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>244</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="clearButton">
-          <property name="text">
-           <string>clear</string>
-          </property>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget">
+          <row>
+           <property name="text">
+            <string>内环比例系数上限</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>内环比例系数上限对应误差门限</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>内环积分系数</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>内环微分系数</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>内环前馈系数</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>内环积分饱和下限</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>内环积分饱和上限</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>内环积分起始误差下限</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>内环积分起始误差上限</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>内环比例系数上限</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>中环比例系数</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>中环微分系数</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>中环微分系数</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>外环比例系数</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>外环微分系数</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>横滚参数</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>俯仰参数</string>
+           </property>
+          </column>
          </widget>
         </item>
-        <item>
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>244</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLCDNumber" name="lcdNumber">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>244</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
+        <item row="0" column="1">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QPushButton" name="clearButton">
+            <property name="text">
+             <string>clear</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lcdNumber">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
