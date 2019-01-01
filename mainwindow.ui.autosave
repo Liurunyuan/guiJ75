@@ -169,21 +169,6 @@
             <string>俯仰参数</string>
            </property>
           </column>
-          <column>
-           <property name="text">
-            <string/>
-           </property>
-          </column>
-          <item row="0" column="2">
-           <property name="text">
-            <string>左前最大操纵力</string>
-           </property>
-          </item>
-          <item row="1" column="2">
-           <property name="text">
-            <string>左前第１操纵力</string>
-           </property>
-          </item>
          </widget>
         </item>
         <item row="0" column="1">

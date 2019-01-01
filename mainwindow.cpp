@@ -54,7 +54,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->label_4->setStyleSheet("QLabel{color: red;}");
     ui->label_5->setStyleSheet("QLabel{color: red;}");
 
-    ui->label_6->setStyleSheet("QLabel{color: blue;}");
+    ui->label_6->setStyleSheet("QLabel{color: white;}");
+    ui->label_7->setStyleSheet("QLabel{color: white;}");
+    ui->label_8->setStyleSheet("QLabel{color: white;}");
+    ui->label_9->setStyleSheet("QLabel{color: white;}");
+    ui->label_10->setStyleSheet("QLabel{color: white;}");
 
 //    ui->label_5->setStyleSheet("QLabel{color: rgb(0,255,255);"
 //                               "background-color: white;"
