@@ -118,6 +118,8 @@ private slots:
 
     void on_openButton_2_clicked();
 
+    void on_SendBtn_clicked();
+
 private:
     static MainWindow* mainWindow;
     Ui::MainWindow *ui;

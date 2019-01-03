@@ -815,3 +815,9 @@ void MainWindow::on_actionBus_voltage_triggered()
 }
 
 
+
+void MainWindow::on_SendBtn_clicked()
+{
+    //pack all the configuration data and send them to lower computer
+    qDebug() << "send button clicked";
+}
