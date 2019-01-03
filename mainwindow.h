@@ -77,7 +77,9 @@ public:
     void initCustomPlot2();
 
     bool needToUnpack();
+    bool needToUnpack2();
     void unpack();
+    void unpack2();
 
 //    void initTxDataDisplay();
 
@@ -120,6 +122,8 @@ private slots:
 
     void on_SendBtn_clicked();
 
+    void on_tableWidget_cellChanged(int row, int column);
+
 private:
     static MainWindow* mainWindow;
     Ui::MainWindow *ui;
@@ -132,6 +136,7 @@ private:
 
     QQueue<QByteArray> sendStringQ;
     char curve[12] = {0x5a,0x5a,0x01,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0xa5,0xa5};
+    char configPara[12] = {0x5a,0x5a,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xa5,0xa5};
     CurveStr curveComm;
 };
 

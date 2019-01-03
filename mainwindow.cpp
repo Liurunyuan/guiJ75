@@ -63,6 +63,21 @@ MainWindow::MainWindow(QWidget *parent) :
 //    ui->label_5->setStyleSheet("QLabel{color: rgb(0,255,255);"
 //                               "background-color: white;"
 //                               "}");
+
+    ui->tableWidget->horizontalHeader()->setStyleSheet("QHeaderView::section{background:skyblue;}");
+    ui->tableWidget->verticalHeader()->setStyleSheet("QHeaderView::section{background:yellow;}");
+//    ui->tableWidget->setFrameShape(QFrame::NoFrame);
+//    ui->tableWidget->horizontalScrollBar()->setEnabled(false);
+//    ui->tableWidget->verticalScrollBar()->setEnabled(false);
+
+//    //设置代理
+//    QLineEdit * m_edit = new QLineEdit;
+//    //设置正则表达式限制输入,限制只能输入一到三位数字
+//    QRegExp rx("^\\d\\d\\d\\d\\d?$");
+//    m_edit->setValidator(new QRegExpValidator(rx,m_edit));
+//    ui->tableWidget->setCellWidget(1,1,m_edit); //(0,0)项的item设置代理
+
+
 }
 
 MainWindow::~MainWindow()
@@ -310,9 +325,26 @@ bool MainWindow::needToUnpack()
     }
 }
 
+bool MainWindow::needToUnpack2()
+{
+    if(this->serialPortX->needUnpackData() == true)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 void MainWindow::unpack()
 {
     this->serialPort->unpackData();
+}
+
+void MainWindow::unpack2()
+{
+    this->serialPortX->unpackData();
 }
 void MainWindow::updateSerialInfo()
 {
@@ -392,6 +424,7 @@ void MainWindow::initialUI()
 void MainWindow::updatePlot()
 {
     static int key = 0;
+    static int key2 = 0;
     static qint16 y = 0;
     int len;
     unsigned char yh;
@@ -448,6 +481,55 @@ void MainWindow::updatePlot()
         ui->widget->xAxis->setRange(key, 160, Qt::AlignRight);
         ui->widget->replot();
         ++key;
+    }
+    else if(this->serialPortX->isReadQEmpty() != 1)
+    {
+        tmp = this->serialPortX->getDisplayArray();
+        len = tmp[2];
+        for(int i = 0; i < len; ++i)
+        {
+            switch(tmp[3 + i * 3]){
+            case 0:
+                yh = tmp[4 + (i * 3)];
+                yl = tmp[5 + (i * 3)];
+                y = (yh << 8) + yl;
+
+                ui->widget2->graph(0)->addData(key2,y);
+                ui->widget2->graph(0)->rescaleAxes(true);
+                break;
+            case 1:
+                yh = tmp[4 + (i * 3)];
+                yl = tmp[5 + (i * 3)];
+                y = (yh << 8) + yl;
+
+                ui->widget2->graph(1)->addData(key2,y);
+                ui->widget2->graph(1)->rescaleAxes(true);
+                break;
+            case 2:
+                yh = tmp[4 + (i * 3)];
+                yl = tmp[5 + (i * 3)];
+                y = (yh << 8) + yl;
+
+                ui->widget2->graph(2)->addData(key2,y);
+                ui->widget2->graph(2)->rescaleAxes(true);
+                break;
+            case 3:
+                yh = tmp[4 + (i * 3)];
+                yl = tmp[5 + (i * 3)];
+                y = (qint16)((yh << 8) + yl);
+
+                ui->widget2->graph(3)->addData(key2,y);
+
+                ui->widget2->graph(3)->rescaleAxes(true);
+                break;
+            default:
+                break;
+            }
+        }
+
+        ui->widget2->xAxis->setRange(key2, 160, Qt::AlignRight);
+        ui->widget2->replot();
+        ++key2;
     }
 }
 void MainWindow::paintEvent(QPaintEvent *event)
@@ -820,4 +902,41 @@ void MainWindow::on_SendBtn_clicked()
 {
     //pack all the configuration data and send them to lower computer
     qDebug() << "send button clicked";
+    ui->tableWidget->horizontalHeaderItem(1);
+}
+
+void MainWindow::on_tableWidget_cellChanged(int row, int column)
+{
+    qint16 crc;
+    QByteArray send_data;
+    CurveStr value;
+    int tmp;
+
+    tmp = ui->tableWidget->item(row,column)->text().toInt();
+    if(tmp > 32000 || tmp < -32000)
+    {
+        QMessageBox::about(NULL,"wrong value","wrong");
+        ui->tableWidget->item(row,column)->setText("-99999999");
+
+        return;
+    }
+    else
+    {
+        value.all = tmp;
+    }
+    qDebug() << ui->tableWidget->item(row,column)->text().toInt();
+    qDebug() << value.all;
+    configPara[5] = row;
+    configPara[7] = value.half.low8;
+    configPara[6] = value.half.high8;
+
+    crc = this->serialPort->calCrc(0, configPara + 5, 3);
+
+    configPara[9] = (char)crc;
+    configPara[8] = (char)(crc >> 8);
+
+    send_data.append(configPara,12);
+    qDebug() << send_data.toHex();
+    this->serialPort->sendData(send_data);
+    this->serialPort->sendData(send_data);
 }

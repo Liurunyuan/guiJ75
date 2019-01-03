@@ -84,6 +84,18 @@
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
          <widget class="QTableWidget" name="tableWidget">
+          <property name="locale">
+           <locale language="Chinese" country="China"/>
+          </property>
+          <property name="autoScroll">
+           <bool>false</bool>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::DotLine</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>true</bool>
+          </attribute>
           <row>
            <property name="text">
             <string>内环比例系数上限</string>
@@ -206,6 +218,9 @@
          </layout>
         </item>
        </layout>
+       <zorder>tableWidget</zorder>
+       <zorder>layoutWidget</zorder>
+       <zorder>SendBtn</zorder>
       </widget>
      </widget>
     </item>

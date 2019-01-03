@@ -9,6 +9,7 @@
 #ifndef UI_MAINWINDOW_H
 #define UI_MAINWINDOW_H
 
+#include <QtCore/QLocale>
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
@@ -242,6 +243,10 @@ public:
         QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
         tableWidget->setVerticalHeaderItem(14, __qtablewidgetitem16);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
+        tableWidget->setLocale(QLocale(QLocale::Chinese, QLocale::China));
+        tableWidget->setAutoScroll(false);
+        tableWidget->setGridStyle(Qt::DotLine);
+        tableWidget->horizontalHeader()->setVisible(true);
 
         gridLayout_4->addWidget(tableWidget, 0, 0, 1, 1);
 
@@ -274,6 +279,8 @@ public:
         gridLayout_4->addLayout(verticalLayout_3, 0, 1, 1, 1);
 
         splitter->addWidget(frame);
+        tableWidget->raise();
+        SendBtn->raise();
 
         gridLayout->addWidget(splitter, 0, 0, 1, 1);
 
