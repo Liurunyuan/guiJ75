@@ -61,13 +61,16 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QCustomPlot *widget2;
     QFrame *frame;
-    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout_4;
     QTableWidget *tableWidget;
-    QSpacerItem *horizontalSpacer;
+    QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_3;
     QPushButton *SendBtn;
     QPushButton *clearButton;
     QLCDNumber *lcdNumber;
+    QLabel *targetimage;
+    QSpacerItem *horizontalSpacer;
+    QSpacerItem *verticalSpacer_2;
     QMenuBar *menuBar;
     QMenu *menuHelp;
     QMenu *menuLine_select;
@@ -118,7 +121,9 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1228, 576);
+        MainWindow->setBaseSize(QSize(0, 0));
         MainWindow->setAutoFillBackground(true);
+        MainWindow->setIconSize(QSize(10, 24));
         actionAbout_how_to_use = new QAction(MainWindow);
         actionAbout_how_to_use->setObjectName(QStringLiteral("actionAbout_how_to_use"));
         actionAbout_how_to_use->setCheckable(true);
@@ -215,10 +220,10 @@ public:
         frame->setMaximumSize(QSize(16777215, 16777215));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Sunken);
-        horizontalLayout = new QHBoxLayout(frame);
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        gridLayout_4 = new QGridLayout(frame);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         tableWidget = new QTableWidget(frame);
         if (tableWidget->columnCount() < 2)
             tableWidget->setColumnCount(2);
@@ -379,13 +384,13 @@ public:
         tableWidget->setLocale(QLocale(QLocale::Chinese, QLocale::China));
         tableWidget->setAutoScroll(false);
         tableWidget->setGridStyle(Qt::DotLine);
-        tableWidget->horizontalHeader()->setVisible(true);
+        tableWidget->horizontalHeader()->setVisible(false);
 
-        horizontalLayout->addWidget(tableWidget);
+        gridLayout_4->addWidget(tableWidget, 0, 0, 3, 1);
 
-        horizontalSpacer = new QSpacerItem(530, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        verticalSpacer = new QSpacerItem(20, 22, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        horizontalLayout->addItem(horizontalSpacer);
+        gridLayout_4->addItem(verticalSpacer, 0, 1, 1, 1);
 
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(6);
@@ -413,7 +418,23 @@ public:
         verticalLayout_3->addWidget(lcdNumber);
 
 
-        horizontalLayout->addLayout(verticalLayout_3);
+        gridLayout_4->addLayout(verticalLayout_3, 0, 3, 2, 1);
+
+        targetimage = new QLabel(frame);
+        targetimage->setObjectName(QStringLiteral("targetimage"));
+        targetimage->setMaximumSize(QSize(250, 250));
+        targetimage->setPixmap(QPixmap(QString::fromUtf8("../../Pictures/miaozhun.jpeg")));
+        targetimage->setScaledContents(true);
+
+        gridLayout_4->addWidget(targetimage, 1, 1, 1, 1);
+
+        horizontalSpacer = new QSpacerItem(457, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_4->addItem(horizontalSpacer, 1, 2, 1, 1);
+
+        verticalSpacer_2 = new QSpacerItem(20, 22, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_4->addItem(verticalSpacer_2, 2, 1, 1, 1);
 
         splitter->addWidget(frame);
 
@@ -422,7 +443,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1228, 22));
+        menuBar->setGeometry(QRect(0, 0, 1228, 28));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuLine_select = new QMenu(menuBar);
@@ -805,6 +826,7 @@ public:
         ___qtablewidgetitem73->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\345\276\256\345\210\206\346\264\227\346\274\261", 0));
         SendBtn->setText(QApplication::translate("MainWindow", "Send", 0));
         clearButton->setText(QApplication::translate("MainWindow", "clear", 0));
+        targetimage->setText(QString());
         menuHelp->setTitle(QApplication::translate("MainWindow", "help", 0));
         menuLine_select->setTitle(QApplication::translate("MainWindow", "line select", 0));
         menuDockwidget->setTitle(QApplication::translate("MainWindow", "dockwidget", 0));

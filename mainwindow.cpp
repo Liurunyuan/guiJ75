@@ -83,8 +83,14 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QRegExp rx("^\\d\\d\\d\\d\\d?$");
 //    m_edit->setValidator(new QRegExpValidator(rx,m_edit));
 //    ui->tableWidget->setCellWidget(1,1,m_edit); //(0,0)项的item设置代理
+    QPixmap pixmap("/home/sean/Pictures/miaozhun.jpeg");
+
+    pixmap.scaled(QSize(10,10), Qt::KeepAspectRatio);
+    ui->targetimage->setPixmap(pixmap);
+    ui->targetimage->setScaledContents(true);
 
 
+    ui->targetimage->show();
 }
 
 MainWindow::~MainWindow()
