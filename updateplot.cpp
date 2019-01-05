@@ -19,17 +19,9 @@ void updatePlot::run()
         {
             MainWindow::getInstance()->unpack();
         }
-        else
-        {
-            QThread::msleep(10);
-        }
         if(MainWindow::getInstance()->needToUnpack2() == true)
         {
             MainWindow::getInstance()->unpack2();
-        }
-        else
-        {
-            QThread::msleep(10);
         }
     }
 }

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.7.1
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -27,6 +27,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
@@ -61,7 +62,9 @@ public:
     QCustomPlot *widget2;
     QFrame *frame;
     QGridLayout *gridLayout_4;
+    QHBoxLayout *horizontalLayout;
     QTableWidget *tableWidget;
+    QSpacerItem *horizontalSpacer;
     QVBoxLayout *verticalLayout_3;
     QPushButton *SendBtn;
     QPushButton *clearButton;
@@ -124,23 +127,23 @@ public:
         actionDisplacement = new QAction(MainWindow);
         actionDisplacement->setObjectName(QStringLiteral("actionDisplacement"));
         actionDisplacement->setCheckable(true);
-        actionDisplacement->setChecked(true);
+        actionDisplacement->setChecked(false);
         actionMotor_speed = new QAction(MainWindow);
         actionMotor_speed->setObjectName(QStringLiteral("actionMotor_speed"));
         actionMotor_speed->setCheckable(true);
-        actionMotor_speed->setChecked(true);
+        actionMotor_speed->setChecked(false);
         actionMotor_accel = new QAction(MainWindow);
         actionMotor_accel->setObjectName(QStringLiteral("actionMotor_accel"));
         actionMotor_accel->setCheckable(true);
-        actionMotor_accel->setChecked(true);
+        actionMotor_accel->setChecked(false);
         actionCurrent = new QAction(MainWindow);
         actionCurrent->setObjectName(QStringLiteral("actionCurrent"));
         actionCurrent->setCheckable(true);
-        actionCurrent->setChecked(true);
+        actionCurrent->setChecked(false);
         actionBus_voltage = new QAction(MainWindow);
         actionBus_voltage->setObjectName(QStringLiteral("actionBus_voltage"));
         actionBus_voltage->setCheckable(true);
-        actionBus_voltage->setChecked(true);
+        actionBus_voltage->setChecked(false);
         actionSystem_config = new QAction(MainWindow);
         actionSystem_config->setObjectName(QStringLiteral("actionSystem_config"));
         actionSystem_config->setCheckable(true);
@@ -155,6 +158,7 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setVerticalSpacing(6);
         splitter = new QSplitter(centralWidget);
         splitter->setObjectName(QStringLiteral("splitter"));
         splitter->setOrientation(Qt::Vertical);
@@ -203,6 +207,10 @@ public:
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        gridLayout_4->setVerticalSpacing(6);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(3);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         tableWidget = new QTableWidget(frame);
         if (tableWidget->columnCount() < 2)
             tableWidget->setColumnCount(2);
@@ -243,12 +251,18 @@ public:
         QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
         tableWidget->setVerticalHeaderItem(14, __qtablewidgetitem16);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
+        tableWidget->setMinimumSize(QSize(407, 0));
+        tableWidget->setMaximumSize(QSize(407, 16777215));
         tableWidget->setLocale(QLocale(QLocale::Chinese, QLocale::China));
         tableWidget->setAutoScroll(false);
         tableWidget->setGridStyle(Qt::DotLine);
         tableWidget->horizontalHeader()->setVisible(true);
 
-        gridLayout_4->addWidget(tableWidget, 0, 0, 1, 1);
+        horizontalLayout->addWidget(tableWidget);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
 
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(6);
@@ -276,18 +290,19 @@ public:
         verticalLayout_3->addWidget(lcdNumber);
 
 
-        gridLayout_4->addLayout(verticalLayout_3, 0, 1, 1, 1);
+        horizontalLayout->addLayout(verticalLayout_3);
+
+
+        gridLayout_4->addLayout(horizontalLayout, 0, 0, 1, 1);
 
         splitter->addWidget(frame);
-        tableWidget->raise();
-        SendBtn->raise();
 
         gridLayout->addWidget(splitter, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1100, 27));
+        menuBar->setGeometry(QRect(0, 0, 1100, 25));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuLine_select = new QMenu(menuBar);
@@ -508,106 +523,106 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-        actionAbout_how_to_use->setText(QApplication::translate("MainWindow", "about how to use", Q_NULLPTR));
-        actionDisplacement->setText(QApplication::translate("MainWindow", "displacement", Q_NULLPTR));
-        actionMotor_speed->setText(QApplication::translate("MainWindow", "motor speed", Q_NULLPTR));
-        actionMotor_accel->setText(QApplication::translate("MainWindow", "motor accel", Q_NULLPTR));
-        actionCurrent->setText(QApplication::translate("MainWindow", "current", Q_NULLPTR));
-        actionBus_voltage->setText(QApplication::translate("MainWindow", "bus voltage", Q_NULLPTR));
-        actionSystem_config->setText(QApplication::translate("MainWindow", "system config", Q_NULLPTR));
-        actionCurve_config->setText(QApplication::translate("MainWindow", "curve config", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Tab 2", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        actionAbout_how_to_use->setText(QApplication::translate("MainWindow", "about how to use", 0));
+        actionDisplacement->setText(QApplication::translate("MainWindow", "displacement", 0));
+        actionMotor_speed->setText(QApplication::translate("MainWindow", "motor speed", 0));
+        actionMotor_accel->setText(QApplication::translate("MainWindow", "motor accel", 0));
+        actionCurrent->setText(QApplication::translate("MainWindow", "current", 0));
+        actionBus_voltage->setText(QApplication::translate("MainWindow", "bus voltage", 0));
+        actionSystem_config->setText(QApplication::translate("MainWindow", "system config", 0));
+        actionCurve_config->setText(QApplication::translate("MainWindow", "curve config", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Tab 2", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "\346\250\252\346\273\232\345\217\202\346\225\260", Q_NULLPTR));
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "\346\250\252\346\273\232\345\217\202\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "\344\277\257\344\273\260\345\217\202\346\225\260", Q_NULLPTR));
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "\344\277\257\344\273\260\345\217\202\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget->verticalHeaderItem(0);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260\344\270\212\351\231\220", Q_NULLPTR));
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260\344\270\212\351\231\220", 0));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget->verticalHeaderItem(1);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260\344\270\212\351\231\220\345\257\271\345\272\224\350\257\257\345\267\256\351\227\250\351\231\220", Q_NULLPTR));
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260\344\270\212\351\231\220\345\257\271\345\272\224\350\257\257\345\267\256\351\227\250\351\231\220", 0));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget->verticalHeaderItem(2);
-        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\347\263\273\346\225\260", Q_NULLPTR));
+        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\347\263\273\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem5 = tableWidget->verticalHeaderItem(3);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\345\276\256\345\210\206\347\263\273\346\225\260", Q_NULLPTR));
+        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\345\276\256\345\210\206\347\263\273\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem6 = tableWidget->verticalHeaderItem(4);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\345\211\215\351\246\210\347\263\273\346\225\260", Q_NULLPTR));
+        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\345\211\215\351\246\210\347\263\273\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem7 = tableWidget->verticalHeaderItem(5);
-        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\351\245\261\345\222\214\344\270\213\351\231\220", Q_NULLPTR));
+        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\351\245\261\345\222\214\344\270\213\351\231\220", 0));
         QTableWidgetItem *___qtablewidgetitem8 = tableWidget->verticalHeaderItem(6);
-        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\351\245\261\345\222\214\344\270\212\351\231\220", Q_NULLPTR));
+        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\351\245\261\345\222\214\344\270\212\351\231\220", 0));
         QTableWidgetItem *___qtablewidgetitem9 = tableWidget->verticalHeaderItem(7);
-        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\350\265\267\345\247\213\350\257\257\345\267\256\344\270\213\351\231\220", Q_NULLPTR));
+        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\350\265\267\345\247\213\350\257\257\345\267\256\344\270\213\351\231\220", 0));
         QTableWidgetItem *___qtablewidgetitem10 = tableWidget->verticalHeaderItem(8);
-        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\350\265\267\345\247\213\350\257\257\345\267\256\344\270\212\351\231\220", Q_NULLPTR));
+        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\350\265\267\345\247\213\350\257\257\345\267\256\344\270\212\351\231\220", 0));
         QTableWidgetItem *___qtablewidgetitem11 = tableWidget->verticalHeaderItem(9);
-        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260\344\270\212\351\231\220", Q_NULLPTR));
+        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260\344\270\212\351\231\220", 0));
         QTableWidgetItem *___qtablewidgetitem12 = tableWidget->verticalHeaderItem(10);
-        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "\344\270\255\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260", Q_NULLPTR));
+        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "\344\270\255\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem13 = tableWidget->verticalHeaderItem(11);
-        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "\344\270\255\347\216\257\345\276\256\345\210\206\347\263\273\346\225\260", Q_NULLPTR));
+        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "\344\270\255\347\216\257\345\276\256\345\210\206\347\263\273\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem14 = tableWidget->verticalHeaderItem(12);
-        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "\344\270\255\347\216\257\345\276\256\345\210\206\347\263\273\346\225\260", Q_NULLPTR));
+        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "\344\270\255\347\216\257\345\276\256\345\210\206\347\263\273\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem15 = tableWidget->verticalHeaderItem(13);
-        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260", Q_NULLPTR));
+        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem16 = tableWidget->verticalHeaderItem(14);
-        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\345\276\256\345\210\206\347\263\273\346\225\260", Q_NULLPTR));
-        SendBtn->setText(QApplication::translate("MainWindow", "Send", Q_NULLPTR));
-        clearButton->setText(QApplication::translate("MainWindow", "clear", Q_NULLPTR));
-        menuHelp->setTitle(QApplication::translate("MainWindow", "help", Q_NULLPTR));
-        menuLine_select->setTitle(QApplication::translate("MainWindow", "line select", Q_NULLPTR));
-        menuDockwidget->setTitle(QApplication::translate("MainWindow", "dockwidget", Q_NULLPTR));
-        label->setText(QApplication::translate("MainWindow", "com", Q_NULLPTR));
-        label_2->setText(QApplication::translate("MainWindow", "baud", Q_NULLPTR));
+        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\345\276\256\345\210\206\347\263\273\346\225\260", 0));
+        SendBtn->setText(QApplication::translate("MainWindow", "Send", 0));
+        clearButton->setText(QApplication::translate("MainWindow", "clear", 0));
+        menuHelp->setTitle(QApplication::translate("MainWindow", "help", 0));
+        menuLine_select->setTitle(QApplication::translate("MainWindow", "line select", 0));
+        menuDockwidget->setTitle(QApplication::translate("MainWindow", "dockwidget", 0));
+        label->setText(QApplication::translate("MainWindow", "com", 0));
+        label_2->setText(QApplication::translate("MainWindow", "baud", 0));
         baudBox->clear();
         baudBox->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "9600", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "115200", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "9600", 0)
+         << QApplication::translate("MainWindow", "115200", 0)
         );
-        label_3->setText(QApplication::translate("MainWindow", "stop", Q_NULLPTR));
+        label_3->setText(QApplication::translate("MainWindow", "stop", 0));
         stopBox->clear();
         stopBox->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "1", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "1", 0)
         );
-        label_4->setText(QApplication::translate("MainWindow", "data", Q_NULLPTR));
+        label_4->setText(QApplication::translate("MainWindow", "data", 0));
         dataBox->clear();
         dataBox->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "8", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "8", 0)
         );
-        label_5->setText(QApplication::translate("MainWindow", "check", Q_NULLPTR));
+        label_5->setText(QApplication::translate("MainWindow", "check", 0));
         checkBox->clear();
         checkBox->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "none", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "none", 0)
         );
-        openButton->setText(QApplication::translate("MainWindow", "open", Q_NULLPTR));
-        checkBox_2->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
-        checkBox_3->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
-        checkBox_4->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
-        checkBox_5->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
-        label_6->setText(QApplication::translate("MainWindow", "com", Q_NULLPTR));
-        label_7->setText(QApplication::translate("MainWindow", "baud", Q_NULLPTR));
+        openButton->setText(QApplication::translate("MainWindow", "open", 0));
+        checkBox_2->setText(QApplication::translate("MainWindow", "CheckBox", 0));
+        checkBox_3->setText(QApplication::translate("MainWindow", "CheckBox", 0));
+        checkBox_4->setText(QApplication::translate("MainWindow", "CheckBox", 0));
+        checkBox_5->setText(QApplication::translate("MainWindow", "CheckBox", 0));
+        label_6->setText(QApplication::translate("MainWindow", "com", 0));
+        label_7->setText(QApplication::translate("MainWindow", "baud", 0));
         baudBox_2->clear();
         baudBox_2->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "9600", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "115200", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "9600", 0)
+         << QApplication::translate("MainWindow", "115200", 0)
         );
-        label_8->setText(QApplication::translate("MainWindow", "stop", Q_NULLPTR));
+        label_8->setText(QApplication::translate("MainWindow", "stop", 0));
         stopBox_2->clear();
         stopBox_2->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "1", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "1", 0)
         );
-        label_9->setText(QApplication::translate("MainWindow", "data", Q_NULLPTR));
+        label_9->setText(QApplication::translate("MainWindow", "data", 0));
         dataBox_2->clear();
         dataBox_2->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "8", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "8", 0)
         );
-        label_10->setText(QApplication::translate("MainWindow", "check", Q_NULLPTR));
+        label_10->setText(QApplication::translate("MainWindow", "check", 0));
         checkBox_6->clear();
         checkBox_6->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "none", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "none", 0)
         );
-        openButton_2->setText(QApplication::translate("MainWindow", "open", Q_NULLPTR));
+        openButton_2->setText(QApplication::translate("MainWindow", "open", 0));
     } // retranslateUi
 
 };

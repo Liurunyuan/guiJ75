@@ -4,6 +4,15 @@
 
 
 
+void MainWindow::configCuveMenu()
+{
+    ui->actionDisplacement->setChecked(false);
+    ui->actionMotor_accel->setChecked(false);
+    ui->actionMotor_speed->setChecked(false);
+    ui->actionBus_voltage->setChecked(false);
+    ui->actionCurrent->setChecked(false);
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -12,9 +21,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setGeometry(100,50,1100,600);
     this->menuBar()->show();
-
-//    task1 = new MyThread();
-//    task1->start();
 
     initialUI();
 
@@ -25,8 +31,12 @@ MainWindow::MainWindow(QWidget *parent) :
     updateSerialInfo();
 
     this->curveCommand = 0;
-
     this->curveComm.all = 0;
+
+    this->curveCount[0] = 0;
+    this->curveCount[1] = 0;
+
+    configCuveMenu();
 
     ui->dockWidget->setMinimumSize(150,300);
     ui->dockWidget->setWindowTitle("com port config");
@@ -104,24 +114,24 @@ void MainWindow::initCustomPlot()
 
     ui->widget->addGraph();
     ui->widget->graph(0)->setPen(QPen(Qt::blue));
-    ui->widget->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+    //ui->widget->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
     ui->widget->graph(0)->rescaleAxes();
 
 
     ui->widget->addGraph();
-    ui->widget->graph(1)->setPen(QPen(Qt::black));
-    ui->widget->graph(1)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+    ui->widget->graph(1)->setPen(QPen(Qt::white));
+    //ui->widget->graph(1)->setBrush(QBrush(QColor(0, 0, 255, 20)));
     ui->widget->graph(1)->rescaleAxes();
 
     ui->widget->addGraph();
     ui->widget->graph(2)->setPen(QPen(Qt::red));
-    ui->widget->graph(2)->setBrush(QBrush(QColor(0, 0, 255, 20)));
-    ui->widget->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::black, 1.5), QBrush(Qt::white), 9));
+    //ui->widget->graph(2)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+    //ui->widget->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::black, 1.5), QBrush(Qt::white), 9));
     ui->widget->graph(2)->rescaleAxes();
 
     ui->widget->addGraph();
     ui->widget->graph(3)->setPen(QPen(Qt::yellow));
-    ui->widget->graph(3)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+    //ui->widget->graph(3)->setBrush(QBrush(QColor(0, 0, 255, 20)));
     ui->widget->graph(3)->rescaleAxes();
 
     ui->widget->xAxis2->setVisible(true);
@@ -431,54 +441,49 @@ void MainWindow::updatePlot()
     unsigned char yl;
 
     QByteArray tmp;
-//    qDebug() << this->serialPort->getRxQLength();
-//    while(this->serialPort->isReadQEmpty() != 1)
     if(this->serialPort->isReadQEmpty() != 1)
     {
         tmp = this->serialPort->getDisplayArray();
         len = tmp[2];
         for(int i = 0; i < len; ++i)
         {
-            switch(tmp[3 + i * 3]){
+            switch(tmp[5 + i * 3] % 4){
             case 0:
-                yh = tmp[4 + (i * 3)];
-                yl = tmp[5 + (i * 3)];
+                yh = tmp[6 + (i * 3)];
+                yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
 
                 ui->widget->graph(0)->addData(key,y);
                 ui->widget->graph(0)->rescaleAxes(true);
                 break;
             case 1:
-                yh = tmp[4 + (i * 3)];
-                yl = tmp[5 + (i * 3)];
+                yh = tmp[6 + (i * 3)];
+                yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
 
                 ui->widget->graph(1)->addData(key,y);
                 ui->widget->graph(1)->rescaleAxes(true);
                 break;
             case 2:
-                yh = tmp[4 + (i * 3)];
-                yl = tmp[5 + (i * 3)];
+                yh = tmp[6 + (i * 3)];
+                yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
 
                 ui->widget->graph(2)->addData(key,y);
                 ui->widget->graph(2)->rescaleAxes(true);
                 break;
             case 3:
-                yh = tmp[4 + (i * 3)];
-                yl = tmp[5 + (i * 3)];
+                yh = tmp[6 + (i * 3)];
+                yl = tmp[7 + (i * 3)];
                 y = (qint16)((yh << 8) + yl);
-
                 ui->widget->graph(3)->addData(key,y);
-
                 ui->widget->graph(3)->rescaleAxes(true);
                 break;
             default:
                 break;
             }
         }
-
-        ui->widget->xAxis->setRange(key, 160, Qt::AlignRight);
+        ui->widget->xAxis->setRange(key, 260, Qt::AlignRight);
         ui->widget->replot();
         ++key;
     }
@@ -488,38 +493,37 @@ void MainWindow::updatePlot()
         len = tmp[2];
         for(int i = 0; i < len; ++i)
         {
-            switch(tmp[3 + i * 3]){
+            switch(tmp[5 + i * 3]){
             case 0:
-                yh = tmp[4 + (i * 3)];
-                yl = tmp[5 + (i * 3)];
+                yh = tmp[6 + (i * 3)];
+                yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
 
                 ui->widget2->graph(0)->addData(key2,y);
                 ui->widget2->graph(0)->rescaleAxes(true);
                 break;
             case 1:
-                yh = tmp[4 + (i * 3)];
-                yl = tmp[5 + (i * 3)];
+                yh = tmp[6 + (i * 3)];
+                yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
 
                 ui->widget2->graph(1)->addData(key2,y);
                 ui->widget2->graph(1)->rescaleAxes(true);
                 break;
             case 2:
-                yh = tmp[4 + (i * 3)];
-                yl = tmp[5 + (i * 3)];
+                yh = tmp[6 + (i * 3)];
+                yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
 
                 ui->widget2->graph(2)->addData(key2,y);
                 ui->widget2->graph(2)->rescaleAxes(true);
                 break;
             case 3:
-                yh = tmp[4 + (i * 3)];
-                yl = tmp[5 + (i * 3)];
+                yh = tmp[6 + (i * 3)];
+                yl = tmp[7 + (i * 3)];
                 y = (qint16)((yh << 8) + yl);
 
                 ui->widget2->graph(3)->addData(key2,y);
-
                 ui->widget2->graph(3)->rescaleAxes(true);
                 break;
             default:
@@ -700,8 +704,20 @@ void MainWindow::on_actionDisplacement_triggered()
 {
     qint16 crc;
     QByteArray send_data;
+
     if(ui->actionDisplacement->isChecked() == true)
     {
+        qDebug() << curveCount[0];
+        if(curveCount[0] > MAXCURVE)
+        {
+            ui->actionDisplacement->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[0]++;
+        }
         qDebug() << "ask for displacement";
         this->curveComm.bit.displacemet = 1;
 
@@ -717,9 +733,15 @@ void MainWindow::on_actionDisplacement_triggered()
 
         qDebug() << send_data.toHex();
         this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
     }
     else
     {
+        --curveCount[0];
+        if(curveCount[0] < 0)
+        {
+            curveCount[0] = 0;
+        }
         qDebug() << "cancle displacement";
         this->curveComm.bit.displacemet = 0;
         curve[7] = this->curveComm.half.low8;
@@ -735,6 +757,7 @@ void MainWindow::on_actionDisplacement_triggered()
         qDebug() << send_data.toHex();
 
         this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
     }
 }
 
@@ -744,6 +767,16 @@ void MainWindow::on_actionMotor_speed_triggered()
     QByteArray send_data;
     if(ui->actionMotor_speed->isChecked() == true)
     {
+        if(curveCount[0] > MAXCURVE)
+        {
+            ui->actionMotor_speed->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[0]++;
+        }
         qDebug() << "ask for motor speed";
         this->curveComm.bit.speed = 1;
         curve[7] = this->curveComm.half.low8;
@@ -757,9 +790,15 @@ void MainWindow::on_actionMotor_speed_triggered()
         send_data.append(curve,12);
         qDebug() << send_data.toHex();
         this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
     }
     else
     {
+        --curveCount[0];
+        if(curveCount[0] < 0)
+        {
+            curveCount[0] = 0;
+        }
         qDebug() << "cancle motor speed";
 
         this->curveComm.bit.speed = 0;
@@ -775,6 +814,7 @@ void MainWindow::on_actionMotor_speed_triggered()
         send_data.append(curve,12);
         qDebug() << send_data.toHex();
         this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
     }
 }
 
@@ -784,10 +824,20 @@ void MainWindow::on_actionMotor_accel_triggered()
     QByteArray send_data;
     if(ui->actionMotor_accel->isChecked() == true)
     {
+        if(curveCount[0] > MAXCURVE)
+        {
+            ui->actionMotor_accel->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[0]++;
+        }
         qDebug() << "ask for motor accel";
         this->curveComm.bit.accel = 1;
-        curve[7] = (qint8)this->curveComm.half.low8;
-        curve[6] = (qint8)this->curveComm.half.high8;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
 
         crc = this->serialPort->calCrc(0, curve + 5, 3);
 
@@ -797,13 +847,19 @@ void MainWindow::on_actionMotor_accel_triggered()
         send_data.append(curve,12);
         qDebug() << send_data.toHex();
         this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
     }
     else
     {
+        --curveCount[0];
+        if(curveCount[0] < 0)
+        {
+            curveCount[0] = 0;
+        }
         qDebug() << "cancle motor accel";
         this->curveComm.bit.accel = 0;
-        curve[7] = (qint8)this->curveComm.half.low8;
-        curve[6] = (qint8)this->curveComm.half.high8;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
 
         crc = this->serialPort->calCrc(0, curve + 5, 3);
 
@@ -811,6 +867,7 @@ void MainWindow::on_actionMotor_accel_triggered()
         curve[8] = (char)(crc >> 8);
         send_data.append(curve,12);
         qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
         this->serialPort->sendData(send_data);
     }
 }
@@ -821,11 +878,21 @@ void MainWindow::on_actionCurrent_triggered()
     QByteArray send_data;
     if(ui->actionCurrent->isChecked() == true)
     {
+        if(curveCount[0] > MAXCURVE)
+        {
+            ui->actionCurrent->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[0]++;
+        }
         qDebug() << "ask for system current";
 
         this->curveComm.bit.current = 1;
-        curve[7] = (qint8)this->curveComm.half.low8;
-        curve[6] = (qint8)this->curveComm.half.high8;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
 
         crc = this->serialPort->calCrc(0, curve + 5, 3);
 
@@ -835,15 +902,21 @@ void MainWindow::on_actionCurrent_triggered()
         send_data.append(curve,12);
         qDebug() << send_data.toHex();
         this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
 
     }
     else
     {
+        --curveCount[0];
+        if(curveCount[0] < 0)
+        {
+            curveCount[0] = 0;
+        }
         qDebug() << "cancle system current";
 
         this->curveComm.bit.current = 0;
-        curve[7] = (qint8)this->curveComm.half.low8;
-        curve[6] = (qint8)this->curveComm.half.high8;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
 
         crc = this->serialPort->calCrc(0, curve + 5, 3);
 
@@ -852,6 +925,7 @@ void MainWindow::on_actionCurrent_triggered()
 
         send_data.append(curve,12);
         qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
         this->serialPort->sendData(send_data);
     }
 }
@@ -862,11 +936,21 @@ void MainWindow::on_actionBus_voltage_triggered()
     QByteArray send_data;
     if(ui->actionBus_voltage->isChecked() == true)
     {
+        if(curveCount[0] > MAXCURVE)
+        {
+            ui->actionBus_voltage->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[0]++;
+        }
         qDebug() << "ask for bus voltage";
 
         this->curveComm.bit.voltage = 1;
-        curve[7] = (qint8)this->curveComm.half.low8;
-        curve[6] = (qint8)this->curveComm.half.high8;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
 
         crc = this->serialPort->calCrc(0, curve + 5, 3);
 
@@ -876,14 +960,20 @@ void MainWindow::on_actionBus_voltage_triggered()
         send_data.append(curve,12);
         qDebug() << send_data.toHex();
         this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
 
     }
     else
     {
+        --curveCount[0];
+        if(curveCount[0] < 0)
+        {
+            curveCount[0] = 0;
+        }
         qDebug() << "cancle bus voltage";
         this->curveComm.bit.voltage = 0;
-        curve[7] = (qint8)this->curveComm.half.low8;
-        curve[6] = (qint8)this->curveComm.half.high8;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
 
         crc = this->serialPort->calCrc(0, curve + 5, 3);
 
@@ -892,6 +982,7 @@ void MainWindow::on_actionBus_voltage_triggered()
 
         send_data.append(curve,12);
         qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
         this->serialPort->sendData(send_data);
     }
 }
@@ -924,9 +1015,9 @@ void MainWindow::on_tableWidget_cellChanged(int row, int column)
     {
         value.all = tmp;
     }
-    qDebug() << ui->tableWidget->item(row,column)->text().toInt();
+    qDebug() << row;
     qDebug() << value.all;
-    configPara[5] = row;
+    configPara[5] = (char)row;
     configPara[7] = value.half.low8;
     configPara[6] = value.half.high8;
 
