@@ -117,13 +117,16 @@ void Serialport::unpackData()
 {
     int headpos = -1;
     int tailpos = -1;
+    QByteArray key;
     headpos = readComData.indexOf(packageHead);
     tailpos = readComData.indexOf(packageTail);
     while((headpos != -1) && (tailpos != -1))
     {
-        if(tailpos - headpos > 9)
+        key = readComData.left(tailpos + 2);
+        qDebug() << key.toHex();
+        if((key[2] * 3 + 9) == key.length())
         {
-            readStringQ.enqueue(readComData.left(tailpos + 1));
+            readStringQ.enqueue(readComData.left(tailpos + 2));
         }
         readComData = readComData.right(readComData.length() - readComData.indexOf(packageTail)-2);
         headpos = readComData.indexOf(packageHead);
