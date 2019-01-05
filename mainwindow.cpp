@@ -2,17 +2,6 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 
-
-
-void MainWindow::configCuveMenu()
-{
-    ui->actionDisplacement->setChecked(false);
-    ui->actionMotor_accel->setChecked(false);
-    ui->actionMotor_speed->setChecked(false);
-    ui->actionBus_voltage->setChecked(false);
-    ui->actionCurrent->setChecked(false);
-}
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -21,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setGeometry(400, 100, 1295, 540);
     this->menuBar()->show();
+
 
     initialUI();
 
@@ -36,10 +26,13 @@ MainWindow::MainWindow(QWidget *parent) :
     this->curveCount[0] = 0;
     this->curveCount[1] = 0;
 
+    ui->tabWidget->setTabText(0, "俯仰通道");
+    ui->tabWidget->setTabText(1, "横滚通道");
+
     configCuveMenu();
 
     ui->dockWidget->setMinimumSize(150,300);
-    ui->dockWidget->setWindowTitle("com port config");
+    ui->dockWidget->setWindowTitle("俯仰串口设置");
 
 
 
@@ -53,8 +46,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->systemconfig->setFeatures(QDockWidget::NoDockWidgetFeatures);
 
     ui->xComConfigDockWidget->setMinimumSize(150,300);
-    ui->xComConfigDockWidget->setWindowTitle("com port config");
-    ui->xComConfigDockWidget->setStyleSheet("QDockWidget {background-color:white;}");
+    ui->xComConfigDockWidget->setWindowTitle("横滚串口设置");
+    ui->xComConfigDockWidget->setStyleSheet("QDockWidget {background-color:black;}");
     addDockWidget(Qt::LeftDockWidgetArea, ui->dockWidget);
     addDockWidget(Qt::LeftDockWidgetArea, ui->xComConfigDockWidget);
 
@@ -64,11 +57,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->label_4->setStyleSheet("QLabel{color: red;}");
     ui->label_5->setStyleSheet("QLabel{color: red;}");
 
-    ui->label_6->setStyleSheet("QLabel{color: white;}");
-    ui->label_7->setStyleSheet("QLabel{color: white;}");
-    ui->label_8->setStyleSheet("QLabel{color: white;}");
-    ui->label_9->setStyleSheet("QLabel{color: white;}");
-    ui->label_10->setStyleSheet("QLabel{color: white;}");
+    ui->label_6->setStyleSheet("QLabel{color: green;}");
+    ui->label_7->setStyleSheet("QLabel{color: green;}");
+    ui->label_8->setStyleSheet("QLabel{color: green;}");
+    ui->label_9->setStyleSheet("QLabel{color: green;}");
+    ui->label_10->setStyleSheet("QLabel{color: green;}");
 
 //    ui->label_5->setStyleSheet("QLabel{color: rgb(0,255,255);"
 //                               "background-color: white;"
@@ -96,7 +89,14 @@ MainWindow::~MainWindow()
     delete timer2;
     delete ui;
 }
-
+void MainWindow::configCuveMenu()
+{
+    ui->actionDisplacement->setChecked(false);
+    ui->actionMotor_accel->setChecked(false);
+    ui->actionMotor_speed->setChecked(false);
+    ui->actionBus_voltage->setChecked(false);
+    ui->actionCurrent->setChecked(false);
+}
 void MainWindow::initCustomPlot()
 {
     ui->widget->show();
@@ -418,15 +418,7 @@ void MainWindow::initTimer2()
 
 void MainWindow::initialUI()
 {
-//    ui->sendButton->setIcon(QIcon("/home/pi/Pictures/heike1.jpg"));
-//    ui->sendButton->setIconSize(QSize(101, 30));
-
-//    initTxDataDisplay();
-
-//    initRxDataDisplay();
-
     initLcdNum();
-
     initCustomPlot();
     initCustomPlot2();
 }
@@ -539,7 +531,7 @@ void MainWindow::updatePlot()
 void MainWindow::paintEvent(QPaintEvent *event)
 {
     QPainter p(this);
-    p.drawPixmap(0,0,width(), height(), QPixmap("/home/sean/Pictures/heike2.jpg"));
+//    p.drawPixmap(0,0,width(), height(), QPixmap("/home/sean/Pictures/heike2.jpg"));
 }
 
 MainWindow* MainWindow::getInstance()
@@ -1016,7 +1008,7 @@ void MainWindow::on_tableWidget_cellChanged(int row, int column)
     }
     qDebug() << row;
     qDebug() << value.all;
-    configPara[5] = (char)row;
+    configPara[5] = (char)(row + 6);
     configPara[7] = value.half.low8;
     configPara[6] = value.half.high8;
 
