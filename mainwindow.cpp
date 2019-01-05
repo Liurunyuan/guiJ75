@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     mainWindow = this;
     ui->setupUi(this);
-    this->setGeometry(100,50,1100,600);
+    this->setGeometry(400, 100, 1295, 540);
     this->menuBar()->show();
 
     initialUI();
@@ -922,7 +922,6 @@ void MainWindow::on_actionCurrent_triggered()
 
         curve[9] = (char)crc;
         curve[8] = (char)(crc >> 8);
-
         send_data.append(curve,12);
         qDebug() << send_data.toHex();
         this->serialPort->sendData(send_data);

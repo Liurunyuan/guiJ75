@@ -118,7 +118,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1100, 605);
+        MainWindow->resize(969, 500);
         MainWindow->setAutoFillBackground(true);
         actionAbout_how_to_use = new QAction(MainWindow);
         actionAbout_how_to_use->setObjectName(QStringLiteral("actionAbout_how_to_use"));
@@ -161,9 +161,19 @@ public:
         gridLayout->setVerticalSpacing(6);
         splitter = new QSplitter(centralWidget);
         splitter->setObjectName(QStringLiteral("splitter"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(splitter->sizePolicy().hasHeightForWidth());
+        splitter->setSizePolicy(sizePolicy);
         splitter->setOrientation(Qt::Vertical);
         tabWidget = new QTabWidget(splitter);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(1);
+        sizePolicy1.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
+        tabWidget->setSizePolicy(sizePolicy1);
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         verticalLayout_2 = new QVBoxLayout(tab);
@@ -173,11 +183,9 @@ public:
         widget = new QCustomPlot(tab);
         widget->setObjectName(QStringLiteral("widget"));
         widget->setEnabled(true);
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(250);
         sizePolicy.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
         widget->setSizePolicy(sizePolicy);
+        widget->setMinimumSize(QSize(0, 0));
 
         verticalLayout_2->addWidget(widget);
 
@@ -191,8 +199,11 @@ public:
         widget2 = new QCustomPlot(tab_2);
         widget2->setObjectName(QStringLiteral("widget2"));
         widget2->setEnabled(true);
-        sizePolicy.setHeightForWidth(widget2->sizePolicy().hasHeightForWidth());
-        widget2->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(250);
+        sizePolicy2.setHeightForWidth(widget2->sizePolicy().hasHeightForWidth());
+        widget2->setSizePolicy(sizePolicy2);
 
         horizontalLayout_2->addWidget(widget2);
 
@@ -200,6 +211,8 @@ public:
         splitter->addWidget(tabWidget);
         frame = new QFrame(splitter);
         frame->setObjectName(QStringLiteral("frame"));
+        sizePolicy.setHeightForWidth(frame->sizePolicy().hasHeightForWidth());
+        frame->setSizePolicy(sizePolicy);
         frame->setMaximumSize(QSize(16777215, 16777215));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Sunken);
@@ -207,10 +220,10 @@ public:
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-        gridLayout_4->setVerticalSpacing(6);
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(3);
+        horizontalLayout->setSpacing(0);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setSizeConstraint(QLayout::SetMinimumSize);
         tableWidget = new QTableWidget(frame);
         if (tableWidget->columnCount() < 2)
             tableWidget->setColumnCount(2);
@@ -253,6 +266,7 @@ public:
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
         tableWidget->setMinimumSize(QSize(407, 0));
         tableWidget->setMaximumSize(QSize(407, 16777215));
+        tableWidget->setBaseSize(QSize(0, 0));
         tableWidget->setLocale(QLocale(QLocale::Chinese, QLocale::China));
         tableWidget->setAutoScroll(false);
         tableWidget->setGridStyle(Qt::DotLine);
@@ -279,11 +293,11 @@ public:
 
         lcdNumber = new QLCDNumber(frame);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(lcdNumber->sizePolicy().hasHeightForWidth());
-        lcdNumber->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(lcdNumber->sizePolicy().hasHeightForWidth());
+        lcdNumber->setSizePolicy(sizePolicy3);
         lcdNumber->setFrameShape(QFrame::NoFrame);
         lcdNumber->setFrameShadow(QFrame::Raised);
 
@@ -302,7 +316,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1100, 25));
+        menuBar->setGeometry(QRect(0, 0, 969, 25));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuLine_select = new QMenu(menuBar);
@@ -318,11 +332,11 @@ public:
         MainWindow->setStatusBar(statusBar);
         dockWidget = new QDockWidget(MainWindow);
         dockWidget->setObjectName(QStringLiteral("dockWidget"));
-        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
-        dockWidget->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy4(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
+        dockWidget->setSizePolicy(sizePolicy4);
         dockWidget->setMinimumSize(QSize(73, 41));
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QStringLiteral("dockWidgetContents"));
@@ -515,7 +529,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
