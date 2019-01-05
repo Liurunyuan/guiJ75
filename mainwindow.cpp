@@ -44,7 +44,6 @@ MainWindow::MainWindow(QWidget *parent) :
                                     "border:2px outset white;"
                                     "}");
     //ui->systemconfig->setFeatures(QDockWidget::NoDockWidgetFeatures);
-
     ui->xComConfigDockWidget->setMinimumSize(150,300);
     ui->xComConfigDockWidget->setWindowTitle("横滚串口设置");
     ui->xComConfigDockWidget->setStyleSheet("QDockWidget {background-color:black;}");
@@ -68,7 +67,9 @@ MainWindow::MainWindow(QWidget *parent) :
 //                               "}");
 
     ui->tableWidget->horizontalHeader()->setStyleSheet("QHeaderView::section{background:skyblue;}");
-    ui->tableWidget->verticalHeader()->setStyleSheet("QHeaderView::section{background:yellow;}");
+    ui->tableWidget->verticalHeader()->setStyleSheet("QHeaderView::section{background:skyblue;}");
+    ui->tableWidget_2->horizontalHeader()->setStyleSheet("QHeaderView::section{background:yellow;}");
+    ui->tableWidget_2->verticalHeader()->setStyleSheet("QHeaderView::section{background:yellow;}");
 //    ui->tableWidget->setFrameShape(QFrame::NoFrame);
 //    ui->tableWidget->horizontalScrollBar()->setEnabled(false);
 //    ui->tableWidget->verticalScrollBar()->setEnabled(false);
