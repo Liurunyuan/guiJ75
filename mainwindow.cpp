@@ -34,8 +34,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->dockWidget->setMinimumSize(150,300);
     ui->dockWidget->setWindowTitle("俯仰串口设置");
 
-
-
     ui->dockWidget->setStyleSheet("QDockWidget {background-color:white;}");
 
     ui->systemconfig->setMinimumSize(150,300);
@@ -49,6 +47,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->xComConfigDockWidget->setStyleSheet("QDockWidget {background-color:black;}");
     addDockWidget(Qt::LeftDockWidgetArea, ui->dockWidget);
     addDockWidget(Qt::LeftDockWidgetArea, ui->xComConfigDockWidget);
+    ui->dockWidget->setStyleSheet("QDockWidget{color: black;}");
+    ui->systemconfig->setStyleSheet("QDockWidget{color: black;}");
+    QFont ft("Microsoft Yahei", 12, 75);
+    ui->dockWidget->setFont(ft);
+    ui->systemconfig->setFont(ft);
+    ui->systemconfig->setWindowTitle("曲线显示/隐藏");
+    ui->xComConfigDockWidget->setFont(ft);
 
     ui->label->setStyleSheet("QLabel{color: red;}");
     ui->label_2->setStyleSheet("QLabel{color: red;}");
@@ -67,9 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //                               "}");
 
     ui->tableWidget->horizontalHeader()->setStyleSheet("QHeaderView::section{background:skyblue;}");
-    ui->tableWidget->verticalHeader()->setStyleSheet("QHeaderView::section{background:skyblue;}");
-    ui->tableWidget_2->horizontalHeader()->setStyleSheet("QHeaderView::section{background:yellow;}");
-    ui->tableWidget_2->verticalHeader()->setStyleSheet("QHeaderView::section{background:yellow;}");
+    ui->tableWidget->verticalHeader()->setStyleSheet("QHeaderView::section{background:yellow;}");
 //    ui->tableWidget->setFrameShape(QFrame::NoFrame);
 //    ui->tableWidget->horizontalScrollBar()->setEnabled(false);
 //    ui->tableWidget->verticalScrollBar()->setEnabled(false);
