@@ -117,20 +117,47 @@ void Serialport::unpackData()
 {
     int headpos = -1;
     int tailpos = -1;
+    int length = 0;
     QByteArray key;
     headpos = readComData.indexOf(packageHead);
-    tailpos = readComData.indexOf(packageTail);
-    while((headpos != -1) && (tailpos != -1))
+    while(headpos != -1)
     {
-        key = readComData.left(tailpos + 2);
-        qDebug() << key.toHex();
-        if((key[2] * 3 + 9) == key.length())
+        if((readComData.length() - headpos) > 9)
         {
-            readStringQ.enqueue(readComData.left(tailpos + 2));
+            length = readComData[headpos + 2] * 3 + 9;
+            if(length < (readComData.length() - headpos))
+            {
+                if(readComData[headpos + length - 1] == (char)0xa5)
+                {
+                    if(readComData[headpos + length - 2] == (char)0xa5)
+                    {
+                        key = readComData.mid(headpos, length);
+                        qDebug() << key.toHex();
+                        readStringQ.enqueue(key);
+                        readComData = readComData.right(readComData.length() - length - headpos);
+                        headpos = readComData.indexOf(packageHead);
+                    }
+                    else
+                    {
+                        readComData = readComData.right(readComData.length() - 1);
+                        return;
+                    }
+                }
+                else
+                {
+                    readComData = readComData.right(readComData.length() - 1);
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
         }
-        readComData = readComData.right(readComData.length() - readComData.indexOf(packageTail)-2);
-        headpos = readComData.indexOf(packageHead);
-        tailpos = readComData.indexOf(packageTail);
+        else
+        {
+            return;
+        }
     }
 }
 
