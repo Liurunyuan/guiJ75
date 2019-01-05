@@ -535,7 +535,7 @@ void MainWindow::updatePlot()
 void MainWindow::paintEvent(QPaintEvent *event)
 {
     QPainter p(this);
-    p.drawPixmap(0,0,width(), height(), QPixmap("/home/pi/Pictures/heike2.jpg"));
+    p.drawPixmap(0,0,width(), height(), QPixmap("/home/sean/Pictures/heike2.jpg"));
 }
 
 MainWindow* MainWindow::getInstance()

@@ -4,22 +4,30 @@
 Serialport::Serialport()
 {
     readComData.clear();
-    //readStringQ.clear();
+
+
+    packageHead.push_back(0x5a);
+    packageHead.push_back(0x5a);
+    packageTail.push_back(0xa5);
+    packageTail.push_back(0xa5);
+
 }
 
 void Serialport::scanPort()
 {
+    qDebug() << "scan Port";
     foreach (const QSerialPortInfo &info,QSerialPortInfo::availablePorts())
     {
 
         this->setPort(info);
+        qDebug() << this->portName();
         if(this->open(QIODevice::ReadWrite))
         {
-            qDebug() << this->portName();
             availablePort.push_back(this->portName());
-
+            qDebug() << "can be read and write";
             this->close();
         }
+        qDebug() << "-------------------------------";
     }
 }
 
@@ -65,6 +73,7 @@ void Serialport::sendStringEnquque(QByteArray sdata)
 
 void Serialport::readData()
 {
+//    qDebug() << "data is comming";
     QByteArray tmp = this->readAll();
     if(!tmp.isEmpty())
     {
@@ -113,14 +122,16 @@ void Serialport::unpackData()
 {
     int headpos = -1;
     int tailpos = -1;
-
+    qDebug() << "unpacking the data";
     headpos = readComData.indexOf(packageHead);
     tailpos = readComData.indexOf(packageTail);
+    qDebug() << readComData.toHex();
     while((headpos != -1) && (tailpos != -1))
     {
+        qDebug() << "we find it";
         readStringQ.enqueue(readComData.left(tailpos + 1));
         qDebug() << readComData.left(tailpos + 1).toHex();
-        readComData = readComData.right(readComData.length()-readComData.indexOf(packageTail)-2);
+        readComData = readComData.right(readComData.length() - readComData.indexOf(packageTail)-2);
         headpos = readComData.indexOf(packageHead);
         tailpos = readComData.indexOf(packageTail);
     }

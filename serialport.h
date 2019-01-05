@@ -11,8 +11,8 @@
 #include <QString>
 #include <QByteArray>
 
-const char packageHead[2] = {0x5a, 0x5a};
-const char packageTail[2] = {0xa5, 0xa5};
+//const  char packageHead[2] = {(char)0x5a, (char)0x5a};
+//const  char packageTail[2] = {(char)0xa5, (char)0xa5};
 
 class Serialport : public QSerialPort
 {
@@ -30,6 +30,7 @@ public:
     int getRxQLength();
     bool needUnpackData();
     void unpackData();
+    
 private slots:
     void readData();
 
@@ -38,7 +39,8 @@ private:
     QByteArray readComData;
     QQueue<QByteArray> readStringQ;
     QQueue<QByteArray> sendStringQ;
-
+    QByteArray packageHead;
+    QByteArray packageTail;
 };
 
 #endif // SERIALPORT_H
