@@ -634,19 +634,19 @@
      <x>0</x>
      <y>0</y>
      <width>1228</width>
-     <height>22</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>help</string>
+     <string>帮助</string>
     </property>
     <addaction name="actionAbout_how_to_use"/>
     <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuLine_select">
     <property name="title">
-     <string>line select</string>
+     <string>俯仰曲线</string>
     </property>
     <addaction name="actionDisplacement"/>
     <addaction name="separator"/>
@@ -660,15 +660,26 @@
    </widget>
    <widget class="QMenu" name="menuDockwidget">
     <property name="title">
-     <string>dockwidget</string>
+     <string>浮动窗口</string>
     </property>
     <addaction name="actionSystem_config"/>
     <addaction name="separator"/>
     <addaction name="actionCurve_config"/>
    </widget>
-   <addaction name="menuHelp"/>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>横滚曲线</string>
+    </property>
+    <addaction name="action"/>
+    <addaction name="action_2"/>
+    <addaction name="action_3"/>
+    <addaction name="action_4"/>
+    <addaction name="action_5"/>
+   </widget>
    <addaction name="menuLine_select"/>
+   <addaction name="menu"/>
    <addaction name="menuDockwidget"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -984,7 +995,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>displacement</string>
+    <string>位移曲线</string>
    </property>
   </action>
   <action name="actionMotor_speed">
@@ -995,7 +1006,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>motor speed</string>
+    <string>电机转速曲线</string>
    </property>
   </action>
   <action name="actionMotor_accel">
@@ -1006,7 +1017,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>motor accel</string>
+    <string>电机加速度曲线</string>
    </property>
   </action>
   <action name="actionCurrent">
@@ -1017,7 +1028,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>current</string>
+    <string>母线电压</string>
    </property>
   </action>
   <action name="actionBus_voltage">
@@ -1028,7 +1039,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>bus voltage</string>
+    <string>母线电流</string>
    </property>
   </action>
   <action name="actionSystem_config">
@@ -1051,6 +1062,31 @@
    </property>
    <property name="text">
     <string>curve config</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>位移曲线</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>电机转速曲线</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>电机加速度曲线</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>母线电流</string>
+   </property>
+  </action>
+  <action name="action_5">
+   <property name="text">
+    <string>母线电压</string>
    </property>
   </action>
  </widget>

@@ -546,6 +546,9 @@ void MainWindow::updatePlot()
                 yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
 
+                this->posX = y;
+                this->update();
+
                 ui->widget2->graph(2)->addData(key2,y);
                 ui->widget2->graph(2)->rescaleAxes(true);
                 break;
@@ -777,6 +780,8 @@ void MainWindow::on_actionDisplacement_triggered()
         qDebug() << send_data.toHex();
         this->serialPort->sendData(send_data);
         this->serialPort->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
     }
     else
     {

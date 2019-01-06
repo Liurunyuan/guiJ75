@@ -50,6 +50,11 @@ public:
     QAction *actionBus_voltage;
     QAction *actionSystem_config;
     QAction *actionCurve_config;
+    QAction *action;
+    QAction *action_2;
+    QAction *action_3;
+    QAction *action_4;
+    QAction *action_5;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QSplitter *splitter;
@@ -75,6 +80,7 @@ public:
     QMenu *menuHelp;
     QMenu *menuLine_select;
     QMenu *menuDockwidget;
+    QMenu *menu;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
     QDockWidget *dockWidget;
@@ -156,6 +162,16 @@ public:
         actionCurve_config->setObjectName(QStringLiteral("actionCurve_config"));
         actionCurve_config->setCheckable(true);
         actionCurve_config->setChecked(true);
+        action = new QAction(MainWindow);
+        action->setObjectName(QStringLiteral("action"));
+        action_2 = new QAction(MainWindow);
+        action_2->setObjectName(QStringLiteral("action_2"));
+        action_3 = new QAction(MainWindow);
+        action_3->setObjectName(QStringLiteral("action_3"));
+        action_4 = new QAction(MainWindow);
+        action_4->setObjectName(QStringLiteral("action_4"));
+        action_5 = new QAction(MainWindow);
+        action_5->setObjectName(QStringLiteral("action_5"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -445,13 +461,15 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1228, 22));
+        menuBar->setGeometry(QRect(0, 0, 1228, 28));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuLine_select = new QMenu(menuBar);
         menuLine_select->setObjectName(QStringLiteral("menuLine_select"));
         menuDockwidget = new QMenu(menuBar);
         menuDockwidget->setObjectName(QStringLiteral("menuDockwidget"));
+        menu = new QMenu(menuBar);
+        menu->setObjectName(QStringLiteral("menu"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -639,9 +657,10 @@ public:
         xComConfigDockWidget->setWidget(dockWidgetContents_3);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), xComConfigDockWidget);
 
-        menuBar->addAction(menuHelp->menuAction());
         menuBar->addAction(menuLine_select->menuAction());
+        menuBar->addAction(menu->menuAction());
         menuBar->addAction(menuDockwidget->menuAction());
+        menuBar->addAction(menuHelp->menuAction());
         menuHelp->addAction(actionAbout_how_to_use);
         menuHelp->addSeparator();
         menuLine_select->addAction(actionDisplacement);
@@ -656,6 +675,11 @@ public:
         menuDockwidget->addAction(actionSystem_config);
         menuDockwidget->addSeparator();
         menuDockwidget->addAction(actionCurve_config);
+        menu->addAction(action);
+        menu->addAction(action_2);
+        menu->addAction(action_3);
+        menu->addAction(action_4);
+        menu->addAction(action_5);
 
         retranslateUi(MainWindow);
 
@@ -669,13 +693,18 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         actionAbout_how_to_use->setText(QApplication::translate("MainWindow", "about how to use", 0));
-        actionDisplacement->setText(QApplication::translate("MainWindow", "displacement", 0));
-        actionMotor_speed->setText(QApplication::translate("MainWindow", "motor speed", 0));
-        actionMotor_accel->setText(QApplication::translate("MainWindow", "motor accel", 0));
-        actionCurrent->setText(QApplication::translate("MainWindow", "current", 0));
-        actionBus_voltage->setText(QApplication::translate("MainWindow", "bus voltage", 0));
+        actionDisplacement->setText(QApplication::translate("MainWindow", "\344\275\215\347\247\273\346\233\262\347\272\277", 0));
+        actionMotor_speed->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\350\275\254\351\200\237\346\233\262\347\272\277", 0));
+        actionMotor_accel->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\345\212\240\351\200\237\345\272\246\346\233\262\347\272\277", 0));
+        actionCurrent->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\345\216\213", 0));
+        actionBus_voltage->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\346\265\201", 0));
         actionSystem_config->setText(QApplication::translate("MainWindow", "system config", 0));
         actionCurve_config->setText(QApplication::translate("MainWindow", "curve config", 0));
+        action->setText(QApplication::translate("MainWindow", "\344\275\215\347\247\273\346\233\262\347\272\277", 0));
+        action_2->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\350\275\254\351\200\237\346\233\262\347\272\277", 0));
+        action_3->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\345\212\240\351\200\237\345\272\246\346\233\262\347\272\277", 0));
+        action_4->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\346\265\201", 0));
+        action_5->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\345\216\213", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Tab 2", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
@@ -829,9 +858,10 @@ public:
         SendBtn->setText(QApplication::translate("MainWindow", "Send", 0));
         clearButton->setText(QApplication::translate("MainWindow", "clear", 0));
         targetimage->setText(QString());
-        menuHelp->setTitle(QApplication::translate("MainWindow", "help", 0));
-        menuLine_select->setTitle(QApplication::translate("MainWindow", "line select", 0));
-        menuDockwidget->setTitle(QApplication::translate("MainWindow", "dockwidget", 0));
+        menuHelp->setTitle(QApplication::translate("MainWindow", "\345\270\256\345\212\251", 0));
+        menuLine_select->setTitle(QApplication::translate("MainWindow", "\344\277\257\344\273\260\346\233\262\347\272\277", 0));
+        menuDockwidget->setTitle(QApplication::translate("MainWindow", "\346\265\256\345\212\250\347\252\227\345\217\243", 0));
+        menu->setTitle(QApplication::translate("MainWindow", "\346\250\252\346\273\232\346\233\262\347\272\277", 0));
         label->setText(QApplication::translate("MainWindow", "COM", 0));
         label_2->setText(QApplication::translate("MainWindow", "BAUD", 0));
         baudBox->clear();
