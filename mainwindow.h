@@ -130,6 +130,16 @@ private slots:
 
     void on_tableWidget_cellChanged(int row, int column);
 
+    void on_actionDisplacement2_triggered();
+
+    void on_actionMotor_speed2_triggered();
+
+    void on_actionMotor_accel2_triggered();
+
+    void on_actionCurrent2_triggered();
+
+    void on_actionBus_voltage2_triggered();
+
 private:
     static MainWindow* mainWindow;
     Ui::MainWindow *ui;
@@ -141,10 +151,12 @@ private:
     int curveCount[2];
     QQueue<QByteArray> sendStringQ;
     char curve[12] = {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x02,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
+    char curve2[12] = {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x02,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
     char configPara[12] = {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
     //QByteArray curve[12] = {0x5a, 0x5a, 0x01, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0xa5, 0xa5};
     //QByteArray configPara[12] = {0x5a, 0x5a, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xa5, 0xa5};
     CurveStr curveComm;
+    CurveStr curveComm2;
     int posX;
     int posY;
 };

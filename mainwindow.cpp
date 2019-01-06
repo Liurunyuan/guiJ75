@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->curveCommand = 0;
     this->curveComm.all = 0;
+    this->curveComm2.all = 0;
 
     this->curveCount[0] = 0;
     this->curveCount[1] = 0;
@@ -668,7 +669,6 @@ void MainWindow::on_actionAbout_how_to_use_triggered()
 
 }
 
-
 void MainWindow::on_checkBox_2_clicked()
 {
     if(ui->checkBox_2->isChecked())
@@ -780,8 +780,6 @@ void MainWindow::on_actionDisplacement_triggered()
         qDebug() << send_data.toHex();
         this->serialPort->sendData(send_data);
         this->serialPort->sendData(send_data);
-        this->serialPortX->sendData(send_data);
-        this->serialPortX->sendData(send_data);
     }
     else
     {
@@ -1034,8 +1032,6 @@ void MainWindow::on_actionBus_voltage_triggered()
     }
 }
 
-
-
 void MainWindow::on_SendBtn_clicked()
 {
     QPen mpen;
@@ -1084,4 +1080,293 @@ void MainWindow::on_tableWidget_cellChanged(int row, int column)
     qDebug() << send_data.toHex();
     this->serialPort->sendData(send_data);
     this->serialPort->sendData(send_data);
+}
+
+void MainWindow::on_actionDisplacement2_triggered()
+{
+    qint16 crc;
+    QByteArray send_data;
+
+    if(ui->actionDisplacement2->isChecked() == true)
+    {
+        qDebug() << curveCount[1];
+        if(curveCount[1] > MAXCURVE)
+        {
+            ui->actionDisplacement2->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[1]++;
+        }
+        qDebug() << "ask for displacement2";
+        this->curveComm2.bit.displacemet = 1;
+
+        curve2[7] = this->curveComm2.half.low8;
+        curve2[6] = this->curveComm2.half.high8;
+
+        crc = this->serialPortX->calCrc(0, curve2 + 5, 3);
+
+        curve2[9] = (char)crc;
+        curve2[8] = (char)(crc >> 8);
+
+        send_data.append(curve2,12);
+
+        qDebug() << send_data.toHex();
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
+    else
+    {
+        --curveCount[1];
+        if(curveCount[1] < 0)
+        {
+            curveCount[1] = 0;
+        }
+        qDebug() << "cancle displacement2";
+        this->curveComm2.bit.displacemet = 0;
+        curve2[7] = this->curveComm2.half.low8;
+        curve2[6] = this->curveComm2.half.high8;
+
+        crc = this->serialPortX->calCrc(0, curve2 + 5, 3);
+
+        curve2[9] = (char)crc;
+        curve2[8] = (char)(crc >> 8);
+
+        send_data.append(curve2,12);
+
+        qDebug() << send_data.toHex();
+
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
+}
+
+void MainWindow::on_actionMotor_speed2_triggered()
+{
+    qint16 crc;
+    QByteArray send_data;
+    if(ui->actionMotor_speed2->isChecked() == true)
+    {
+        if(curveCount[1] > MAXCURVE)
+        {
+            ui->actionMotor_speed2->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[1]++;
+        }
+        qDebug() << "ask for motor speed";
+        this->curveComm2.bit.speed = 1;
+        curve2[7] = this->curveComm2.half.low8;
+        curve2[6] = this->curveComm2.half.high8;
+
+        crc = this->serialPortX->calCrc(0, curve2 + 5, 3);
+
+        curve2[9] = (char)crc;
+        curve2[8] = (char)(crc >> 8);
+
+        send_data.append(curve2,12);
+        qDebug() << send_data.toHex();
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
+    else
+    {
+        --curveCount[1];
+        if(curveCount[1] < 0)
+        {
+            curveCount[1] = 0;
+        }
+        qDebug() << "cancle motor speed";
+
+        this->curveComm2.bit.speed = 0;
+
+        curve2[7] = this->curveComm2.half.low8;
+        curve2[6] = this->curveComm2.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve2 + 5, 3);
+
+        curve2[9] = (char)crc;
+        curve2[8] = (char)(crc >> 8);
+
+        send_data.append(curve2,12);
+        qDebug() << send_data.toHex();
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
+}
+
+void MainWindow::on_actionMotor_accel2_triggered()
+{
+    qint16 crc;
+    QByteArray send_data;
+    if(ui->actionMotor_accel2->isChecked() == true)
+    {
+        if(curveCount[1] > MAXCURVE)
+        {
+            ui->actionMotor_accel2->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[1]++;
+        }
+        qDebug() << "ask for motor accel2";
+        this->curveComm2.bit.accel = 1;
+        curve2[7] = this->curveComm2.half.low8;
+        curve2[6] = this->curveComm2.half.high8;
+
+        crc = this->serialPortX->calCrc(0, curve2 + 5, 3);
+
+        curve2[9] = (char)crc;
+        curve2[8] = (char)(crc >> 8);
+
+        send_data.append(curve2,12);
+        qDebug() << send_data.toHex();
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
+    else
+    {
+        --curveCount[1];
+        if(curveCount[1] < 0)
+        {
+            curveCount[1] = 0;
+        }
+        qDebug() << "cancle motor accel2";
+
+        this->curveComm2.bit.accel = 0;
+
+        curve2[7] = this->curveComm2.half.low8;
+        curve2[6] = this->curveComm2.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve2 + 5, 3);
+
+        curve2[9] = (char)crc;
+        curve2[8] = (char)(crc >> 8);
+
+        send_data.append(curve2,12);
+        qDebug() << send_data.toHex();
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
+}
+
+void MainWindow::on_actionCurrent2_triggered()
+{
+    qint16 crc;
+    QByteArray send_data;
+    if(ui->actionCurrent2->isChecked() == true)
+    {
+        if(curveCount[1] > MAXCURVE)
+        {
+            ui->actionCurrent2->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[1]++;
+        }
+        qDebug() << "ask for motor current2";
+        this->curveComm2.bit.current = 1;
+        curve2[7] = this->curveComm2.half.low8;
+        curve2[6] = this->curveComm2.half.high8;
+
+        crc = this->serialPortX->calCrc(0, curve2 + 5, 3);
+
+        curve2[9] = (char)crc;
+        curve2[8] = (char)(crc >> 8);
+
+        send_data.append(curve2,12);
+        qDebug() << send_data.toHex();
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
+    else
+    {
+        --curveCount[1];
+        if(curveCount[1] < 0)
+        {
+            curveCount[1] = 0;
+        }
+        qDebug() << "cancle motor current2";
+
+        this->curveComm2.bit.current = 0;
+
+        curve2[7] = this->curveComm2.half.low8;
+        curve2[6] = this->curveComm2.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve2 + 5, 3);
+
+        curve2[9] = (char)crc;
+        curve2[8] = (char)(crc >> 8);
+
+        send_data.append(curve2,12);
+        qDebug() << send_data.toHex();
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
+}
+
+void MainWindow::on_actionBus_voltage2_triggered()
+{
+    qint16 crc;
+    QByteArray send_data;
+    if(ui->actionBus_voltage2->isChecked() == true)
+    {
+        if(curveCount[1] > MAXCURVE)
+        {
+            ui->actionBus_voltage2->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[1]++;
+        }
+        qDebug() << "ask for motor bus voltage2";
+        this->curveComm2.bit.voltage = 1;
+        curve2[7] = this->curveComm2.half.low8;
+        curve2[6] = this->curveComm2.half.high8;
+
+        crc = this->serialPortX->calCrc(0, curve2 + 5, 3);
+
+        curve2[9] = (char)crc;
+        curve2[8] = (char)(crc >> 8);
+
+        send_data.append(curve2,12);
+        qDebug() << send_data.toHex();
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
+    else
+    {
+        --curveCount[1];
+        if(curveCount[1] < 0)
+        {
+            curveCount[1] = 0;
+        }
+        qDebug() << "cancle motor bus voltage2";
+
+        this->curveComm2.bit.voltage = 0;
+
+        curve2[7] = this->curveComm2.half.low8;
+        curve2[6] = this->curveComm2.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve2 + 5, 3);
+
+        curve2[9] = (char)crc;
+        curve2[8] = (char)(crc >> 8);
+
+        send_data.append(curve2,12);
+        qDebug() << send_data.toHex();
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
 }

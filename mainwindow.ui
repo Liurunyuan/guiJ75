@@ -670,11 +670,11 @@
     <property name="title">
      <string>横滚曲线</string>
     </property>
-    <addaction name="action"/>
-    <addaction name="action_2"/>
-    <addaction name="action_3"/>
-    <addaction name="action_4"/>
-    <addaction name="action_5"/>
+    <addaction name="actionDisplacement2"/>
+    <addaction name="actionMotor_speed2"/>
+    <addaction name="actionMotor_accel2"/>
+    <addaction name="actionCurrent2"/>
+    <addaction name="actionBus_voltage2"/>
    </widget>
    <addaction name="menuLine_select"/>
    <addaction name="menu"/>
@@ -1064,7 +1064,7 @@
     <string>curve config</string>
    </property>
   </action>
-  <action name="action">
+  <action name="actionDisplacement2">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1072,7 +1072,7 @@
     <string>位移曲线</string>
    </property>
   </action>
-  <action name="action_2">
+  <action name="actionMotor_speed2">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1080,7 +1080,7 @@
     <string>电机转速曲线</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="actionMotor_accel2">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1088,7 +1088,7 @@
     <string>电机加速度曲线</string>
    </property>
   </action>
-  <action name="action_4">
+  <action name="actionCurrent2">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1096,7 +1096,7 @@
     <string>母线电流</string>
    </property>
   </action>
-  <action name="action_5">
+  <action name="actionBus_voltage2">
    <property name="checkable">
     <bool>true</bool>
    </property>
