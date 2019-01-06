@@ -382,9 +382,9 @@ public:
         tableWidget->setMaximumSize(QSize(407, 16777215));
         tableWidget->setBaseSize(QSize(0, 0));
         tableWidget->setLocale(QLocale(QLocale::Chinese, QLocale::China));
-        tableWidget->setAutoScroll(false);
+        tableWidget->setAutoScroll(true);
         tableWidget->setGridStyle(Qt::DotLine);
-        tableWidget->horizontalHeader()->setVisible(false);
+        tableWidget->horizontalHeader()->setVisible(true);
 
         gridLayout_4->addWidget(tableWidget, 0, 0, 3, 1);
 
@@ -443,7 +443,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1228, 28));
+        menuBar->setGeometry(QRect(0, 0, 1228, 22));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuLine_select = new QMenu(menuBar);

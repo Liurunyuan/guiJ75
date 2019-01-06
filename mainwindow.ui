@@ -145,13 +145,13 @@
            <locale language="Chinese" country="China"/>
           </property>
           <property name="autoScroll">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="gridStyle">
            <enum>Qt::DotLine</enum>
           </property>
           <attribute name="horizontalHeaderVisible">
-           <bool>false</bool>
+           <bool>true</bool>
           </attribute>
           <row>
            <property name="text">
@@ -629,7 +629,7 @@
      <x>0</x>
      <y>0</y>
      <width>1228</width>
-     <height>28</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
