@@ -8,8 +8,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     mainWindow = this;
     ui->setupUi(this);
+    ui->targetimage->installEventFilter(this);
     this->setGeometry(400, 100, 1295, 540);
     this->menuBar()->show();
+
+    this->posX = 0;
+    this->posY = 0;
 
 
     initialUI();
@@ -83,12 +87,11 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QRegExp rx("^\\d\\d\\d\\d\\d?$");
 //    m_edit->setValidator(new QRegExpValidator(rx,m_edit));
 //    ui->tableWidget->setCellWidget(1,1,m_edit); //(0,0)项的item设置代理
-    QPixmap pixmap("/home/sean/Pictures/miaozhun.jpeg");
+//    QPixmap pixmap("/home/sean/Pictures/miaozhun.jpeg");
 
-    pixmap.scaled(QSize(10,10), Qt::KeepAspectRatio);
-    ui->targetimage->setPixmap(pixmap);
+//    pixmap.scaled(QSize(10,10), Qt::KeepAspectRatio);
+//    ui->targetimage->setPixmap(pixmap);
     ui->targetimage->setScaledContents(true);
-
 
     ui->targetimage->show();
 }
@@ -366,6 +369,29 @@ void MainWindow::unpack2()
 {
     this->serialPortX->unpackData();
 }
+
+void MainWindow::drawCurrentPosition(double x, double y)
+{
+    QPainter painter(ui->targetimage);
+    QImage image("/home/sean/Pictures/miaozhun.jpeg");
+    QRectF target(0.0, 0.0, 250.0, 250.0);
+    QRectF source(0.0, 0.0, 1000.0, 1000.0);
+
+    y = this->posY - 10000;
+    x = this->posX - 10000;
+    y = (y*500)/65535;
+    x = (x*500)/65535;
+
+    for(int i = 0; i < 50; ++i)
+    {
+        for(int j = 0; j < 50; ++j)
+        {
+            image.setPixel(QPoint(i+475+x, j+475+y),qRgb(255,0,0));
+        }
+    }
+
+    painter.drawImage(target,image,source);
+}
 void MainWindow::updateSerialInfo()
 {
     serialPort = new Serialport();
@@ -471,6 +497,9 @@ void MainWindow::updatePlot()
                 yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
 
+                this->posY = y;
+                this->update();
+
                 ui->widget->graph(2)->addData(key,y);
                 ui->widget->graph(2)->rescaleAxes(true);
                 break;
@@ -540,8 +569,20 @@ void MainWindow::updatePlot()
 }
 void MainWindow::paintEvent(QPaintEvent *event)
 {
+    QImage image(10,10,QImage::Format_RGB32);
     QPainter p(this);
-//    p.drawPixmap(0,0,width(), height(), QPixmap("/home/sean/Pictures/heike2.jpg"));
+
+
+    //    p.drawPixmap(0,0,width(), height(), QPixmap("/home/sean/Pictures/heike2.jpg"));
+}
+
+bool MainWindow::eventFilter(QObject *watched, QEvent *event)
+{
+    if(watched == ui->targetimage && event->type() == QEvent::Paint)
+    {
+        this->drawCurrentPosition(1,1);
+    }
+    return QWidget::eventFilter(watched,event);
 }
 
 MainWindow* MainWindow::getInstance()
@@ -992,9 +1033,16 @@ void MainWindow::on_actionBus_voltage_triggered()
 
 void MainWindow::on_SendBtn_clicked()
 {
+    QPen mpen;
+    QPainter painter(this);
     //pack all the configuration data and send them to lower computer
     qDebug() << "send button clicked";
-    ui->tableWidget->horizontalHeaderItem(1);
+    QRect rect;
+    rect = ui->targetimage->geometry();
+    qDebug() << rect.width();
+    qDebug() << rect.height();
+    qDebug() << rect.center();
+    this->update();
 }
 
 void MainWindow::on_tableWidget_cellChanged(int row, int column)

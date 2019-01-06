@@ -82,6 +82,8 @@ public:
     void unpack();
     void unpack2();
 
+    void drawCurrentPosition(double x, double y);
+
 //    void initTxDataDisplay();
 
 //    void initRxDataDisplay();
@@ -93,6 +95,7 @@ public slots:
     void updatePlot();
 protected:
     void paintEvent(QPaintEvent *event);
+    bool eventFilter(QObject *watched, QEvent *event);
 private slots:
     void on_openButton_clicked();
     void on_testbtn_clicked();
@@ -142,6 +145,8 @@ private:
     //QByteArray curve[12] = {0x5a, 0x5a, 0x01, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0xa5, 0xa5};
     //QByteArray configPara[12] = {0x5a, 0x5a, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xa5, 0xa5};
     CurveStr curveComm;
+    int posX;
+    int posY;
 };
 
 

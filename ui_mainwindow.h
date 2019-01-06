@@ -422,8 +422,8 @@ public:
 
         targetimage = new QLabel(frame);
         targetimage->setObjectName(QStringLiteral("targetimage"));
+        targetimage->setMinimumSize(QSize(250, 250));
         targetimage->setMaximumSize(QSize(250, 250));
-        targetimage->setPixmap(QPixmap(QString::fromUtf8("../../Pictures/miaozhun.jpeg")));
         targetimage->setScaledContents(true);
 
         gridLayout_4->addWidget(targetimage, 1, 1, 1, 1);
@@ -437,6 +437,8 @@ public:
         gridLayout_4->addItem(verticalSpacer_2, 2, 1, 1, 1);
 
         splitter->addWidget(frame);
+        targetimage->raise();
+        tableWidget->raise();
 
         gridLayout->addWidget(splitter, 0, 0, 1, 1);
 
