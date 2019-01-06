@@ -1065,26 +1065,41 @@
    </property>
   </action>
   <action name="action">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>位移曲线</string>
    </property>
   </action>
   <action name="action_2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>电机转速曲线</string>
    </property>
   </action>
   <action name="action_3">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>电机加速度曲线</string>
    </property>
   </action>
   <action name="action_4">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>母线电流</string>
    </property>
   </action>
   <action name="action_5">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>母线电压</string>
    </property>
