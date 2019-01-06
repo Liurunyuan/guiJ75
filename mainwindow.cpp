@@ -1065,21 +1065,36 @@ void MainWindow::on_tableWidget_cellChanged(int row, int column)
     {
         value.all = tmp;
     }
-    qDebug() << row;
+    qDebug() << "row = " << row;
+    qDebug() << "column = " << column;
     qDebug() << value.all;
     configPara[5] = (char)(row + 6);
     configPara[7] = value.half.low8;
     configPara[6] = value.half.high8;
+    if(column == 0)
+    {
+        crc = this->serialPort->calCrc(0, configPara + 5, 3);
 
-    crc = this->serialPort->calCrc(0, configPara + 5, 3);
+        configPara[9] = (char)crc;
+        configPara[8] = (char)(crc >> 8);
 
-    configPara[9] = (char)crc;
-    configPara[8] = (char)(crc >> 8);
+        send_data.append(configPara,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
+    }
+    else if(column == 1)
+    {
+        crc = this->serialPortX->calCrc(0, configPara + 5, 3);
 
-    send_data.append(configPara,12);
-    qDebug() << send_data.toHex();
-    this->serialPort->sendData(send_data);
-    this->serialPort->sendData(send_data);
+        configPara[9] = (char)crc;
+        configPara[8] = (char)(crc >> 8);
+
+        send_data.append(configPara,12);
+        qDebug() << send_data.toHex();
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
 }
 
 void MainWindow::on_actionDisplacement2_triggered()
@@ -1188,7 +1203,7 @@ void MainWindow::on_actionMotor_speed2_triggered()
         curve2[7] = this->curveComm2.half.low8;
         curve2[6] = this->curveComm2.half.high8;
 
-        crc = this->serialPort->calCrc(0, curve2 + 5, 3);
+        crc = this->serialPortX->calCrc(0, curve2 + 5, 3);
 
         curve2[9] = (char)crc;
         curve2[8] = (char)(crc >> 8);
@@ -1245,7 +1260,7 @@ void MainWindow::on_actionMotor_accel2_triggered()
         curve2[7] = this->curveComm2.half.low8;
         curve2[6] = this->curveComm2.half.high8;
 
-        crc = this->serialPort->calCrc(0, curve2 + 5, 3);
+        crc = this->serialPortX->calCrc(0, curve2 + 5, 3);
 
         curve2[9] = (char)crc;
         curve2[8] = (char)(crc >> 8);
@@ -1302,7 +1317,7 @@ void MainWindow::on_actionCurrent2_triggered()
         curve2[7] = this->curveComm2.half.low8;
         curve2[6] = this->curveComm2.half.high8;
 
-        crc = this->serialPort->calCrc(0, curve2 + 5, 3);
+        crc = this->serialPortX->calCrc(0, curve2 + 5, 3);
 
         curve2[9] = (char)crc;
         curve2[8] = (char)(crc >> 8);
@@ -1359,7 +1374,7 @@ void MainWindow::on_actionBus_voltage2_triggered()
         curve2[7] = this->curveComm2.half.low8;
         curve2[6] = this->curveComm2.half.high8;
 
-        crc = this->serialPort->calCrc(0, curve2 + 5, 3);
+        crc = this->serialPortX->calCrc(0, curve2 + 5, 3);
 
         curve2[9] = (char)crc;
         curve2[8] = (char)(crc >> 8);
