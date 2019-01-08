@@ -378,8 +378,8 @@ void MainWindow::drawCurrentPosition(double x, double y)
     QRectF target(0.0, 0.0, 250.0, 250.0);
     QRectF source(0.0, 0.0, 1000.0, 1000.0);
 
-    y = this->posY - 10000;
-    x = this->posX - 10000;
+    y = this->posY;
+    x = this->posX;
     y = (y*500)/65535;
     x = (x*500)/65535;
 

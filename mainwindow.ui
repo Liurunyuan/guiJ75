@@ -515,12 +515,12 @@
           </row>
           <column>
            <property name="text">
-            <string>横滚参数</string>
+            <string>俯仰参数</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>俯仰参数</string>
+            <string>横滚参数</string>
            </property>
           </column>
          </widget>

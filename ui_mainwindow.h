@@ -713,9 +713,9 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Tab 2", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "\346\250\252\346\273\232\345\217\202\346\225\260", 0));
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "\344\277\257\344\273\260\345\217\202\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "\344\277\257\344\273\260\345\217\202\346\225\260", 0));
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "\346\250\252\346\273\232\345\217\202\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget->verticalHeaderItem(0);
         ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\346\234\200\345\244\247\346\223\215\347\272\265\345\212\233", 0));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget->verticalHeaderItem(1);
