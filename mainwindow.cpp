@@ -1056,7 +1056,7 @@ void MainWindow::on_tableWidget_cellChanged(int row, int column)
     tmp = ui->tableWidget->item(row,column)->text().toInt();
     if(tmp > 32000 || tmp < -32000)
     {
-        QMessageBox::about(NULL,"wrong value","wrong");
+        QMessageBox::about(NULL,"wrong value","The value range should be -32767 ~ 32767");
         ui->tableWidget->item(row,column)->setText("-99999999");
 
         return;
@@ -1065,9 +1065,6 @@ void MainWindow::on_tableWidget_cellChanged(int row, int column)
     {
         value.all = tmp;
     }
-    qDebug() << "row = " << row;
-    qDebug() << "column = " << column;
-    qDebug() << value.all;
     configPara[5] = (char)(row + 6);
     configPara[7] = value.half.low8;
     configPara[6] = value.half.high8;
