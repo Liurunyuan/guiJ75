@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-//    w.show();
     w.showMaximized();
 
     updatePlot updatePlotThread(&w);
@@ -30,7 +29,6 @@ int main(int argc, char *argv[])
     subject->notify();
     subject->notify();
     subject->notify();
-
 
 //    qDebug() << "Supported formats:" << QImageReader::supportedImageFormats();
     return a.exec();

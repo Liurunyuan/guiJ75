@@ -515,11 +515,11 @@ void MainWindow::updatePlot()
                 break;
             }
         }
-        ui->widget->xAxis->setRange(key, 260, Qt::AlignRight);
+        ui->widget->xAxis->setRange(key, 160, Qt::AlignRight);
         ui->widget->replot();
         ++key;
     }
-    else if(this->serialPortX->isReadQEmpty() != 1)
+    if(this->serialPortX->isReadQEmpty() != 1)
     {
         tmp = this->serialPortX->getDisplayArray();
         len = tmp[2];
