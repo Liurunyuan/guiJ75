@@ -20,16 +20,5 @@ int main(int argc, char *argv[])
     updatePlot updatePlotThread(&w);
     updatePlotThread.start();
 
-    Singleton::GetInstance()->singlePrint();
-
-    Subject *subject = new Subject();
-    Client client(subject);
-
-    subject->SetVal(5);
-    subject->notify();
-    subject->notify();
-    subject->notify();
-
-//    qDebug() << "Supported formats:" << QImageReader::supportedImageFormats();
     return a.exec();
 }

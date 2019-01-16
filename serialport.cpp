@@ -5,7 +5,6 @@ Serialport::Serialport()
 {
     readComData.clear();
 
-
     packageHead.push_back(0x5a);
     packageHead.push_back(0x5a);
     packageTail.push_back(0xa5);
@@ -116,7 +115,6 @@ bool Serialport::needUnpackData()
 void Serialport::unpackData()
 {
     int headpos = -1;
-    int tailpos = -1;
     int length = 0;
     QByteArray key;
     headpos = readComData.indexOf(packageHead);

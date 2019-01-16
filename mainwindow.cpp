@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initTimer2();
 
     updateSerialInfo();
+    ui->SendBtn->setStyleSheet("QPushButton {background-color:green;}");
 
     this->curveCommand = 0;
     this->curveComm.all = 0;
@@ -245,7 +246,7 @@ void MainWindow::initCustomPlot2()
 
 
     ui->widget2->addGraph();
-    ui->widget2->graph(1)->setPen(QPen(Qt::black));
+    ui->widget2->graph(1)->setPen(QPen(Qt::white));
     ui->widget2->graph(1)->setBrush(QBrush(QColor(0, 0, 255, 20)));
     ui->widget2->graph(1)->rescaleAxes();
 
@@ -650,11 +651,6 @@ void MainWindow::on_openButton_2_clicked()
     }
 }
 
-void MainWindow::on_testbtn_clicked()
-{
-
-}
-
 void MainWindow::on_actionAbout_how_to_use_triggered()
 {
      //QMessageBox::about(NULL, "提示", "help");
@@ -1034,16 +1030,46 @@ void MainWindow::on_actionBus_voltage_triggered()
 
 void MainWindow::on_SendBtn_clicked()
 {
-    QPen mpen;
-    QPainter painter(this);
-    //pack all the configuration data and send them to lower computer
-    qDebug() << "send button clicked";
-    QRect rect;
-    rect = ui->targetimage->geometry();
-    qDebug() << rect.width();
-    qDebug() << rect.height();
-    qDebug() << rect.center();
-    this->update();
+    qDebug() << "start button clicked";
+    qint16 crc;
+    QByteArray send_data;
+
+    if(ui->SendBtn->text() == "Start")
+    {
+        stateComm[7] = 1;
+        stateComm[6] = 0;
+        crc = this->serialPort->calCrc(0, stateComm + 5, 3);
+
+        stateComm[9] = (char)crc;
+        stateComm[8] = (char)(crc >> 8);
+
+        send_data.append(stateComm,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+        ui->SendBtn->setText("Stop");
+        ui->SendBtn->setStyleSheet("QPushButton {background-color:red;}");
+    }
+    else
+    {
+        stateComm[7] = 0;
+        stateComm[6] = 0;
+        crc = this->serialPort->calCrc(0, stateComm + 5, 3);
+
+        stateComm[9] = (char)crc;
+        stateComm[8] = (char)(crc >> 8);
+
+        send_data.append(stateComm,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+        ui->SendBtn->setText("Start");
+        ui->SendBtn->setStyleSheet("QPushButton {background-color:green;}");
+    }
 }
 
 void MainWindow::on_tableWidget_cellChanged(int row, int column)
@@ -1381,4 +1407,28 @@ void MainWindow::on_actionBus_voltage2_triggered()
         this->serialPortX->sendData(send_data);
         this->serialPortX->sendData(send_data);
     }
+}
+
+void MainWindow::on_duty_editingFinished()
+{
+    qDebug() << "duty setting";
+    qint16 crc;
+    QByteArray send_data;
+    CurveStr value;
+
+    value.all = ui->duty->text().toInt();
+
+    duty[7] = value.half.low8;
+    duty[6] = value.half.high8;
+    crc = this->serialPort->calCrc(0, duty + 5, 3);
+
+    duty[9] = (char)crc;
+    duty[8] = (char)(crc >> 8);
+
+    send_data.append(duty,12);
+    qDebug() << send_data.toHex();
+    this->serialPort->sendData(send_data);
+    this->serialPort->sendData(send_data);
+    this->serialPortX->sendData(send_data);
+    this->serialPortX->sendData(send_data);
 }

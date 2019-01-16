@@ -543,7 +543,7 @@
           <item>
            <widget class="QPushButton" name="SendBtn">
             <property name="text">
-             <string>Send</string>
+             <string>Start</string>
             </property>
            </widget>
           </item>
@@ -553,6 +553,9 @@
              <string>clear</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="duty"/>
           </item>
           <item>
            <widget class="QLCDNumber" name="lcdNumber">

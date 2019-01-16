@@ -23,6 +23,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -72,6 +73,7 @@ public:
     QVBoxLayout *verticalLayout_3;
     QPushButton *SendBtn;
     QPushButton *clearButton;
+    QLineEdit *duty;
     QLCDNumber *lcdNumber;
     QLabel *targetimage;
     QSpacerItem *horizontalSpacer;
@@ -425,6 +427,11 @@ public:
         clearButton->setObjectName(QStringLiteral("clearButton"));
 
         verticalLayout_3->addWidget(clearButton);
+
+        duty = new QLineEdit(frame);
+        duty->setObjectName(QStringLiteral("duty"));
+
+        verticalLayout_3->addWidget(duty);
 
         lcdNumber = new QLCDNumber(frame);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
@@ -860,7 +867,7 @@ public:
         ___qtablewidgetitem72->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\347\247\257\345\210\206\347\263\273\346\225\260", 0));
         QTableWidgetItem *___qtablewidgetitem73 = tableWidget->verticalHeaderItem(71);
         ___qtablewidgetitem73->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\345\276\256\345\210\206\346\264\227\346\274\261", 0));
-        SendBtn->setText(QApplication::translate("MainWindow", "Send", 0));
+        SendBtn->setText(QApplication::translate("MainWindow", "Start", 0));
         clearButton->setText(QApplication::translate("MainWindow", "clear", 0));
         targetimage->setText(QString());
         menuHelp->setTitle(QApplication::translate("MainWindow", "\345\270\256\345\212\251", 0));
