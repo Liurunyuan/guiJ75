@@ -241,24 +241,25 @@ void MainWindow::initCustomPlot2()
 
     ui->widget2->addGraph();
     ui->widget2->graph(0)->setPen(QPen(Qt::blue));
-    ui->widget2->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+//    ui->widget2->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+    ui->widget2->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::black, 1.5), QBrush(Qt::white), 9));
     ui->widget2->graph(0)->rescaleAxes();
 
 
     ui->widget2->addGraph();
     ui->widget2->graph(1)->setPen(QPen(Qt::white));
-    ui->widget2->graph(1)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+//    ui->widget2->graph(1)->setBrush(QBrush(QColor(0, 0, 255, 20)));
     ui->widget2->graph(1)->rescaleAxes();
 
     ui->widget2->addGraph();
     ui->widget2->graph(2)->setPen(QPen(Qt::red));
-    ui->widget2->graph(2)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+ //   ui->widget2->graph(2)->setBrush(QBrush(QColor(0, 0, 255, 20)));
     ui->widget2->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::black, 1.5), QBrush(Qt::white), 9));
     ui->widget2->graph(2)->rescaleAxes();
 
     ui->widget2->addGraph();
     ui->widget2->graph(3)->setPen(QPen(Qt::yellow));
-    ui->widget2->graph(3)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+  //  ui->widget2->graph(3)->setBrush(QBrush(QColor(0, 0, 255, 20)));
     ui->widget2->graph(3)->rescaleAxes();
 
     ui->widget2->xAxis2->setVisible(true);
