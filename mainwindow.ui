@@ -121,6 +121,22 @@
         <enum>QFrame::Sunken</enum>
        </property>
        <layout class="QGridLayout" name="gridLayout_4">
+        <item row="2" column="3">
+         <widget class="QLCDNumber" name="lcdNumber">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0" rowspan="3">
          <widget class="QTableWidget" name="tableWidget">
           <property name="minimumSize">
@@ -525,19 +541,6 @@
           </column>
          </widget>
         </item>
-        <item row="0" column="1">
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>22</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="0" column="3" rowspan="2">
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
@@ -555,25 +558,65 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="duty"/>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item>
-           <widget class="QLCDNumber" name="lcdNumber">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>Dutysetting</string>
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QLineEdit" name="duty"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>TargetSpeedSetting</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="targetSpeed"/>
+          </item>
          </layout>
+        </item>
+        <item row="0" column="1">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>22</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="1">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>22</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item row="1" column="1">
          <widget class="QLabel" name="targetimage">
@@ -610,22 +653,10 @@
           </property>
          </spacer>
         </item>
-        <item row="2" column="1">
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>22</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
        <zorder>targetimage</zorder>
        <zorder>tableWidget</zorder>
+       <zorder>lcdNumber</zorder>
       </widget>
      </widget>
     </item>
@@ -637,7 +668,7 @@
      <x>0</x>
      <y>0</y>
      <width>1228</width>
-     <height>28</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
@@ -702,7 +733,7 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>73</width>
+     <width>89</width>
      <height>41</height>
     </size>
    </property>

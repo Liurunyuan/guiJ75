@@ -68,16 +68,20 @@ public:
     QCustomPlot *widget2;
     QFrame *frame;
     QGridLayout *gridLayout_4;
+    QLCDNumber *lcdNumber;
     QTableWidget *tableWidget;
-    QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_3;
     QPushButton *SendBtn;
     QPushButton *clearButton;
+    QSpacerItem *verticalSpacer_3;
+    QLabel *label_11;
     QLineEdit *duty;
-    QLCDNumber *lcdNumber;
+    QLabel *label_12;
+    QLineEdit *targetSpeed;
+    QSpacerItem *verticalSpacer;
+    QSpacerItem *verticalSpacer_2;
     QLabel *targetimage;
     QSpacerItem *horizontalSpacer;
-    QSpacerItem *verticalSpacer_2;
     QMenuBar *menuBar;
     QMenu *menuHelp;
     QMenu *menuLine_select;
@@ -247,6 +251,18 @@ public:
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        lcdNumber = new QLCDNumber(frame);
+        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
+        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(lcdNumber->sizePolicy().hasHeightForWidth());
+        lcdNumber->setSizePolicy(sizePolicy3);
+        lcdNumber->setFrameShape(QFrame::NoFrame);
+        lcdNumber->setFrameShadow(QFrame::Raised);
+
+        gridLayout_4->addWidget(lcdNumber, 2, 3, 1, 1);
+
         tableWidget = new QTableWidget(frame);
         if (tableWidget->columnCount() < 2)
             tableWidget->setColumnCount(2);
@@ -411,10 +427,6 @@ public:
 
         gridLayout_4->addWidget(tableWidget, 0, 0, 3, 1);
 
-        verticalSpacer = new QSpacerItem(20, 22, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_4->addItem(verticalSpacer, 0, 1, 1, 1);
-
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
@@ -428,25 +440,40 @@ public:
 
         verticalLayout_3->addWidget(clearButton);
 
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer_3);
+
+        label_11 = new QLabel(frame);
+        label_11->setObjectName(QStringLiteral("label_11"));
+
+        verticalLayout_3->addWidget(label_11);
+
         duty = new QLineEdit(frame);
         duty->setObjectName(QStringLiteral("duty"));
 
         verticalLayout_3->addWidget(duty);
 
-        lcdNumber = new QLCDNumber(frame);
-        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
-        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(lcdNumber->sizePolicy().hasHeightForWidth());
-        lcdNumber->setSizePolicy(sizePolicy3);
-        lcdNumber->setFrameShape(QFrame::NoFrame);
-        lcdNumber->setFrameShadow(QFrame::Raised);
+        label_12 = new QLabel(frame);
+        label_12->setObjectName(QStringLiteral("label_12"));
 
-        verticalLayout_3->addWidget(lcdNumber);
+        verticalLayout_3->addWidget(label_12);
+
+        targetSpeed = new QLineEdit(frame);
+        targetSpeed->setObjectName(QStringLiteral("targetSpeed"));
+
+        verticalLayout_3->addWidget(targetSpeed);
 
 
         gridLayout_4->addLayout(verticalLayout_3, 0, 3, 2, 1);
+
+        verticalSpacer = new QSpacerItem(20, 22, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_4->addItem(verticalSpacer, 0, 1, 1, 1);
+
+        verticalSpacer_2 = new QSpacerItem(20, 22, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_4->addItem(verticalSpacer_2, 2, 1, 1, 1);
 
         targetimage = new QLabel(frame);
         targetimage->setObjectName(QStringLiteral("targetimage"));
@@ -460,20 +487,17 @@ public:
 
         gridLayout_4->addItem(horizontalSpacer, 1, 2, 1, 1);
 
-        verticalSpacer_2 = new QSpacerItem(20, 22, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_4->addItem(verticalSpacer_2, 2, 1, 1, 1);
-
         splitter->addWidget(frame);
         targetimage->raise();
         tableWidget->raise();
+        lcdNumber->raise();
 
         gridLayout->addWidget(splitter, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1228, 28));
+        menuBar->setGeometry(QRect(0, 0, 1228, 21));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuLine_select = new QMenu(menuBar);
@@ -496,7 +520,7 @@ public:
         sizePolicy4.setVerticalStretch(0);
         sizePolicy4.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
         dockWidget->setSizePolicy(sizePolicy4);
-        dockWidget->setMinimumSize(QSize(73, 41));
+        dockWidget->setMinimumSize(QSize(89, 41));
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QStringLiteral("dockWidgetContents"));
         layoutWidget = new QWidget(dockWidgetContents);
@@ -869,6 +893,8 @@ public:
         ___qtablewidgetitem73->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\345\276\256\345\210\206\346\264\227\346\274\261", 0));
         SendBtn->setText(QApplication::translate("MainWindow", "Start", 0));
         clearButton->setText(QApplication::translate("MainWindow", "clear", 0));
+        label_11->setText(QApplication::translate("MainWindow", "Dutysetting", 0));
+        label_12->setText(QApplication::translate("MainWindow", "TargetSpeedSetting", 0));
         targetimage->setText(QString());
         menuHelp->setTitle(QApplication::translate("MainWindow", "\345\270\256\345\212\251", 0));
         menuLine_select->setTitle(QApplication::translate("MainWindow", "\344\277\257\344\273\260\346\233\262\347\272\277", 0));

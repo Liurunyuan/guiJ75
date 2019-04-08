@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->systemconfig->setFeatures(QDockWidget::NoDockWidgetFeatures);
     ui->xComConfigDockWidget->setMinimumSize(150,300);
     ui->xComConfigDockWidget->setWindowTitle("横滚串口设置");
-    ui->xComConfigDockWidget->setStyleSheet("QDockWidget {background-color:black;}");
+    ui->xComConfigDockWidget->setStyleSheet("QDockWidget {background-color:white;}");
     addDockWidget(Qt::LeftDockWidgetArea, ui->dockWidget);
     addDockWidget(Qt::LeftDockWidgetArea, ui->xComConfigDockWidget);
     ui->dockWidget->setStyleSheet("QDockWidget{color: black;}");
@@ -376,7 +376,7 @@ void MainWindow::unpack2()
 void MainWindow::drawCurrentPosition(double x, double y)
 {
     QPainter painter(ui->targetimage);
-    QImage image("/home/sean/Pictures/miaozhun.jpeg");
+    QImage image("C:/Project/qtProject/bakserialqt/image/miaozhun.jpeg");
     QRectF target(0.0, 0.0, 250.0, 250.0);
     QRectF source(0.0, 0.0, 1000.0, 1000.0);
 
@@ -442,18 +442,6 @@ void MainWindow::initTimer2()
     connect(timer2, SIGNAL(timeout()), this, SLOT(updatePlot()));
     timer2->start();
 }
-
-//void MainWindow::initTxDataDisplay()
-//{
-//    ui->txDataInput->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
-//    ui->txDataInput->append("<font color=\"#00FF00\">绿色字体</font> ");
-//}
-
-//void MainWindow::initRxDataDisplay()
-//{
-//    ui->rxDataDisplay->setStyleSheet("background-color: rgb(255, 255, 255, 10);");
-//    ui->rxDataDisplay->show();
-//}
 
 void MainWindow::initialUI()
 {
@@ -1055,7 +1043,7 @@ void MainWindow::on_SendBtn_clicked()
     }
     else
     {
-        stateComm[7] = 0;
+        stateComm[7] = 2;
         stateComm[6] = 0;
         crc = this->serialPort->calCrc(0, stateComm + 5, 3);
 
@@ -1432,4 +1420,29 @@ void MainWindow::on_duty_editingFinished()
     this->serialPort->sendData(send_data);
     this->serialPortX->sendData(send_data);
     this->serialPortX->sendData(send_data);
+}
+
+void MainWindow::on_targetSpeed_editingFinished()
+{
+    qDebug() << "set target speed";
+    qint16 crc;
+    QByteArray send_data;
+    CurveStr value;
+
+    value.all = ui->targetSpeed->text().toInt();
+
+    targetSpeed[7] = value.half.low8;
+    targetSpeed[6] = value.half.high8;
+    crc = this->serialPort->calCrc(0, targetSpeed + 5, 3);
+
+    targetSpeed[9] = (char)crc;
+    targetSpeed[8] = (char)(crc >> 8);
+
+    send_data.append(targetSpeed,12);
+    qDebug() << send_data.toHex();
+    this->serialPort->sendData(send_data);
+    this->serialPort->sendData(send_data);
+    this->serialPortX->sendData(send_data);
+    this->serialPortX->sendData(send_data);
+
 }
