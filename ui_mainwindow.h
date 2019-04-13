@@ -75,6 +75,8 @@ public:
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_4;
     QSpacerItem *verticalSpacer_4;
+    QLabel *label_15;
+    QLineEdit *alarmInfo;
     QLabel *label_13;
     QSpinBox *dutySpinBox;
     QLabel *label_14;
@@ -417,7 +419,7 @@ public:
         tableWidget->setLocale(QLocale(QLocale::Chinese, QLocale::China));
         tableWidget->setAutoScroll(true);
         tableWidget->setGridStyle(Qt::DotLine);
-        tableWidget->horizontalHeader()->setVisible(true);
+        tableWidget->horizontalHeader()->setVisible(false);
 
         horizontalLayout->addWidget(tableWidget);
 
@@ -443,6 +445,17 @@ public:
         verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_4->addItem(verticalSpacer_4);
+
+        label_15 = new QLabel(frame);
+        label_15->setObjectName(QStringLiteral("label_15"));
+
+        verticalLayout_4->addWidget(label_15);
+
+        alarmInfo = new QLineEdit(frame);
+        alarmInfo->setObjectName(QStringLiteral("alarmInfo"));
+        alarmInfo->setReadOnly(true);
+
+        verticalLayout_4->addWidget(alarmInfo);
 
         label_13 = new QLabel(frame);
         label_13->setObjectName(QStringLiteral("label_13"));
@@ -935,6 +948,7 @@ public:
         QTableWidgetItem *___qtablewidgetitem73 = tableWidget->verticalHeaderItem(71);
         ___qtablewidgetitem73->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\345\276\256\345\210\206\346\264\227\346\274\261", 0));
         targetimage->setText(QString());
+        label_15->setText(QApplication::translate("MainWindow", "\346\212\245\350\255\246\344\277\241\346\201\257", 0));
         label_13->setText(QApplication::translate("MainWindow", " \345\215\240\347\251\272\346\257\224\357\274\210-561~561\357\274\211", 0));
         label_14->setText(QApplication::translate("MainWindow", "\347\233\256\346\240\207\350\275\254\351\200\237", 0));
         SendBtn->setText(QApplication::translate("MainWindow", "Start", 0));

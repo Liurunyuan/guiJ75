@@ -466,8 +466,9 @@ void MainWindow::updatePlot()
         len = tmp[2];
         for(int i = 0; i < len; ++i)
         {
-            if((tmp[8]) == 0x02){
+            if((tmp[5]) == 0x02){
                 qDebug() << "Alarm info comming";
+                ui->alarmInfo->setText("No Alarm");
                 break;
             }
             switch(tmp[5 + i * 3] % 4){
@@ -1464,7 +1465,7 @@ void MainWindow::on_targetSpeed_editingFinished()
 
 void MainWindow::on_dutySpinBox_editingFinished()
 {
-    static int dutybak = 0;
+    static int dutybak = -1;
     qDebug() << "duty spin box setting";
     qint16 crc;
     QByteArray send_data;
@@ -1497,7 +1498,7 @@ void MainWindow::on_dutySpinBox_editingFinished()
 
 void MainWindow::on_targetSpeedSpinBox_editingFinished()
 {
-    static int dutybak = 0;
+    static int dutybak = -1;
     qDebug() << "set target speed spin box";
     qint16 crc;
     QByteArray send_data;
