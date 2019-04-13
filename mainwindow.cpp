@@ -466,6 +466,10 @@ void MainWindow::updatePlot()
         len = tmp[2];
         for(int i = 0; i < len; ++i)
         {
+            if((tmp[8]) == 0x02){
+                qDebug() << "Alarm info comming";
+                break;
+            }
             switch(tmp[5 + i * 3] % 4){
             case 0:
                 yh = tmp[6 + (i * 3)];
