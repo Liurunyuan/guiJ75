@@ -1407,6 +1407,12 @@ void MainWindow::on_duty_editingFinished()
 
     value.all = ui->duty->text().toInt();
 
+    if(value.all > 561 || value.all < -561){
+        //generate alarm
+        QMessageBox::about(NULL, "提示", "duty 设置溢出，确保小于562");
+        return;
+    }
+
     duty[7] = value.half.low8;
     duty[6] = value.half.high8;
     crc = this->serialPort->calCrc(0, duty + 5, 3);
@@ -1430,6 +1436,11 @@ void MainWindow::on_targetSpeed_editingFinished()
     CurveStr value;
 
     value.all = ui->targetSpeed->text().toInt();
+
+    if(value.all > 8000 || value.all < 0){
+        QMessageBox::about(NULL, "提示", "target speed 设置溢出，确保小于8000");
+        return;
+    }
 
     targetSpeed[7] = value.half.low8;
     targetSpeed[6] = value.half.high8;
