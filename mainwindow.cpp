@@ -467,7 +467,6 @@ void MainWindow::updatePlot()
         for(int i = 0; i < len; ++i)
         {
             if((tmp[5]) == 0x02){
-                qDebug() << "Alarm info comming";
                 ui->alarmInfo->setText("No Alarm");
                 break;
             }
