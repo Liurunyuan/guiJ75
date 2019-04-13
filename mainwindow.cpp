@@ -1457,3 +1457,69 @@ void MainWindow::on_targetSpeed_editingFinished()
     this->serialPortX->sendData(send_data);
 
 }
+
+void MainWindow::on_dutySpinBox_editingFinished()
+{
+    static int dutybak = 0;
+    qDebug() << "duty spin box setting";
+    qint16 crc;
+    QByteArray send_data;
+    CurveStr value;
+
+    value.all = ui->duty->text().toInt();
+    value.all = ui->dutySpinBox->text().toInt();
+
+    if(value.all == dutybak){
+        qDebug() << "same value, don't setting";
+        return;
+    }
+
+    dutybak = value.all;
+
+    duty[7] = value.half.low8;
+    duty[6] = value.half.high8;
+    crc = this->serialPort->calCrc(0, duty + 5, 3);
+
+    duty[9] = (char)crc;
+    duty[8] = (char)(crc >> 8);
+
+    send_data.append(duty,12);
+    qDebug() << send_data.toHex();
+    this->serialPort->sendData(send_data);
+    this->serialPort->sendData(send_data);
+    this->serialPortX->sendData(send_data);
+    this->serialPortX->sendData(send_data);
+}
+
+void MainWindow::on_targetSpeedSpinBox_editingFinished()
+{
+    static int dutybak = 0;
+    qDebug() << "set target speed spin box";
+    qint16 crc;
+    QByteArray send_data;
+    CurveStr value;
+
+    value.all = ui->targetSpeedSpinBox->text().toInt();
+
+    if(value.all == dutybak){
+        qDebug() << "same value, don't setting";
+        return;
+    }
+
+    dutybak = value.all;
+
+    targetSpeed[7] = value.half.low8;
+    targetSpeed[6] = value.half.high8;
+    crc = this->serialPort->calCrc(0, targetSpeed + 5, 3);
+
+    targetSpeed[9] = (char)crc;
+    targetSpeed[8] = (char)(crc >> 8);
+
+    send_data.append(targetSpeed,12);
+    qDebug() << send_data.toHex();
+    this->serialPort->sendData(send_data);
+    this->serialPort->sendData(send_data);
+    this->serialPortX->sendData(send_data);
+    this->serialPortX->sendData(send_data);
+
+}

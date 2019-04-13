@@ -143,6 +143,10 @@ private slots:
 
     void on_targetSpeed_editingFinished();
 
+    void on_dutySpinBox_editingFinished();
+
+    void on_targetSpeedSpinBox_editingFinished();
+
 private:
     static MainWindow* mainWindow;
     Ui::MainWindow *ui;
