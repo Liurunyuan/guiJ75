@@ -117,7 +117,7 @@ $(DESTDIR_TARGET): ui_mainwindow.h $(OBJECTS)
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) object_script.serialQT.Debug  $(LIBS)
 
 qmake: FORCE
-	@$(QMAKE) -spec win32-g++ -o Makefile.Debug serialQT.pro
+	@$(QMAKE) -spec win32-g++ "CONFIG+=debug" -o Makefile.Debug serialQT.pro
 
 qmake_all: FORCE
 
