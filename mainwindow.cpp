@@ -557,57 +557,57 @@ void MainWindow::updatePlot()
             ++key;
         }
     }
-    if(this->serialPortX->isReadQEmpty() != 1)
-    {
-        tmp = this->serialPortX->getDisplayArray();
-        len = tmp[2];
-        for(int i = 0; i < len; ++i)
-        {
-            switch(tmp[5 + i * 3]){
-            case 0:
-                yh = tmp[6 + (i * 3)];
-                yl = tmp[7 + (i * 3)];
-                y = (yh << 8) + yl;
+//    if(this->serialPortX->isReadQEmpty() != 1)
+//    {
+//        tmp = this->serialPortX->getDisplayArray();
+//        len = tmp[2];
+//        for(int i = 0; i < len; ++i)
+//        {
+//            switch(tmp[5 + i * 3]){
+//            case 0:
+//                yh = tmp[6 + (i * 3)];
+//                yl = tmp[7 + (i * 3)];
+//                y = (yh << 8) + yl;
 
-                ui->widget2->graph(0)->addData(key2,y);
-                ui->widget2->graph(0)->rescaleAxes(true);
-                break;
-            case 1:
-                yh = tmp[6 + (i * 3)];
-                yl = tmp[7 + (i * 3)];
-                y = (yh << 8) + yl;
+//                ui->widget2->graph(0)->addData(key2,y);
+//                ui->widget2->graph(0)->rescaleAxes(true);
+//                break;
+//            case 1:
+//                yh = tmp[6 + (i * 3)];
+//                yl = tmp[7 + (i * 3)];
+//                y = (yh << 8) + yl;
 
-                ui->widget2->graph(1)->addData(key2,y);
-                ui->widget2->graph(1)->rescaleAxes(true);
-                break;
-            case 2:
-                yh = tmp[6 + (i * 3)];
-                yl = tmp[7 + (i * 3)];
-                y = (yh << 8) + yl;
+//                ui->widget2->graph(1)->addData(key2,y);
+//                ui->widget2->graph(1)->rescaleAxes(true);
+//                break;
+//            case 2:
+//                yh = tmp[6 + (i * 3)];
+//                yl = tmp[7 + (i * 3)];
+//                y = (yh << 8) + yl;
 
-                this->posX = y;
-                this->update();
+//                this->posX = y;
+//                this->update();
 
-                ui->widget2->graph(2)->addData(key2,y);
-                ui->widget2->graph(2)->rescaleAxes(true);
-                break;
-            case 3:
-                yh = tmp[6 + (i * 3)];
-                yl = tmp[7 + (i * 3)];
-                y = (qint16)((yh << 8) + yl);
+//                ui->widget2->graph(2)->addData(key2,y);
+//                ui->widget2->graph(2)->rescaleAxes(true);
+//                break;
+//            case 3:
+//                yh = tmp[6 + (i * 3)];
+//                yl = tmp[7 + (i * 3)];
+//                y = (qint16)((yh << 8) + yl);
 
-                ui->widget2->graph(3)->addData(key2,y);
-                ui->widget2->graph(3)->rescaleAxes(true);
-                break;
-            default:
-                break;
-            }
-        }
+//                ui->widget2->graph(3)->addData(key2,y);
+//                ui->widget2->graph(3)->rescaleAxes(true);
+//                break;
+//            default:
+//                break;
+//            }
+//        }
 
-        ui->widget2->xAxis->setRange(key2, 160, Qt::AlignRight);
-        ui->widget2->replot();
-        ++key2;
-    }
+//        ui->widget2->xAxis->setRange(key2, 160, Qt::AlignRight);
+//        ui->widget2->replot();
+//        ++key2;
+//    }
 }
 void MainWindow::paintEvent(QPaintEvent *event)
 {
@@ -1472,8 +1472,8 @@ void MainWindow::on_duty_editingFinished()
     qDebug() << send_data.toHex();
     this->serialPort->sendData(send_data);
     this->serialPort->sendData(send_data);
-    this->serialPortX->sendData(send_data);
-    this->serialPortX->sendData(send_data);
+//    this->serialPortX->sendData(send_data);
+//    this->serialPortX->sendData(send_data);
 }
 
 void MainWindow::on_targetSpeed_editingFinished()
@@ -1501,8 +1501,8 @@ void MainWindow::on_targetSpeed_editingFinished()
     qDebug() << send_data.toHex();
     this->serialPort->sendData(send_data);
     this->serialPort->sendData(send_data);
-    this->serialPortX->sendData(send_data);
-    this->serialPortX->sendData(send_data);
+//    this->serialPortX->sendData(send_data);
+//    this->serialPortX->sendData(send_data);
 
 }
 
@@ -1535,8 +1535,8 @@ void MainWindow::on_dutySpinBox_editingFinished()
     qDebug() << send_data.toHex();
     this->serialPort->sendData(send_data);
     this->serialPort->sendData(send_data);
-    this->serialPortX->sendData(send_data);
-    this->serialPortX->sendData(send_data);
+//    this->serialPortX->sendData(send_data);
+//    this->serialPortX->sendData(send_data);
 }
 
 void MainWindow::on_targetSpeedSpinBox_editingFinished()
@@ -1567,7 +1567,7 @@ void MainWindow::on_targetSpeedSpinBox_editingFinished()
     qDebug() << send_data.toHex();
     this->serialPort->sendData(send_data);
     this->serialPort->sendData(send_data);
-    this->serialPortX->sendData(send_data);
-    this->serialPortX->sendData(send_data);
+//    this->serialPortX->sendData(send_data);
+//    this->serialPortX->sendData(send_data);
 
 }
