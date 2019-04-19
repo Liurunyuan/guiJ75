@@ -117,7 +117,7 @@ $(DESTDIR_TARGET): ui_mainwindow.h $(OBJECTS)
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) object_script.serialQT.Release  $(LIBS)
 
 qmake: FORCE
-	@$(QMAKE) -spec win32-g++ "CONFIG+=debug" -o Makefile.Release serialQT.pro
+	@$(QMAKE) -spec win32-g++ -o Makefile.Release serialQT.pro
 
 qmake_all: FORCE
 
@@ -1751,6 +1751,8 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/QMenuBar \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/qmenubar.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/QSpacerItem \
+		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/QSpinBox \
+		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/qspinbox.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/QSplitter \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/qsplitter.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/QStatusBar \
@@ -2060,7 +2062,6 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/qradiobutton.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/qscrollbar.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/qsizegrip.h \
-		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/qspinbox.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/qsplashscreen.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/qstackedwidget.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/qtextbrowser.h \

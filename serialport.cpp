@@ -95,6 +95,10 @@ int Serialport::isReadQEmpty()
     return readStringQ.isEmpty();
 }
 
+int Serialport::clearReadQ(){
+    readStringQ.clear();
+}
+
 int Serialport::getRxQLength()
 {
     return readStringQ.length();

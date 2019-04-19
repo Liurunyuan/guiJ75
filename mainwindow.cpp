@@ -438,7 +438,7 @@ void MainWindow::initTimer1()
 void MainWindow::initTimer2()
 {
     timer2 = new QTimer(this);
-    timer2->setInterval(0);
+    timer2->setInterval(20);
     connect(timer2, SIGNAL(timeout()), this, SLOT(updatePlot()));
     timer2->start();
 }
@@ -452,24 +452,62 @@ void MainWindow::initialUI()
 
 void MainWindow::updatePlot()
 {
+    QByteArray tmp;
     static int key = 0;
     static int key2 = 0;
     static qint16 y = 0;
     int len;
     unsigned char yh;
     unsigned char yl;
+    static int ct = 0;
+    static qint16 alarminfo = 0;
+    static qint16 alarminfobak = -1;
 
-    QByteArray tmp;
+    ct++;
+
+    if(ct > 2){
+        this->serialPort->clearReadQ();
+        ct = 0;
+    }
+
     if(this->serialPort->isReadQEmpty() != 1)
     {
         tmp = this->serialPort->getDisplayArray();
+        yh = tmp[6];
+        yl = tmp[7];
+        y = (yh << 8) + yl;
+        alarminfo = y;
+        if(alarminfo != alarminfobak)
+        {
+            if(alarminfo == 0)
+            {
+                ui->alarmInfo->setText("No Alarm");
+            }
+            if((alarminfo & 0x0001) == 0x0001)
+            {
+                ui->alarmInfo->setText("over current");
+            }
+            if((alarminfo & 0x0002) == 0x0002)
+            {
+                ui->alarmInfo->setText("over voltage");
+            }
+            if((alarminfo & 0x0004) == 0x0004)
+            {
+                ui->alarmInfo->setText("over temperature");
+            }
+            if((alarminfo & 0x0008) == 0x0004)
+            {
+                ui->alarmInfo->setText("software error");
+            }
+            if((alarminfo & 0x0010) == 0x0004)
+            {
+                ui->alarmInfo->setText("init error");
+            }
+            alarminfobak = alarminfo;
+        }
         len = tmp[2];
         for(int i = 0; i < len; ++i)
         {
-            if((tmp[5]) == 0x02){
-                ui->alarmInfo->setText("No Alarm");
-                break;
-            }
             switch(tmp[5 + i * 3] % 4){
             case 0:
                 yh = tmp[6 + (i * 3)];
@@ -488,6 +526,9 @@ void MainWindow::updatePlot()
                 ui->widget->graph(1)->rescaleAxes(true);
                 break;
             case 2:
+                if(tmp[5 + i *3] == 2){
+                    break;
+                }
                 yh = tmp[6 + (i * 3)];
                 yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
@@ -509,9 +550,12 @@ void MainWindow::updatePlot()
                 break;
             }
         }
-        ui->widget->xAxis->setRange(key, 160, Qt::AlignRight);
-        ui->widget->replot();
-        ++key;
+        if(len > 1)
+        {
+            ui->widget->xAxis->setRange(key, 160, Qt::AlignRight);
+            ui->widget->replot();
+            ++key;
+        }
     }
     if(this->serialPortX->isReadQEmpty() != 1)
     {
