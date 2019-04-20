@@ -589,6 +589,13 @@
            </spacer>
           </item>
           <item>
+           <widget class="QSpinBox" name="MotorSpeed">
+            <property name="maximum">
+             <number>20000</number>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="label_15">
             <property name="text">
              <string>报警信息</string>
@@ -711,12 +718,7 @@
        </layout>
        <zorder>targetimage</zorder>
        <zorder>tableWidget</zorder>
-       <zorder>dutySpinBox</zorder>
        <zorder>verticalSpacer</zorder>
-       <zorder>label_13</zorder>
-       <zorder>label_14</zorder>
-       <zorder>targetSpeedSpinBox</zorder>
-       <zorder>verticalSpacer_4</zorder>
       </widget>
      </widget>
     </item>

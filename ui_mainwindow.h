@@ -75,6 +75,7 @@ public:
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_4;
     QSpacerItem *verticalSpacer_4;
+    QSpinBox *MotorSpeed;
     QLabel *label_15;
     QLineEdit *alarmInfo;
     QLabel *label_13;
@@ -446,6 +447,12 @@ public:
 
         verticalLayout_4->addItem(verticalSpacer_4);
 
+        MotorSpeed = new QSpinBox(frame);
+        MotorSpeed->setObjectName(QStringLiteral("MotorSpeed"));
+        MotorSpeed->setMaximum(20000);
+
+        verticalLayout_4->addWidget(MotorSpeed);
+
         label_15 = new QLabel(frame);
         label_15->setObjectName(QStringLiteral("label_15"));
 
@@ -543,10 +550,6 @@ public:
         splitter->addWidget(frame);
         targetimage->raise();
         tableWidget->raise();
-        dutySpinBox->raise();
-        label_13->raise();
-        label_14->raise();
-        targetSpeedSpinBox->raise();
 
         gridLayout->addWidget(splitter, 0, 0, 1, 1);
 

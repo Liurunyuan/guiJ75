@@ -375,6 +375,7 @@ void MainWindow::unpack2()
 
 void MainWindow::drawCurrentPosition(double x, double y)
 {
+    qDebug("---------------------draw current position entry");
     QPainter painter(ui->targetimage);
     QImage image("C:/Project/qtProject/bakserialqt/image/miaozhun.jpeg");
     QRectF target(0.0, 0.0, 250.0, 250.0);
@@ -394,6 +395,7 @@ void MainWindow::drawCurrentPosition(double x, double y)
     }
 
     painter.drawImage(target,image,source);
+     qDebug("---------------------draw current position exit");
 }
 void MainWindow::updateSerialInfo()
 {
@@ -521,6 +523,7 @@ void MainWindow::updatePlot()
                 yh = tmp[6 + (i * 3)];
                 yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
+                ui->MotorSpeed->setValue(y);
 
                 ui->widget->graph(1)->addData(key,y);
                 ui->widget->graph(1)->rescaleAxes(true);
@@ -1535,8 +1538,6 @@ void MainWindow::on_dutySpinBox_editingFinished()
     qDebug() << send_data.toHex();
     this->serialPort->sendData(send_data);
     this->serialPort->sendData(send_data);
-//    this->serialPortX->sendData(send_data);
-//    this->serialPortX->sendData(send_data);
 }
 
 void MainWindow::on_targetSpeedSpinBox_editingFinished()
