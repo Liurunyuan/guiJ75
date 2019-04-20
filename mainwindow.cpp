@@ -375,7 +375,6 @@ void MainWindow::unpack2()
 
 void MainWindow::drawCurrentPosition(double x, double y)
 {
-    qDebug("---------------------draw current position entry");
     QPainter painter(ui->targetimage);
     QImage image("C:/Project/qtProject/bakserialqt/image/miaozhun.jpeg");
     QRectF target(0.0, 0.0, 250.0, 250.0);
