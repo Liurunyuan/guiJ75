@@ -117,7 +117,7 @@ $(DESTDIR_TARGET): ui_mainwindow.h $(OBJECTS)
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) object_script.serialQT.Release  $(LIBS)
 
 qmake: FORCE
-	@$(QMAKE) -spec win32-g++ "CONFIG+=debug" -o Makefile.Release serialQT.pro
+	@$(QMAKE) -spec win32-g++ -o Makefile.Release serialQT.pro
 
 qmake_all: FORCE
 
@@ -273,6 +273,7 @@ release/moc_mainwindow.cpp: ../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidget
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qqueue.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QString \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QByteArray \
+		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QMutex \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QTimer \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qtimer.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qbasictimer.h \
@@ -400,6 +401,7 @@ release/moc_serialport.cpp: ../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/Q
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qqueue.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QString \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QByteArray \
+		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QMutex \
 		serialport.h
 	C:\Qt\Qt5.5.1\5.5\mingw492_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.5.1/5.5/mingw492_32/mkspecs/win32-g++ -IC:/Project/qtProject/bakserialqt -IC:/Qt/Qt5.5.1/5.5/mingw492_32/include -IC:/Qt/Qt5.5.1/5.5/mingw492_32/include/QtPrintSupport -IC:/Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets -IC:/Qt/Qt5.5.1/5.5/mingw492_32/include/QtGui -IC:/Qt/Qt5.5.1/5.5/mingw492_32/include/QtANGLE -IC:/Qt/Qt5.5.1/5.5/mingw492_32/include/QtSerialPort -IC:/Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore serialport.h -o release\moc_serialport.cpp
 
@@ -1525,6 +1527,7 @@ release/main.o: main.cpp mainwindow.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qqueue.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QString \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QByteArray \
+		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QMutex \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QTimer \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qtimer.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qbasictimer.h \
@@ -1685,6 +1688,7 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qqueue.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QString \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QByteArray \
+		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QMutex \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QTimer \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qtimer.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qbasictimer.h \
@@ -2481,6 +2485,7 @@ release/serialport.o: serialport.cpp serialport.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qqueue.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QString \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QByteArray \
+		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QMutex \
 		mainwindow.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/QMainWindow \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtWidgets/qmainwindow.h \
@@ -3195,6 +3200,7 @@ release/updateplot.o: updateplot.cpp updateplot.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qqueue.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QString \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QByteArray \
+		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QMutex \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/QTimer \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qtimer.h \
 		../../../Qt/Qt5.5.1/5.5/mingw492_32/include/QtCore/qbasictimer.h \

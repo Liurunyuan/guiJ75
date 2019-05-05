@@ -82,7 +82,9 @@ void Serialport::sendData(QByteArray data)
 
 QByteArray Serialport::getDisplayArray()
 {
+//    mutex.lock();
     return readStringQ.dequeue();
+//    mutex.unlock();
 }
 
 QVector<QString> Serialport::getAvailablePort()
@@ -92,11 +94,17 @@ QVector<QString> Serialport::getAvailablePort()
 
 int Serialport::isReadQEmpty()
 {
-    return readStringQ.isEmpty();
+    int ret;
+//    mutex.lock();
+    ret = readStringQ.isEmpty();
+//    mutex.unlock();
+    return ret;
 }
 
-int Serialport::clearReadQ(){
+void Serialport::clearReadQ(){
+//    mutex.lock();
     readStringQ.clear();
+//    mutex.unlock();
 }
 
 int Serialport::getRxQLength()
@@ -139,7 +147,9 @@ void Serialport::unpackData()
                     if(readComData[headpos + length - 2] == (char)0xa5)
                     {
                         key = readComData.mid(headpos, length);
+//                        mutex.lock();
                         readStringQ.enqueue(key);
+//                        mutex.unlock();
                         readComData = readComData.right(readComData.length() - length - headpos);
                         headpos = readComData.indexOf(packageHead);
                     }

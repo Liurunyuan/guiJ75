@@ -57,6 +57,7 @@ public:
     QAction *actionMotor_accel2;
     QAction *actionCurrent2;
     QAction *actionBus_voltage2;
+    QAction *actionTemperatrue;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QSplitter *splitter;
@@ -75,6 +76,9 @@ public:
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_4;
     QSpacerItem *verticalSpacer_4;
+    QLabel *label_16;
+    QSpinBox *temperatureSpinBox;
+    QLabel *label_17;
     QSpinBox *MotorSpeed;
     QLabel *label_15;
     QLineEdit *alarmInfo;
@@ -192,6 +196,9 @@ public:
         actionBus_voltage2 = new QAction(MainWindow);
         actionBus_voltage2->setObjectName(QStringLiteral("actionBus_voltage2"));
         actionBus_voltage2->setCheckable(true);
+        actionTemperatrue = new QAction(MainWindow);
+        actionTemperatrue->setObjectName(QStringLiteral("actionTemperatrue"));
+        actionTemperatrue->setCheckable(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -447,6 +454,23 @@ public:
 
         verticalLayout_4->addItem(verticalSpacer_4);
 
+        label_16 = new QLabel(frame);
+        label_16->setObjectName(QStringLiteral("label_16"));
+
+        verticalLayout_4->addWidget(label_16);
+
+        temperatureSpinBox = new QSpinBox(frame);
+        temperatureSpinBox->setObjectName(QStringLiteral("temperatureSpinBox"));
+        temperatureSpinBox->setReadOnly(true);
+        temperatureSpinBox->setMaximum(4096);
+
+        verticalLayout_4->addWidget(temperatureSpinBox);
+
+        label_17 = new QLabel(frame);
+        label_17->setObjectName(QStringLiteral("label_17"));
+
+        verticalLayout_4->addWidget(label_17);
+
         MotorSpeed = new QSpinBox(frame);
         MotorSpeed->setObjectName(QStringLiteral("MotorSpeed"));
         MotorSpeed->setMaximum(20000);
@@ -476,8 +500,8 @@ public:
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(dutySpinBox->sizePolicy().hasHeightForWidth());
         dutySpinBox->setSizePolicy(sizePolicy3);
-        dutySpinBox->setMinimum(-562);
-        dutySpinBox->setMaximum(562);
+        dutySpinBox->setMinimum(0);
+        dutySpinBox->setMaximum(3000);
 
         verticalLayout_4->addWidget(dutySpinBox);
 
@@ -579,7 +603,7 @@ public:
         sizePolicy5.setVerticalStretch(0);
         sizePolicy5.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
         dockWidget->setSizePolicy(sizePolicy5);
-        dockWidget->setMinimumSize(QSize(89, 41));
+        dockWidget->setMinimumSize(QSize(91, 42));
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QStringLiteral("dockWidgetContents"));
         layoutWidget = new QWidget(dockWidgetContents);
@@ -767,6 +791,8 @@ public:
         menuLine_select->addAction(actionCurrent);
         menuLine_select->addSeparator();
         menuLine_select->addAction(actionBus_voltage);
+        menuLine_select->addSeparator();
+        menuLine_select->addAction(actionTemperatrue);
         menuDockwidget->addAction(actionSystem_config);
         menuDockwidget->addSeparator();
         menuDockwidget->addAction(actionCurve_config);
@@ -800,6 +826,7 @@ public:
         actionMotor_accel2->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\345\212\240\351\200\237\345\272\246\346\233\262\347\272\277", 0));
         actionCurrent2->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\346\265\201", 0));
         actionBus_voltage2->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\345\216\213", 0));
+        actionTemperatrue->setText(QApplication::translate("MainWindow", "Temperatrue", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Tab 2", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
@@ -951,6 +978,8 @@ public:
         QTableWidgetItem *___qtablewidgetitem73 = tableWidget->verticalHeaderItem(71);
         ___qtablewidgetitem73->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\345\276\256\345\210\206\346\264\227\346\274\261", 0));
         targetimage->setText(QString());
+        label_16->setText(QApplication::translate("MainWindow", "\346\270\251\345\272\246\357\274\210\347\240\201\345\200\274\357\274\211", 0));
+        label_17->setText(QApplication::translate("MainWindow", "\346\265\213\351\207\217\347\224\265\346\234\272\350\275\254\351\200\237", 0));
         label_15->setText(QApplication::translate("MainWindow", "\346\212\245\350\255\246\344\277\241\346\201\257", 0));
         label_13->setText(QApplication::translate("MainWindow", " \345\215\240\347\251\272\346\257\224\357\274\210-561~561\357\274\211", 0));
         label_14->setText(QApplication::translate("MainWindow", "\347\233\256\346\240\207\350\275\254\351\200\237", 0));

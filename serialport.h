@@ -10,6 +10,7 @@
 #include <QQueue>
 #include <QString>
 #include <QByteArray>
+#include <QMutex>
 
 //const  char packageHead[2] = {(char)0x5a, (char)0x5a};
 //const  char packageTail[2] = {(char)0xa5, (char)0xa5};
@@ -27,7 +28,7 @@ public:
     QByteArray getDisplayArray();
     QVector<QString> getAvailablePort();
     int isReadQEmpty();
-    int clearReadQ();
+    void clearReadQ();
     int getRxQLength();
     bool needUnpackData();
     void unpackData();
@@ -42,6 +43,7 @@ private:
     QQueue<QByteArray> sendStringQ;
     QByteArray packageHead;
     QByteArray packageTail;
+    QMutex mutex;
 };
 
 #endif // SERIALPORT_H

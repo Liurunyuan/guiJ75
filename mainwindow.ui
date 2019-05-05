@@ -589,6 +589,30 @@
            </spacer>
           </item>
           <item>
+           <widget class="QLabel" name="label_16">
+            <property name="text">
+             <string>温度（码值）</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="temperatureSpinBox">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="maximum">
+             <number>4096</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_17">
+            <property name="text">
+             <string>测量电机转速</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QSpinBox" name="MotorSpeed">
             <property name="maximum">
              <number>20000</number>
@@ -625,10 +649,10 @@
              </sizepolicy>
             </property>
             <property name="minimum">
-             <number>-562</number>
+             <number>0</number>
             </property>
             <property name="maximum">
-             <number>562</number>
+             <number>3000</number>
             </property>
            </widget>
           </item>
@@ -753,6 +777,8 @@
     <addaction name="actionCurrent"/>
     <addaction name="separator"/>
     <addaction name="actionBus_voltage"/>
+    <addaction name="separator"/>
+    <addaction name="actionTemperatrue"/>
    </widget>
    <widget class="QMenu" name="menuDockwidget">
     <property name="title">
@@ -795,8 +821,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>89</width>
-     <height>41</height>
+     <width>91</width>
+     <height>42</height>
     </size>
    </property>
    <attribute name="dockWidgetArea">
@@ -1198,6 +1224,14 @@
    </property>
    <property name="text">
     <string>母线电压</string>
+   </property>
+  </action>
+  <action name="actionTemperatrue">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Temperatrue</string>
    </property>
   </action>
  </widget>

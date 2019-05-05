@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
-
+#include <QMutex>
+extern QMutex mutex;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -453,6 +454,7 @@ void MainWindow::initialUI()
 
 void MainWindow::updatePlot()
 {
+    mutex.lock();
     QByteArray tmp;
     static int key = 0;
     static int key2 = 0;
@@ -496,13 +498,21 @@ void MainWindow::updatePlot()
             {
                 ui->alarmInfo->setText("over temperature");
             }
-            if((alarminfo & 0x0008) == 0x0004)
+            if((alarminfo & 0x0008) == 0x0008)
             {
                 ui->alarmInfo->setText("software error");
             }
-            if((alarminfo & 0x0010) == 0x0004)
+            if((alarminfo & 0x0010) == 0x0010)
             {
                 ui->alarmInfo->setText("init error");
+            }
+            if((alarminfo & 0x0020) == 0x0020)
+            {
+                ui->alarmInfo->setText("GPIO14 error");
+            }
+            if((alarminfo & 0x0040) == 0x0040)
+            {
+                ui->alarmInfo->setText("GPIO15 error");
             }
             alarminfobak = alarminfo;
         }
@@ -528,12 +538,14 @@ void MainWindow::updatePlot()
                 ui->widget->graph(1)->rescaleAxes(true);
                 break;
             case 2:
-                if(tmp[5 + i *3] == 2){
+                if((tmp[5 + i *3]) == 2){
                     break;
                 }
                 yh = tmp[6 + (i * 3)];
                 yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
+
+                ui->temperatureSpinBox->setValue(y);
 
                 this->posY = y;
                 this->update();
@@ -559,7 +571,8 @@ void MainWindow::updatePlot()
             ++key;
         }
     }
-//    if(this->serialPortX->isReadQEmpty() != 1)
+    mutex.unlock();
+    //    if(this->serialPortX->isReadQEmpty() != 1)
 //    {
 //        tmp = this->serialPortX->getDisplayArray();
 //        len = tmp[2];
@@ -1570,4 +1583,79 @@ void MainWindow::on_targetSpeedSpinBox_editingFinished()
 //    this->serialPortX->sendData(send_data);
 //    this->serialPortX->sendData(send_data);
 
+}
+
+void MainWindow::on_clearButton_clicked()
+{
+    qDebug() << "clear alarm info";
+    qint16 crc;
+    QByteArray send_data;
+
+    crc = this->serialPort->calCrc(0, clearAlarm + 5, 3);
+
+    clearAlarm[9] = (char)crc;
+    clearAlarm[8] = (char)(crc >> 8);
+
+    send_data.append(clearAlarm,12);
+    qDebug() << send_data.toHex();
+    this->serialPort->sendData(send_data);
+    this->serialPort->sendData(send_data);
+
+}
+
+void MainWindow::on_actionTemperatrue_triggered()
+{
+    qint16 crc;
+    QByteArray send_data;
+    if(ui->actionTemperatrue->isChecked() == true)
+    {
+        if(curveCount[0] > MAXCURVE)
+        {
+            ui->actionTemperatrue->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[0]++;
+        }
+        qDebug() << "ask for temperature";
+
+        this->curveComm.bit.temperature = 1;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
+
+    }
+    else
+    {
+        --curveCount[0];
+        if(curveCount[0] < 0)
+        {
+            curveCount[0] = 0;
+        }
+        qDebug() << "cancle bus voltage";
+        this->curveComm.bit.temperature = 0;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
+    }
 }

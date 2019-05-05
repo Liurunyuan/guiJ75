@@ -1,4 +1,7 @@
 #include "updateplot.h"
+#include <QMutex>
+
+QMutex mutex;
 
 updatePlot::updatePlot(MainWindow* main)
 {
@@ -17,7 +20,9 @@ void updatePlot::run()
     {
         if(MainWindow::getInstance()->needToUnpack() == true)
         {
+            mutex.lock();
             MainWindow::getInstance()->unpack();
+            mutex.unlock();
         }
         if(MainWindow::getInstance()->needToUnpack2() == true)
         {
