@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     initTimer2();
 
+    initRepeatTimer();
+
     updateSerialInfo();
     ui->SendBtn->setStyleSheet("QPushButton {background-color:green;}");
 
@@ -97,6 +99,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->targetimage->setScaledContents(true);
 
     ui->targetimage->show();
+    ui->repeateBtn->setStyleSheet("QPushButton {background-color:green;}");
 }
 
 MainWindow::~MainWindow()
@@ -129,7 +132,7 @@ void MainWindow::initCustomPlot()
     ui->widget->yAxis->setRange(0,5);
 
     ui->widget->addGraph();
-    ui->widget->graph(0)->setPen(QPen(Qt::blue));
+    ui->widget->graph(0)->setPen(QPen(Qt::green));
     //ui->widget->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
     ui->widget->graph(0)->rescaleAxes();
 
@@ -241,7 +244,7 @@ void MainWindow::initCustomPlot2()
     ui->widget2->yAxis->setRange(0,5);
 
     ui->widget2->addGraph();
-    ui->widget2->graph(0)->setPen(QPen(Qt::blue));
+    ui->widget2->graph(0)->setPen(QPen(Qt::red));
 //    ui->widget2->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
     ui->widget2->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::black, 1.5), QBrush(Qt::white), 9));
     ui->widget2->graph(0)->rescaleAxes();
@@ -395,7 +398,6 @@ void MainWindow::drawCurrentPosition(double x, double y)
     }
 
     painter.drawImage(target,image,source);
-     qDebug("---------------------draw current position exit");
 }
 void MainWindow::updateSerialInfo()
 {
@@ -440,9 +442,18 @@ void MainWindow::initTimer1()
 void MainWindow::initTimer2()
 {
     timer2 = new QTimer(this);
-    timer2->setInterval(20);
+    timer2->setInterval(40);
     connect(timer2, SIGNAL(timeout()), this, SLOT(updatePlot()));
     timer2->start();
+}
+
+void MainWindow::initRepeatTimer()
+{
+    repeatTimer = new QTimer(this);
+    repeatTimer->setInterval(5000);
+    connect(repeatTimer, SIGNAL(timeout()), this, SLOT(repeatTimerPlot()));
+//    repeatTimer->start();
+
 }
 
 void MainWindow::initialUI()
@@ -457,7 +468,6 @@ void MainWindow::updatePlot()
     mutex.lock();
     QByteArray tmp;
     static int key = 0;
-    static int key2 = 0;
     static qint16 y = 0;
     int len;
     unsigned char yh;
@@ -468,7 +478,7 @@ void MainWindow::updatePlot()
 
     ct++;
 
-    if(ct > 2){
+    if(ct > 5){
         this->serialPort->clearReadQ();
         ct = 0;
     }
@@ -525,6 +535,8 @@ void MainWindow::updatePlot()
                 yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
 
+                ui->maxCurrent->setValue(y);
+
                 ui->widget->graph(0)->addData(key,y);
                 ui->widget->graph(0)->rescaleAxes(true);
                 break;
@@ -536,6 +548,7 @@ void MainWindow::updatePlot()
 
                 ui->widget->graph(1)->addData(key,y);
                 ui->widget->graph(1)->rescaleAxes(true);
+
                 break;
             case 2:
                 if((tmp[5 + i *3]) == 2){
@@ -557,6 +570,7 @@ void MainWindow::updatePlot()
                 yh = tmp[6 + (i * 3)];
                 yl = tmp[7 + (i * 3)];
                 y = (qint16)((yh << 8) + yl);
+
                 ui->widget->graph(3)->addData(key,y);
                 ui->widget->graph(3)->rescaleAxes(true);
                 break;
@@ -572,57 +586,51 @@ void MainWindow::updatePlot()
         }
     }
     mutex.unlock();
-    //    if(this->serialPortX->isReadQEmpty() != 1)
-//    {
-//        tmp = this->serialPortX->getDisplayArray();
-//        len = tmp[2];
-//        for(int i = 0; i < len; ++i)
-//        {
-//            switch(tmp[5 + i * 3]){
-//            case 0:
-//                yh = tmp[6 + (i * 3)];
-//                yl = tmp[7 + (i * 3)];
-//                y = (yh << 8) + yl;
+}
 
-//                ui->widget2->graph(0)->addData(key2,y);
-//                ui->widget2->graph(0)->rescaleAxes(true);
-//                break;
-//            case 1:
-//                yh = tmp[6 + (i * 3)];
-//                yl = tmp[7 + (i * 3)];
-//                y = (yh << 8) + yl;
+void MainWindow::repeatTimerPlot()
+{
+    qDebug() << "repeat timer plot running";
 
-//                ui->widget2->graph(1)->addData(key2,y);
-//                ui->widget2->graph(1)->rescaleAxes(true);
-//                break;
-//            case 2:
-//                yh = tmp[6 + (i * 3)];
-//                yl = tmp[7 + (i * 3)];
-//                y = (yh << 8) + yl;
+    static int startFlag = 1;
+    qint16 crc;
+    QByteArray send_data;
 
-//                this->posX = y;
-//                this->update();
+    if(startFlag == 1){
+        startFlag = 0;
 
-//                ui->widget2->graph(2)->addData(key2,y);
-//                ui->widget2->graph(2)->rescaleAxes(true);
-//                break;
-//            case 3:
-//                yh = tmp[6 + (i * 3)];
-//                yl = tmp[7 + (i * 3)];
-//                y = (qint16)((yh << 8) + yl);
+        qDebug() << "repeat timer send start command";
+        stateComm[7] = 1;
+        stateComm[6] = 0;
+        crc = this->serialPort->calCrc(0, stateComm + 5, 3);
 
-//                ui->widget2->graph(3)->addData(key2,y);
-//                ui->widget2->graph(3)->rescaleAxes(true);
-//                break;
-//            default:
-//                break;
-//            }
-//        }
+        stateComm[9] = (char)crc;
+        stateComm[8] = (char)(crc >> 8);
 
-//        ui->widget2->xAxis->setRange(key2, 160, Qt::AlignRight);
-//        ui->widget2->replot();
-//        ++key2;
-//    }
+        send_data.append(stateComm,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
+    else{
+        startFlag = 1;
+        qDebug() << "repeat timer send stop command";
+        stateComm[7] = 2;
+        stateComm[6] = 0;
+        crc = this->serialPort->calCrc(0, stateComm + 5, 3);
+
+        stateComm[9] = (char)crc;
+        stateComm[8] = (char)(crc >> 8);
+
+        send_data.append(stateComm,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+        this->serialPortX->sendData(send_data);
+    }
 }
 void MainWindow::paintEvent(QPaintEvent *event)
 {
@@ -1658,4 +1666,109 @@ void MainWindow::on_actionTemperatrue_triggered()
         this->serialPort->sendData(send_data);
         this->serialPort->sendData(send_data);
     }
+}
+
+void MainWindow::on_actionMacCurrent_triggered()
+{
+    qint16 crc;
+    QByteArray send_data;
+    if(ui->actionMacCurrent->isChecked() == true)
+    {
+        if(curveCount[0] > MAXCURVE)
+        {
+            ui->actionMacCurrent->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[0]++;
+        }
+        qDebug() << "ask for max current";
+
+        this->curveComm.bit.maxCurrent = 1;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
+
+    }
+    else
+    {
+        --curveCount[0];
+        if(curveCount[0] < 0)
+        {
+            curveCount[0] = 0;
+        }
+        qDebug() << "cancle max current";
+        this->curveComm.bit.maxCurrent = 0;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
+    }
+}
+
+void MainWindow::on_repeateBtn_clicked()
+{
+    qDebug() << "repeat button clicked";
+    qint16 crc;
+    QByteArray send_data;
+
+    if(ui->repeateBtn->text() == "Repeat")
+    {
+//        stateComm[7] = 1;
+//        stateComm[6] = 0;
+//        crc = this->serialPort->calCrc(0, stateComm + 5, 3);
+
+//        stateComm[9] = (char)crc;
+//        stateComm[8] = (char)(crc >> 8);
+
+//        send_data.append(stateComm,12);
+//        qDebug() << send_data.toHex();
+//        this->serialPort->sendData(send_data);
+//        this->serialPort->sendData(send_data);
+//        this->serialPortX->sendData(send_data);
+//        this->serialPortX->sendData(send_data);
+        repeatTimer->start();
+        ui->repeateBtn->setText("Halt");
+        ui->repeateBtn->setStyleSheet("QPushButton {background-color:red;}");
+    }
+    else
+    {
+//        stateComm[7] = 2;
+//        stateComm[6] = 0;
+//        crc = this->serialPort->calCrc(0, stateComm + 5, 3);
+
+//        stateComm[9] = (char)crc;
+//        stateComm[8] = (char)(crc >> 8);
+
+//        send_data.append(stateComm,12);
+//        qDebug() << send_data.toHex();
+//        this->serialPort->sendData(send_data);
+//        this->serialPort->sendData(send_data);
+//        this->serialPortX->sendData(send_data);
+//        this->serialPortX->sendData(send_data);
+        repeatTimer->stop();
+        ui->repeateBtn->setText("Repeat");
+        ui->repeateBtn->setStyleSheet("QPushButton {background-color:green;}");
+    }
+
+
 }

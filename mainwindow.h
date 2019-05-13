@@ -24,7 +24,7 @@ class MainWindow;
 
 typedef struct _Curve
 {
-    qint16 torque: 1;
+    qint16 maxCurrent: 1;
     qint16 speed: 1;
     qint16 displacemet: 1;
     qint16 current: 1;
@@ -74,6 +74,8 @@ public:
 
     void initTimer2();
 
+    void initRepeatTimer();
+
     void initCustomPlot();
     void initCustomPlot2();
 
@@ -93,6 +95,7 @@ public:
 public slots:
     void refreshLCD();
     void updatePlot();
+    void repeatTimerPlot();
 protected:
     void paintEvent(QPaintEvent *event);
     bool eventFilter(QObject *watched, QEvent *event);
@@ -151,6 +154,10 @@ private slots:
 
     void on_actionTemperatrue_triggered();
 
+    void on_actionMacCurrent_triggered();
+
+    void on_repeateBtn_clicked();
+
 private:
     static MainWindow* mainWindow;
     Ui::MainWindow *ui;
@@ -158,6 +165,7 @@ private:
     Serialport* serialPortX;
     QTimer *timer1;
     QTimer *timer2;
+    QTimer *repeatTimer;
     qint16 curveCommand;
     int curveCount[2];
     QQueue<QByteArray> sendStringQ;
@@ -174,6 +182,7 @@ private:
     CurveStr curveComm2;
     int posX;
     int posY;
+    int showTargetSpeed;
 };
 
 

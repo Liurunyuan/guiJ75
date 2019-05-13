@@ -17,6 +17,7 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDockWidget>
+#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -58,6 +59,7 @@ public:
     QAction *actionCurrent2;
     QAction *actionBus_voltage2;
     QAction *actionTemperatrue;
+    QAction *actionMacCurrent;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QSplitter *splitter;
@@ -76,6 +78,8 @@ public:
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_4;
     QSpacerItem *verticalSpacer_4;
+    QLabel *label_18;
+    QDoubleSpinBox *maxCurrent;
     QLabel *label_16;
     QSpinBox *temperatureSpinBox;
     QLabel *label_17;
@@ -90,6 +94,8 @@ public:
     QPushButton *SendBtn;
     QPushButton *clearButton;
     QSpacerItem *verticalSpacer_3;
+    QSpinBox *dt;
+    QPushButton *repeateBtn;
     QLCDNumber *lcdNumber;
     QLabel *label_11;
     QLineEdit *duty;
@@ -199,6 +205,9 @@ public:
         actionTemperatrue = new QAction(MainWindow);
         actionTemperatrue->setObjectName(QStringLiteral("actionTemperatrue"));
         actionTemperatrue->setCheckable(true);
+        actionMacCurrent = new QAction(MainWindow);
+        actionMacCurrent->setObjectName(QStringLiteral("actionMacCurrent"));
+        actionMacCurrent->setCheckable(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -454,6 +463,18 @@ public:
 
         verticalLayout_4->addItem(verticalSpacer_4);
 
+        label_18 = new QLabel(frame);
+        label_18->setObjectName(QStringLiteral("label_18"));
+
+        verticalLayout_4->addWidget(label_18);
+
+        maxCurrent = new QDoubleSpinBox(frame);
+        maxCurrent->setObjectName(QStringLiteral("maxCurrent"));
+        maxCurrent->setMinimum(0);
+        maxCurrent->setMaximum(1e+06);
+
+        verticalLayout_4->addWidget(maxCurrent);
+
         label_16 = new QLabel(frame);
         label_16->setObjectName(QStringLiteral("label_16"));
 
@@ -462,6 +483,7 @@ public:
         temperatureSpinBox = new QSpinBox(frame);
         temperatureSpinBox->setObjectName(QStringLiteral("temperatureSpinBox"));
         temperatureSpinBox->setReadOnly(true);
+        temperatureSpinBox->setMinimum(-4096);
         temperatureSpinBox->setMaximum(4096);
 
         verticalLayout_4->addWidget(temperatureSpinBox);
@@ -500,8 +522,8 @@ public:
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(dutySpinBox->sizePolicy().hasHeightForWidth());
         dutySpinBox->setSizePolicy(sizePolicy3);
-        dutySpinBox->setMinimum(0);
-        dutySpinBox->setMaximum(3000);
+        dutySpinBox->setMinimum(2);
+        dutySpinBox->setMaximum(1000000);
 
         verticalLayout_4->addWidget(dutySpinBox);
 
@@ -512,7 +534,7 @@ public:
 
         targetSpeedSpinBox = new QSpinBox(frame);
         targetSpeedSpinBox->setObjectName(QStringLiteral("targetSpeedSpinBox"));
-        targetSpeedSpinBox->setMaximum(8000);
+        targetSpeedSpinBox->setMaximum(10100);
 
         verticalLayout_4->addWidget(targetSpeedSpinBox);
 
@@ -535,6 +557,16 @@ public:
         verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_3->addItem(verticalSpacer_3);
+
+        dt = new QSpinBox(frame);
+        dt->setObjectName(QStringLiteral("dt"));
+
+        verticalLayout_3->addWidget(dt);
+
+        repeateBtn = new QPushButton(frame);
+        repeateBtn->setObjectName(QStringLiteral("repeateBtn"));
+
+        verticalLayout_3->addWidget(repeateBtn);
 
         lcdNumber = new QLCDNumber(frame);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
@@ -793,6 +825,8 @@ public:
         menuLine_select->addAction(actionBus_voltage);
         menuLine_select->addSeparator();
         menuLine_select->addAction(actionTemperatrue);
+        menuLine_select->addSeparator();
+        menuLine_select->addAction(actionMacCurrent);
         menuDockwidget->addAction(actionSystem_config);
         menuDockwidget->addSeparator();
         menuDockwidget->addAction(actionCurve_config);
@@ -827,6 +861,7 @@ public:
         actionCurrent2->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\346\265\201", 0));
         actionBus_voltage2->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\345\216\213", 0));
         actionTemperatrue->setText(QApplication::translate("MainWindow", "Temperatrue", 0));
+        actionMacCurrent->setText(QApplication::translate("MainWindow", "\346\234\200\345\244\247\347\224\265\346\265\201", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Tab 2", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
@@ -978,13 +1013,15 @@ public:
         QTableWidgetItem *___qtablewidgetitem73 = tableWidget->verticalHeaderItem(71);
         ___qtablewidgetitem73->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\345\276\256\345\210\206\346\264\227\346\274\261", 0));
         targetimage->setText(QString());
+        label_18->setText(QApplication::translate("MainWindow", "\346\234\200\345\244\247\347\224\265\346\265\201", 0));
         label_16->setText(QApplication::translate("MainWindow", "\346\270\251\345\272\246\357\274\210\347\240\201\345\200\274\357\274\211", 0));
         label_17->setText(QApplication::translate("MainWindow", "\346\265\213\351\207\217\347\224\265\346\234\272\350\275\254\351\200\237", 0));
         label_15->setText(QApplication::translate("MainWindow", "\346\212\245\350\255\246\344\277\241\346\201\257", 0));
-        label_13->setText(QApplication::translate("MainWindow", " \345\215\240\347\251\272\346\257\224\357\274\210-561~561\357\274\211", 0));
+        label_13->setText(QApplication::translate("MainWindow", "RepeatPeriod", 0));
         label_14->setText(QApplication::translate("MainWindow", "\347\233\256\346\240\207\350\275\254\351\200\237", 0));
         SendBtn->setText(QApplication::translate("MainWindow", "Start", 0));
         clearButton->setText(QApplication::translate("MainWindow", "clear", 0));
+        repeateBtn->setText(QApplication::translate("MainWindow", "Repeat", 0));
         label_11->setText(QApplication::translate("MainWindow", "Dutysetting", 0));
         label_12->setText(QApplication::translate("MainWindow", "TargetSpeedSetting", 0));
         menuHelp->setTitle(QApplication::translate("MainWindow", "\345\270\256\345\212\251", 0));

@@ -147,9 +147,7 @@ void Serialport::unpackData()
                     if(readComData[headpos + length - 2] == (char)0xa5)
                     {
                         key = readComData.mid(headpos, length);
-//                        mutex.lock();
                         readStringQ.enqueue(key);
-//                        mutex.unlock();
                         readComData = readComData.right(readComData.length() - length - headpos);
                         headpos = readComData.indexOf(packageHead);
                     }

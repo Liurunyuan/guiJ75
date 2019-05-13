@@ -589,6 +589,23 @@
            </spacer>
           </item>
           <item>
+           <widget class="QLabel" name="label_18">
+            <property name="text">
+             <string>最大电流</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="maxCurrent">
+            <property name="minimum">
+             <double>0.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>1000000.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="label_16">
             <property name="text">
              <string>温度（码值）</string>
@@ -599,6 +616,9 @@
            <widget class="QSpinBox" name="temperatureSpinBox">
             <property name="readOnly">
              <bool>true</bool>
+            </property>
+            <property name="minimum">
+             <number>-4096</number>
             </property>
             <property name="maximum">
              <number>4096</number>
@@ -636,7 +656,7 @@
           <item>
            <widget class="QLabel" name="label_13">
             <property name="text">
-             <string> 占空比（-561~561）</string>
+             <string>RepeatPeriod</string>
             </property>
            </widget>
           </item>
@@ -649,10 +669,10 @@
              </sizepolicy>
             </property>
             <property name="minimum">
-             <number>0</number>
+             <number>2</number>
             </property>
             <property name="maximum">
-             <number>3000</number>
+             <number>1000000</number>
             </property>
            </widget>
           </item>
@@ -666,7 +686,7 @@
           <item>
            <widget class="QSpinBox" name="targetSpeedSpinBox">
             <property name="maximum">
-             <number>8000</number>
+             <number>10100</number>
             </property>
            </widget>
           </item>
@@ -700,6 +720,16 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="dt"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="repeateBtn">
+            <property name="text">
+             <string>Repeat</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLCDNumber" name="lcdNumber">
@@ -779,6 +809,8 @@
     <addaction name="actionBus_voltage"/>
     <addaction name="separator"/>
     <addaction name="actionTemperatrue"/>
+    <addaction name="separator"/>
+    <addaction name="actionMacCurrent"/>
    </widget>
    <widget class="QMenu" name="menuDockwidget">
     <property name="title">
@@ -1232,6 +1264,14 @@
    </property>
    <property name="text">
     <string>Temperatrue</string>
+   </property>
+  </action>
+  <action name="actionMacCurrent">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>最大电流</string>
    </property>
   </action>
  </widget>
