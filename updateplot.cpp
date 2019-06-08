@@ -16,17 +16,18 @@ updatePlot::~updatePlot()
 
 void updatePlot::run()
 {
+    QThread::msleep(20);
     while(!isInterruptionRequested())
     {
         if(MainWindow::getInstance()->needToUnpack() == true)
         {
-            mutex.lock();
+//            mutex.lock();
             MainWindow::getInstance()->unpack();
-            mutex.unlock();
+//            mutex.unlock();
         }
-        if(MainWindow::getInstance()->needToUnpack2() == true)
-        {
-            MainWindow::getInstance()->unpack2();
-        }
+//        if(MainWindow::getInstance()->needToUnpack2() == true)
+//        {
+//            MainWindow::getInstance()->unpack2();
+//        }
     }
 }

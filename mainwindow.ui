@@ -52,7 +52,7 @@
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -80,26 +80,6 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="tab_2">
-        <attribute name="title">
-         <string>Tab 2</string>
-        </attribute>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QCustomPlot" name="widget2" native="true">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>250</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
       </widget>
       <widget class="QFrame" name="frame">
        <property name="sizePolicy">
@@ -122,453 +102,36 @@
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QTableWidget" name="tableWidget">
-          <property name="minimumSize">
-           <size>
-            <width>430</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>407</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="baseSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="locale">
-           <locale language="Chinese" country="China"/>
-          </property>
-          <property name="autoScroll">
-           <bool>true</bool>
-          </property>
-          <property name="gridStyle">
-           <enum>Qt::DotLine</enum>
-          </property>
-          <attribute name="horizontalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <row>
-           <property name="text">
-            <string>左前最大操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第1操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第2操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第3操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第4操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第5操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第6操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第7操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第8操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第9操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第1操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第2操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第3操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第4操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第5操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第6操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第7操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第8操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第9操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后最大操纵力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前最大操作行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第1操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第2操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第3操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第4操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第5操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第6操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第7操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第8操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前第9操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第1操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第2操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第3操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第4操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第5操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第6操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第7操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第8操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后第9操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后最大操纵行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前启动力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后启动力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前区域前推摩擦力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前区域后拉摩擦力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后区域前推摩擦力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后区域后拉摩擦力</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前空行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后空行程</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>阻尼系数</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>（自振）频率</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>等效质量（惯量）</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>左前配平范围</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>右后配平范围</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>配平目标值</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>配平/改平指令</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>时间延迟</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>状态指令（随动，冰冻，主动）</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>内环比例系数上限</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>内环比例系数上限对应误差门限</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>内环积分系数</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>内环微分系数</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>内环前馈系数</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>内环积分起始误差下限</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>内环积分起始误差上限</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>内环积分饱和上限</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>内环积分饱和下限</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>中环比例系数</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>中环积分系数</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>中环微分系数</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>外环比例系数</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>外环积分系数</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>外环微分洗漱</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>俯仰参数</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>横滚参数</string>
-           </property>
-          </column>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QLineEdit" name="lineEdit"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_2"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_3"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_4"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_5"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_6"/>
+          </item>
+         </layout>
         </item>
         <item>
-         <spacer name="verticalSpacer_2">
+         <spacer name="horizontalSpacer">
           <property name="orientation">
-           <enum>Qt::Vertical</enum>
+           <enum>Qt::Horizontal</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>20</width>
-            <height>22</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="targetimage">
-          <property name="minimumSize">
-           <size>
-            <width>250</width>
-            <height>250</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>250</width>
-            <height>250</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>22</height>
+            <width>40</width>
+            <height>20</height>
            </size>
           </property>
          </spacer>
@@ -576,59 +139,9 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <spacer name="verticalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_18">
-            <property name="text">
-             <string>最大电流</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QDoubleSpinBox" name="maxCurrent">
-            <property name="minimum">
-             <double>0.000000000000000</double>
-            </property>
-            <property name="maximum">
-             <double>1000000.000000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_16">
-            <property name="text">
-             <string>温度（码值）</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="temperatureSpinBox">
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="minimum">
-             <number>-4096</number>
-            </property>
-            <property name="maximum">
-             <number>4096</number>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QLabel" name="label_17">
             <property name="text">
-             <string>测量电机转速</string>
+             <string>电机转速反馈显示</string>
             </property>
            </widget>
           </item>
@@ -640,9 +153,26 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>输出占空比显示</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="currentDuty">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="maximum">
+             <number>2000</number>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="label_15">
             <property name="text">
-             <string>报警信息</string>
+             <string>报警信息显示</string>
             </property>
            </widget>
           </item>
@@ -654,39 +184,19 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_13">
-            <property name="text">
-             <string>RepeatPeriod</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="dutySpinBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimum">
-             <number>2</number>
-            </property>
-            <property name="maximum">
-             <number>1000000</number>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QLabel" name="label_14">
             <property name="text">
-             <string>目标转速</string>
+             <string>目标转速设置</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QSpinBox" name="targetSpeedSpinBox">
+            <property name="minimum">
+             <number>500</number>
+            </property>
             <property name="maximum">
-             <number>10100</number>
+             <number>10000</number>
             </property>
            </widget>
           </item>
@@ -698,13 +208,6 @@
            <widget class="QPushButton" name="SendBtn">
             <property name="text">
              <string>Start</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="clearButton">
-            <property name="text">
-             <string>clear</string>
             </property>
            </widget>
           </item>
@@ -722,57 +225,15 @@
            </spacer>
           </item>
           <item>
-           <widget class="QSpinBox" name="dt"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="repeateBtn">
+           <widget class="QPushButton" name="clearButton">
             <property name="text">
-             <string>Repeat</string>
+             <string>clear</string>
             </property>
            </widget>
-          </item>
-          <item>
-           <widget class="QLCDNumber" name="lcdNumber">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_11">
-            <property name="text">
-             <string>Dutysetting</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="duty"/>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_12">
-            <property name="text">
-             <string>TargetSpeedSetting</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="targetSpeed"/>
           </item>
          </layout>
         </item>
        </layout>
-       <zorder>targetimage</zorder>
-       <zorder>tableWidget</zorder>
-       <zorder>verticalSpacer</zorder>
       </widget>
      </widget>
     </item>
@@ -796,21 +257,19 @@
    </widget>
    <widget class="QMenu" name="menuLine_select">
     <property name="title">
-     <string>俯仰曲线</string>
+     <string>曲线选择</string>
     </property>
-    <addaction name="actionDisplacement"/>
+    <addaction name="actionTargetSpeed"/>
     <addaction name="separator"/>
     <addaction name="actionMotor_speed"/>
     <addaction name="separator"/>
-    <addaction name="actionMotor_accel"/>
+    <addaction name="actionDuty"/>
     <addaction name="separator"/>
-    <addaction name="actionCurrent"/>
+    <addaction name="actionCurrent_2"/>
     <addaction name="separator"/>
-    <addaction name="actionBus_voltage"/>
+    <addaction name="actionTemp"/>
     <addaction name="separator"/>
-    <addaction name="actionTemperatrue"/>
-    <addaction name="separator"/>
-    <addaction name="actionMacCurrent"/>
+    <addaction name="actionVol"/>
    </widget>
    <widget class="QMenu" name="menuDockwidget">
     <property name="title">
@@ -820,18 +279,7 @@
     <addaction name="separator"/>
     <addaction name="actionCurve_config"/>
    </widget>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>横滚曲线</string>
-    </property>
-    <addaction name="actionDisplacement2"/>
-    <addaction name="actionMotor_speed2"/>
-    <addaction name="actionMotor_accel2"/>
-    <addaction name="actionCurrent2"/>
-    <addaction name="actionBus_voltage2"/>
-   </widget>
    <addaction name="menuLine_select"/>
-   <addaction name="menu"/>
    <addaction name="menuDockwidget"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -980,7 +428,7 @@
       <item>
        <widget class="QCheckBox" name="checkBox_2">
         <property name="text">
-         <string>显示曲线1</string>
+         <string>显示电流</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -990,7 +438,7 @@
       <item>
        <widget class="QCheckBox" name="checkBox_3">
         <property name="text">
-         <string>显示曲线2</string>
+         <string>显示转速</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -1000,7 +448,7 @@
       <item>
        <widget class="QCheckBox" name="checkBox_4">
         <property name="text">
-         <string>显示曲线3</string>
+         <string>显示目标转速</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -1010,7 +458,7 @@
       <item>
        <widget class="QCheckBox" name="checkBox_5">
         <property name="text">
-         <string>显示曲线4</string>
+         <string>显示占空比</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -1018,115 +466,6 @@
        </widget>
       </item>
      </layout>
-    </widget>
-   </widget>
-  </widget>
-  <widget class="QDockWidget" name="xComConfigDockWidget">
-   <property name="allowedAreas">
-    <set>Qt::AllDockWidgetAreas</set>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>1</number>
-   </attribute>
-   <widget class="QWidget" name="dockWidgetContents_3">
-    <widget class="QWidget" name="layoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>142</width>
-       <height>181</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>COM</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="comBox_2"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string>BAUD</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QComboBox" name="baudBox_2">
-        <item>
-         <property name="text">
-          <string>115200</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string>BAUD</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QComboBox" name="stopBox_2">
-        <item>
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>DATA</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QComboBox" name="dataBox_2">
-        <item>
-         <property name="text">
-          <string>8</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>CHECK</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QComboBox" name="checkBox_6">
-        <item>
-         <property name="text">
-          <string>none</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QPushButton" name="openButton_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>190</y>
-       <width>131</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>open</string>
-     </property>
     </widget>
    </widget>
   </widget>
@@ -1141,17 +480,6 @@
     <string>about how to use</string>
    </property>
   </action>
-  <action name="actionDisplacement">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>位移曲线</string>
-   </property>
-  </action>
   <action name="actionMotor_speed">
    <property name="checkable">
     <bool>true</bool>
@@ -1161,39 +489,6 @@
    </property>
    <property name="text">
     <string>电机转速曲线</string>
-   </property>
-  </action>
-  <action name="actionMotor_accel">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>电机加速度曲线</string>
-   </property>
-  </action>
-  <action name="actionCurrent">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>母线电压</string>
-   </property>
-  </action>
-  <action name="actionBus_voltage">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>母线电流</string>
    </property>
   </action>
   <action name="actionSystem_config">
@@ -1218,60 +513,44 @@
     <string>curve config</string>
    </property>
   </action>
-  <action name="actionDisplacement2">
+  <action name="actionDuty">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>位移曲线</string>
+    <string>当前占空比</string>
    </property>
   </action>
-  <action name="actionMotor_speed2">
+  <action name="actionTargetSpeed">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>电机转速曲线</string>
+    <string>指令转速</string>
    </property>
   </action>
-  <action name="actionMotor_accel2">
+  <action name="actionCurrent_2">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>电机加速度曲线</string>
+    <string>电流</string>
    </property>
   </action>
-  <action name="actionCurrent2">
+  <action name="actionTemp">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>母线电流</string>
+    <string>温度</string>
    </property>
   </action>
-  <action name="actionBus_voltage2">
+  <action name="actionVol">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>母线电压</string>
-   </property>
-  </action>
-  <action name="actionTemperatrue">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Temperatrue</string>
-   </property>
-  </action>
-  <action name="actionMacCurrent">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>最大电流</string>
+    <string>电压</string>
    </property>
   </action>
  </widget>

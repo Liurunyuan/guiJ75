@@ -71,7 +71,9 @@ void Serialport::readData()
     QByteArray tmp = this->readAll();
     if(!tmp.isEmpty())
     {
+           mutex.lock();
         readComData.append(tmp);
+           mutex.unlock();
     }
 }
 
@@ -132,14 +134,14 @@ void Serialport::unpackData()
     headpos = readComData.indexOf(packageHead);
     while(headpos != -1)
     {
-        if((readComData.length() - headpos) > 10)
+        if((readComData.length() - headpos) > 13)
         {
             length = readComData[headpos + 2] * 3 + 9;
-            if(length < 12)
-            {
-                readComData = readComData.right(readComData.length() - length - headpos);
-                return;
-            }
+//            if(length < 12)
+//            {
+//                readComData = readComData.right(readComData.length() - length - headpos);
+//                return;
+//            }
             if(length <= (readComData.length() - headpos))
             {
                 if(readComData[headpos + length - 1] == (char)0xa5)
@@ -147,19 +149,25 @@ void Serialport::unpackData()
                     if(readComData[headpos + length - 2] == (char)0xa5)
                     {
                         key = readComData.mid(headpos, length);
+                        mutex.lock();
                         readStringQ.enqueue(key);
                         readComData = readComData.right(readComData.length() - length - headpos);
+                        mutex.unlock();
                         headpos = readComData.indexOf(packageHead);
                     }
                     else
                     {
+                        mutex.lock();
                         readComData = readComData.right(readComData.length() - 1);
+                        mutex.unlock();
                         return;
                     }
                 }
                 else
                 {
+                    mutex.lock();
                     readComData = readComData.right(readComData.length() - 1);
+                    mutex.unlock();
                     return;
                 }
             }

@@ -9,7 +9,6 @@
 #ifndef UI_MAINWINDOW_H
 #define UI_MAINWINDOW_H
 
-#include <QtCore/QLocale>
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
@@ -17,12 +16,10 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDockWidget>
-#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -34,7 +31,6 @@
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -46,20 +42,14 @@ class Ui_MainWindow
 {
 public:
     QAction *actionAbout_how_to_use;
-    QAction *actionDisplacement;
     QAction *actionMotor_speed;
-    QAction *actionMotor_accel;
-    QAction *actionCurrent;
-    QAction *actionBus_voltage;
     QAction *actionSystem_config;
     QAction *actionCurve_config;
-    QAction *actionDisplacement2;
-    QAction *actionMotor_speed2;
-    QAction *actionMotor_accel2;
-    QAction *actionCurrent2;
-    QAction *actionBus_voltage2;
-    QAction *actionTemperatrue;
-    QAction *actionMacCurrent;
+    QAction *actionDuty;
+    QAction *actionTargetSpeed;
+    QAction *actionCurrent_2;
+    QAction *actionTemp;
+    QAction *actionVol;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QSplitter *splitter;
@@ -67,45 +57,33 @@ public:
     QWidget *tab;
     QVBoxLayout *verticalLayout_2;
     QCustomPlot *widget;
-    QWidget *tab_2;
-    QHBoxLayout *horizontalLayout_2;
-    QCustomPlot *widget2;
     QFrame *frame;
     QHBoxLayout *horizontalLayout;
-    QTableWidget *tableWidget;
-    QSpacerItem *verticalSpacer_2;
-    QLabel *targetimage;
-    QSpacerItem *verticalSpacer;
+    QVBoxLayout *verticalLayout_5;
+    QLineEdit *lineEdit;
+    QLineEdit *lineEdit_2;
+    QLineEdit *lineEdit_3;
+    QLineEdit *lineEdit_4;
+    QLineEdit *lineEdit_5;
+    QLineEdit *lineEdit_6;
+    QSpacerItem *horizontalSpacer;
     QVBoxLayout *verticalLayout_4;
-    QSpacerItem *verticalSpacer_4;
-    QLabel *label_18;
-    QDoubleSpinBox *maxCurrent;
-    QLabel *label_16;
-    QSpinBox *temperatureSpinBox;
     QLabel *label_17;
     QSpinBox *MotorSpeed;
+    QLabel *label_6;
+    QSpinBox *currentDuty;
     QLabel *label_15;
     QLineEdit *alarmInfo;
-    QLabel *label_13;
-    QSpinBox *dutySpinBox;
     QLabel *label_14;
     QSpinBox *targetSpeedSpinBox;
     QVBoxLayout *verticalLayout_3;
     QPushButton *SendBtn;
-    QPushButton *clearButton;
     QSpacerItem *verticalSpacer_3;
-    QSpinBox *dt;
-    QPushButton *repeateBtn;
-    QLCDNumber *lcdNumber;
-    QLabel *label_11;
-    QLineEdit *duty;
-    QLabel *label_12;
-    QLineEdit *targetSpeed;
+    QPushButton *clearButton;
     QMenuBar *menuBar;
     QMenu *menuHelp;
     QMenu *menuLine_select;
     QMenu *menuDockwidget;
-    QMenu *menu;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
     QDockWidget *dockWidget;
@@ -131,21 +109,6 @@ public:
     QCheckBox *checkBox_3;
     QCheckBox *checkBox_4;
     QCheckBox *checkBox_5;
-    QDockWidget *xComConfigDockWidget;
-    QWidget *dockWidgetContents_3;
-    QWidget *layoutWidget_2;
-    QGridLayout *gridLayout_3;
-    QLabel *label_6;
-    QComboBox *comBox_2;
-    QLabel *label_7;
-    QComboBox *baudBox_2;
-    QLabel *label_8;
-    QComboBox *stopBox_2;
-    QLabel *label_9;
-    QComboBox *dataBox_2;
-    QLabel *label_10;
-    QComboBox *checkBox_6;
-    QPushButton *openButton_2;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -159,26 +122,10 @@ public:
         actionAbout_how_to_use->setObjectName(QStringLiteral("actionAbout_how_to_use"));
         actionAbout_how_to_use->setCheckable(true);
         actionAbout_how_to_use->setChecked(false);
-        actionDisplacement = new QAction(MainWindow);
-        actionDisplacement->setObjectName(QStringLiteral("actionDisplacement"));
-        actionDisplacement->setCheckable(true);
-        actionDisplacement->setChecked(false);
         actionMotor_speed = new QAction(MainWindow);
         actionMotor_speed->setObjectName(QStringLiteral("actionMotor_speed"));
         actionMotor_speed->setCheckable(true);
         actionMotor_speed->setChecked(false);
-        actionMotor_accel = new QAction(MainWindow);
-        actionMotor_accel->setObjectName(QStringLiteral("actionMotor_accel"));
-        actionMotor_accel->setCheckable(true);
-        actionMotor_accel->setChecked(false);
-        actionCurrent = new QAction(MainWindow);
-        actionCurrent->setObjectName(QStringLiteral("actionCurrent"));
-        actionCurrent->setCheckable(true);
-        actionCurrent->setChecked(false);
-        actionBus_voltage = new QAction(MainWindow);
-        actionBus_voltage->setObjectName(QStringLiteral("actionBus_voltage"));
-        actionBus_voltage->setCheckable(true);
-        actionBus_voltage->setChecked(false);
         actionSystem_config = new QAction(MainWindow);
         actionSystem_config->setObjectName(QStringLiteral("actionSystem_config"));
         actionSystem_config->setCheckable(true);
@@ -187,27 +134,21 @@ public:
         actionCurve_config->setObjectName(QStringLiteral("actionCurve_config"));
         actionCurve_config->setCheckable(true);
         actionCurve_config->setChecked(true);
-        actionDisplacement2 = new QAction(MainWindow);
-        actionDisplacement2->setObjectName(QStringLiteral("actionDisplacement2"));
-        actionDisplacement2->setCheckable(true);
-        actionMotor_speed2 = new QAction(MainWindow);
-        actionMotor_speed2->setObjectName(QStringLiteral("actionMotor_speed2"));
-        actionMotor_speed2->setCheckable(true);
-        actionMotor_accel2 = new QAction(MainWindow);
-        actionMotor_accel2->setObjectName(QStringLiteral("actionMotor_accel2"));
-        actionMotor_accel2->setCheckable(true);
-        actionCurrent2 = new QAction(MainWindow);
-        actionCurrent2->setObjectName(QStringLiteral("actionCurrent2"));
-        actionCurrent2->setCheckable(true);
-        actionBus_voltage2 = new QAction(MainWindow);
-        actionBus_voltage2->setObjectName(QStringLiteral("actionBus_voltage2"));
-        actionBus_voltage2->setCheckable(true);
-        actionTemperatrue = new QAction(MainWindow);
-        actionTemperatrue->setObjectName(QStringLiteral("actionTemperatrue"));
-        actionTemperatrue->setCheckable(true);
-        actionMacCurrent = new QAction(MainWindow);
-        actionMacCurrent->setObjectName(QStringLiteral("actionMacCurrent"));
-        actionMacCurrent->setCheckable(true);
+        actionDuty = new QAction(MainWindow);
+        actionDuty->setObjectName(QStringLiteral("actionDuty"));
+        actionDuty->setCheckable(true);
+        actionTargetSpeed = new QAction(MainWindow);
+        actionTargetSpeed->setObjectName(QStringLiteral("actionTargetSpeed"));
+        actionTargetSpeed->setCheckable(true);
+        actionCurrent_2 = new QAction(MainWindow);
+        actionCurrent_2->setObjectName(QStringLiteral("actionCurrent_2"));
+        actionCurrent_2->setCheckable(true);
+        actionTemp = new QAction(MainWindow);
+        actionTemp->setObjectName(QStringLiteral("actionTemp"));
+        actionTemp->setCheckable(true);
+        actionVol = new QAction(MainWindow);
+        actionVol->setObjectName(QStringLiteral("actionVol"));
+        actionVol->setCheckable(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -246,24 +187,6 @@ public:
         verticalLayout_2->addWidget(widget);
 
         tabWidget->addTab(tab, QString());
-        tab_2 = new QWidget();
-        tab_2->setObjectName(QStringLiteral("tab_2"));
-        horizontalLayout_2 = new QHBoxLayout(tab_2);
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        widget2 = new QCustomPlot(tab_2);
-        widget2->setObjectName(QStringLiteral("widget2"));
-        widget2->setEnabled(true);
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(250);
-        sizePolicy2.setHeightForWidth(widget2->sizePolicy().hasHeightForWidth());
-        widget2->setSizePolicy(sizePolicy2);
-
-        horizontalLayout_2->addWidget(widget2);
-
-        tabWidget->addTab(tab_2, QString());
         splitter->addWidget(tabWidget);
         frame = new QFrame(splitter);
         frame->setObjectName(QStringLiteral("frame"));
@@ -276,218 +199,49 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        tableWidget = new QTableWidget(frame);
-        if (tableWidget->columnCount() < 2)
-            tableWidget->setColumnCount(2);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        if (tableWidget->rowCount() < 72)
-            tableWidget->setRowCount(72);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem2);
-        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(1, __qtablewidgetitem3);
-        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(2, __qtablewidgetitem4);
-        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(3, __qtablewidgetitem5);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(4, __qtablewidgetitem6);
-        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(5, __qtablewidgetitem7);
-        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(6, __qtablewidgetitem8);
-        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(7, __qtablewidgetitem9);
-        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(8, __qtablewidgetitem10);
-        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(9, __qtablewidgetitem11);
-        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(10, __qtablewidgetitem12);
-        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(11, __qtablewidgetitem13);
-        QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(12, __qtablewidgetitem14);
-        QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(13, __qtablewidgetitem15);
-        QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(14, __qtablewidgetitem16);
-        QTableWidgetItem *__qtablewidgetitem17 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(15, __qtablewidgetitem17);
-        QTableWidgetItem *__qtablewidgetitem18 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(16, __qtablewidgetitem18);
-        QTableWidgetItem *__qtablewidgetitem19 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(17, __qtablewidgetitem19);
-        QTableWidgetItem *__qtablewidgetitem20 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(18, __qtablewidgetitem20);
-        QTableWidgetItem *__qtablewidgetitem21 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(19, __qtablewidgetitem21);
-        QTableWidgetItem *__qtablewidgetitem22 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(20, __qtablewidgetitem22);
-        QTableWidgetItem *__qtablewidgetitem23 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(21, __qtablewidgetitem23);
-        QTableWidgetItem *__qtablewidgetitem24 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(22, __qtablewidgetitem24);
-        QTableWidgetItem *__qtablewidgetitem25 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(23, __qtablewidgetitem25);
-        QTableWidgetItem *__qtablewidgetitem26 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(24, __qtablewidgetitem26);
-        QTableWidgetItem *__qtablewidgetitem27 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(25, __qtablewidgetitem27);
-        QTableWidgetItem *__qtablewidgetitem28 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(26, __qtablewidgetitem28);
-        QTableWidgetItem *__qtablewidgetitem29 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(27, __qtablewidgetitem29);
-        QTableWidgetItem *__qtablewidgetitem30 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(28, __qtablewidgetitem30);
-        QTableWidgetItem *__qtablewidgetitem31 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(29, __qtablewidgetitem31);
-        QTableWidgetItem *__qtablewidgetitem32 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(30, __qtablewidgetitem32);
-        QTableWidgetItem *__qtablewidgetitem33 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(31, __qtablewidgetitem33);
-        QTableWidgetItem *__qtablewidgetitem34 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(32, __qtablewidgetitem34);
-        QTableWidgetItem *__qtablewidgetitem35 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(33, __qtablewidgetitem35);
-        QTableWidgetItem *__qtablewidgetitem36 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(34, __qtablewidgetitem36);
-        QTableWidgetItem *__qtablewidgetitem37 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(35, __qtablewidgetitem37);
-        QTableWidgetItem *__qtablewidgetitem38 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(36, __qtablewidgetitem38);
-        QTableWidgetItem *__qtablewidgetitem39 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(37, __qtablewidgetitem39);
-        QTableWidgetItem *__qtablewidgetitem40 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(38, __qtablewidgetitem40);
-        QTableWidgetItem *__qtablewidgetitem41 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(39, __qtablewidgetitem41);
-        QTableWidgetItem *__qtablewidgetitem42 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(40, __qtablewidgetitem42);
-        QTableWidgetItem *__qtablewidgetitem43 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(41, __qtablewidgetitem43);
-        QTableWidgetItem *__qtablewidgetitem44 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(42, __qtablewidgetitem44);
-        QTableWidgetItem *__qtablewidgetitem45 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(43, __qtablewidgetitem45);
-        QTableWidgetItem *__qtablewidgetitem46 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(44, __qtablewidgetitem46);
-        QTableWidgetItem *__qtablewidgetitem47 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(45, __qtablewidgetitem47);
-        QTableWidgetItem *__qtablewidgetitem48 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(46, __qtablewidgetitem48);
-        QTableWidgetItem *__qtablewidgetitem49 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(47, __qtablewidgetitem49);
-        QTableWidgetItem *__qtablewidgetitem50 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(48, __qtablewidgetitem50);
-        QTableWidgetItem *__qtablewidgetitem51 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(49, __qtablewidgetitem51);
-        QTableWidgetItem *__qtablewidgetitem52 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(50, __qtablewidgetitem52);
-        QTableWidgetItem *__qtablewidgetitem53 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(51, __qtablewidgetitem53);
-        QTableWidgetItem *__qtablewidgetitem54 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(52, __qtablewidgetitem54);
-        QTableWidgetItem *__qtablewidgetitem55 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(53, __qtablewidgetitem55);
-        QTableWidgetItem *__qtablewidgetitem56 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(54, __qtablewidgetitem56);
-        QTableWidgetItem *__qtablewidgetitem57 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(55, __qtablewidgetitem57);
-        QTableWidgetItem *__qtablewidgetitem58 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(56, __qtablewidgetitem58);
-        QTableWidgetItem *__qtablewidgetitem59 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(57, __qtablewidgetitem59);
-        QTableWidgetItem *__qtablewidgetitem60 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(58, __qtablewidgetitem60);
-        QTableWidgetItem *__qtablewidgetitem61 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(59, __qtablewidgetitem61);
-        QTableWidgetItem *__qtablewidgetitem62 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(60, __qtablewidgetitem62);
-        QTableWidgetItem *__qtablewidgetitem63 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(61, __qtablewidgetitem63);
-        QTableWidgetItem *__qtablewidgetitem64 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(62, __qtablewidgetitem64);
-        QTableWidgetItem *__qtablewidgetitem65 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(63, __qtablewidgetitem65);
-        QTableWidgetItem *__qtablewidgetitem66 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(64, __qtablewidgetitem66);
-        QTableWidgetItem *__qtablewidgetitem67 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(65, __qtablewidgetitem67);
-        QTableWidgetItem *__qtablewidgetitem68 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(66, __qtablewidgetitem68);
-        QTableWidgetItem *__qtablewidgetitem69 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(67, __qtablewidgetitem69);
-        QTableWidgetItem *__qtablewidgetitem70 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(68, __qtablewidgetitem70);
-        QTableWidgetItem *__qtablewidgetitem71 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(69, __qtablewidgetitem71);
-        QTableWidgetItem *__qtablewidgetitem72 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(70, __qtablewidgetitem72);
-        QTableWidgetItem *__qtablewidgetitem73 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(71, __qtablewidgetitem73);
-        tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        tableWidget->setMinimumSize(QSize(430, 0));
-        tableWidget->setMaximumSize(QSize(407, 16777215));
-        tableWidget->setBaseSize(QSize(0, 0));
-        tableWidget->setLocale(QLocale(QLocale::Chinese, QLocale::China));
-        tableWidget->setAutoScroll(true);
-        tableWidget->setGridStyle(Qt::DotLine);
-        tableWidget->horizontalHeader()->setVisible(false);
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        lineEdit = new QLineEdit(frame);
+        lineEdit->setObjectName(QStringLiteral("lineEdit"));
 
-        horizontalLayout->addWidget(tableWidget);
+        verticalLayout_5->addWidget(lineEdit);
 
-        verticalSpacer_2 = new QSpacerItem(20, 22, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        lineEdit_2 = new QLineEdit(frame);
+        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
 
-        horizontalLayout->addItem(verticalSpacer_2);
+        verticalLayout_5->addWidget(lineEdit_2);
 
-        targetimage = new QLabel(frame);
-        targetimage->setObjectName(QStringLiteral("targetimage"));
-        targetimage->setMinimumSize(QSize(250, 250));
-        targetimage->setMaximumSize(QSize(250, 250));
-        targetimage->setScaledContents(true);
+        lineEdit_3 = new QLineEdit(frame);
+        lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
 
-        horizontalLayout->addWidget(targetimage);
+        verticalLayout_5->addWidget(lineEdit_3);
 
-        verticalSpacer = new QSpacerItem(20, 22, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        lineEdit_4 = new QLineEdit(frame);
+        lineEdit_4->setObjectName(QStringLiteral("lineEdit_4"));
 
-        horizontalLayout->addItem(verticalSpacer);
+        verticalLayout_5->addWidget(lineEdit_4);
+
+        lineEdit_5 = new QLineEdit(frame);
+        lineEdit_5->setObjectName(QStringLiteral("lineEdit_5"));
+
+        verticalLayout_5->addWidget(lineEdit_5);
+
+        lineEdit_6 = new QLineEdit(frame);
+        lineEdit_6->setObjectName(QStringLiteral("lineEdit_6"));
+
+        verticalLayout_5->addWidget(lineEdit_6);
+
+
+        horizontalLayout->addLayout(verticalLayout_5);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
 
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_4->addItem(verticalSpacer_4);
-
-        label_18 = new QLabel(frame);
-        label_18->setObjectName(QStringLiteral("label_18"));
-
-        verticalLayout_4->addWidget(label_18);
-
-        maxCurrent = new QDoubleSpinBox(frame);
-        maxCurrent->setObjectName(QStringLiteral("maxCurrent"));
-        maxCurrent->setMinimum(0);
-        maxCurrent->setMaximum(1e+06);
-
-        verticalLayout_4->addWidget(maxCurrent);
-
-        label_16 = new QLabel(frame);
-        label_16->setObjectName(QStringLiteral("label_16"));
-
-        verticalLayout_4->addWidget(label_16);
-
-        temperatureSpinBox = new QSpinBox(frame);
-        temperatureSpinBox->setObjectName(QStringLiteral("temperatureSpinBox"));
-        temperatureSpinBox->setReadOnly(true);
-        temperatureSpinBox->setMinimum(-4096);
-        temperatureSpinBox->setMaximum(4096);
-
-        verticalLayout_4->addWidget(temperatureSpinBox);
-
         label_17 = new QLabel(frame);
         label_17->setObjectName(QStringLiteral("label_17"));
 
@@ -498,6 +252,18 @@ public:
         MotorSpeed->setMaximum(20000);
 
         verticalLayout_4->addWidget(MotorSpeed);
+
+        label_6 = new QLabel(frame);
+        label_6->setObjectName(QStringLiteral("label_6"));
+
+        verticalLayout_4->addWidget(label_6);
+
+        currentDuty = new QSpinBox(frame);
+        currentDuty->setObjectName(QStringLiteral("currentDuty"));
+        currentDuty->setReadOnly(true);
+        currentDuty->setMaximum(2000);
+
+        verticalLayout_4->addWidget(currentDuty);
 
         label_15 = new QLabel(frame);
         label_15->setObjectName(QStringLiteral("label_15"));
@@ -510,23 +276,6 @@ public:
 
         verticalLayout_4->addWidget(alarmInfo);
 
-        label_13 = new QLabel(frame);
-        label_13->setObjectName(QStringLiteral("label_13"));
-
-        verticalLayout_4->addWidget(label_13);
-
-        dutySpinBox = new QSpinBox(frame);
-        dutySpinBox->setObjectName(QStringLiteral("dutySpinBox"));
-        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(dutySpinBox->sizePolicy().hasHeightForWidth());
-        dutySpinBox->setSizePolicy(sizePolicy3);
-        dutySpinBox->setMinimum(2);
-        dutySpinBox->setMaximum(1000000);
-
-        verticalLayout_4->addWidget(dutySpinBox);
-
         label_14 = new QLabel(frame);
         label_14->setObjectName(QStringLiteral("label_14"));
 
@@ -534,7 +283,8 @@ public:
 
         targetSpeedSpinBox = new QSpinBox(frame);
         targetSpeedSpinBox->setObjectName(QStringLiteral("targetSpeedSpinBox"));
-        targetSpeedSpinBox->setMaximum(10100);
+        targetSpeedSpinBox->setMinimum(500);
+        targetSpeedSpinBox->setMaximum(10000);
 
         verticalLayout_4->addWidget(targetSpeedSpinBox);
 
@@ -549,63 +299,19 @@ public:
 
         verticalLayout_3->addWidget(SendBtn);
 
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer_3);
+
         clearButton = new QPushButton(frame);
         clearButton->setObjectName(QStringLiteral("clearButton"));
 
         verticalLayout_3->addWidget(clearButton);
 
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_3->addItem(verticalSpacer_3);
-
-        dt = new QSpinBox(frame);
-        dt->setObjectName(QStringLiteral("dt"));
-
-        verticalLayout_3->addWidget(dt);
-
-        repeateBtn = new QPushButton(frame);
-        repeateBtn->setObjectName(QStringLiteral("repeateBtn"));
-
-        verticalLayout_3->addWidget(repeateBtn);
-
-        lcdNumber = new QLCDNumber(frame);
-        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
-        QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(lcdNumber->sizePolicy().hasHeightForWidth());
-        lcdNumber->setSizePolicy(sizePolicy4);
-        lcdNumber->setFrameShape(QFrame::NoFrame);
-        lcdNumber->setFrameShadow(QFrame::Raised);
-
-        verticalLayout_3->addWidget(lcdNumber);
-
-        label_11 = new QLabel(frame);
-        label_11->setObjectName(QStringLiteral("label_11"));
-
-        verticalLayout_3->addWidget(label_11);
-
-        duty = new QLineEdit(frame);
-        duty->setObjectName(QStringLiteral("duty"));
-
-        verticalLayout_3->addWidget(duty);
-
-        label_12 = new QLabel(frame);
-        label_12->setObjectName(QStringLiteral("label_12"));
-
-        verticalLayout_3->addWidget(label_12);
-
-        targetSpeed = new QLineEdit(frame);
-        targetSpeed->setObjectName(QStringLiteral("targetSpeed"));
-
-        verticalLayout_3->addWidget(targetSpeed);
-
 
         horizontalLayout->addLayout(verticalLayout_3);
 
         splitter->addWidget(frame);
-        targetimage->raise();
-        tableWidget->raise();
 
         gridLayout->addWidget(splitter, 0, 0, 1, 1);
 
@@ -619,8 +325,6 @@ public:
         menuLine_select->setObjectName(QStringLiteral("menuLine_select"));
         menuDockwidget = new QMenu(menuBar);
         menuDockwidget->setObjectName(QStringLiteral("menuDockwidget"));
-        menu = new QMenu(menuBar);
-        menu->setObjectName(QStringLiteral("menu"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -630,11 +334,11 @@ public:
         MainWindow->setStatusBar(statusBar);
         dockWidget = new QDockWidget(MainWindow);
         dockWidget->setObjectName(QStringLiteral("dockWidget"));
-        QSizePolicy sizePolicy5(QSizePolicy::Fixed, QSizePolicy::Preferred);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
-        dockWidget->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
+        dockWidget->setSizePolicy(sizePolicy2);
         dockWidget->setMinimumSize(QSize(91, 42));
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QStringLiteral("dockWidgetContents"));
@@ -739,106 +443,30 @@ public:
 
         systemconfig->setWidget(dockWidgetContents_2);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(2), systemconfig);
-        xComConfigDockWidget = new QDockWidget(MainWindow);
-        xComConfigDockWidget->setObjectName(QStringLiteral("xComConfigDockWidget"));
-        xComConfigDockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
-        dockWidgetContents_3 = new QWidget();
-        dockWidgetContents_3->setObjectName(QStringLiteral("dockWidgetContents_3"));
-        layoutWidget_2 = new QWidget(dockWidgetContents_3);
-        layoutWidget_2->setObjectName(QStringLiteral("layoutWidget_2"));
-        layoutWidget_2->setGeometry(QRect(10, 10, 142, 181));
-        gridLayout_3 = new QGridLayout(layoutWidget_2);
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setContentsMargins(11, 11, 11, 11);
-        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        gridLayout_3->setContentsMargins(0, 0, 0, 0);
-        label_6 = new QLabel(layoutWidget_2);
-        label_6->setObjectName(QStringLiteral("label_6"));
-
-        gridLayout_3->addWidget(label_6, 0, 0, 1, 1);
-
-        comBox_2 = new QComboBox(layoutWidget_2);
-        comBox_2->setObjectName(QStringLiteral("comBox_2"));
-
-        gridLayout_3->addWidget(comBox_2, 0, 1, 1, 1);
-
-        label_7 = new QLabel(layoutWidget_2);
-        label_7->setObjectName(QStringLiteral("label_7"));
-
-        gridLayout_3->addWidget(label_7, 1, 0, 1, 1);
-
-        baudBox_2 = new QComboBox(layoutWidget_2);
-        baudBox_2->setObjectName(QStringLiteral("baudBox_2"));
-
-        gridLayout_3->addWidget(baudBox_2, 1, 1, 1, 1);
-
-        label_8 = new QLabel(layoutWidget_2);
-        label_8->setObjectName(QStringLiteral("label_8"));
-
-        gridLayout_3->addWidget(label_8, 2, 0, 1, 1);
-
-        stopBox_2 = new QComboBox(layoutWidget_2);
-        stopBox_2->setObjectName(QStringLiteral("stopBox_2"));
-
-        gridLayout_3->addWidget(stopBox_2, 2, 1, 1, 1);
-
-        label_9 = new QLabel(layoutWidget_2);
-        label_9->setObjectName(QStringLiteral("label_9"));
-
-        gridLayout_3->addWidget(label_9, 3, 0, 1, 1);
-
-        dataBox_2 = new QComboBox(layoutWidget_2);
-        dataBox_2->setObjectName(QStringLiteral("dataBox_2"));
-
-        gridLayout_3->addWidget(dataBox_2, 3, 1, 1, 1);
-
-        label_10 = new QLabel(layoutWidget_2);
-        label_10->setObjectName(QStringLiteral("label_10"));
-
-        gridLayout_3->addWidget(label_10, 4, 0, 1, 1);
-
-        checkBox_6 = new QComboBox(layoutWidget_2);
-        checkBox_6->setObjectName(QStringLiteral("checkBox_6"));
-
-        gridLayout_3->addWidget(checkBox_6, 4, 1, 1, 1);
-
-        openButton_2 = new QPushButton(dockWidgetContents_3);
-        openButton_2->setObjectName(QStringLiteral("openButton_2"));
-        openButton_2->setGeometry(QRect(10, 190, 131, 31));
-        xComConfigDockWidget->setWidget(dockWidgetContents_3);
-        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), xComConfigDockWidget);
 
         menuBar->addAction(menuLine_select->menuAction());
-        menuBar->addAction(menu->menuAction());
         menuBar->addAction(menuDockwidget->menuAction());
         menuBar->addAction(menuHelp->menuAction());
         menuHelp->addAction(actionAbout_how_to_use);
         menuHelp->addSeparator();
-        menuLine_select->addAction(actionDisplacement);
+        menuLine_select->addAction(actionTargetSpeed);
         menuLine_select->addSeparator();
         menuLine_select->addAction(actionMotor_speed);
         menuLine_select->addSeparator();
-        menuLine_select->addAction(actionMotor_accel);
+        menuLine_select->addAction(actionDuty);
         menuLine_select->addSeparator();
-        menuLine_select->addAction(actionCurrent);
+        menuLine_select->addAction(actionCurrent_2);
         menuLine_select->addSeparator();
-        menuLine_select->addAction(actionBus_voltage);
+        menuLine_select->addAction(actionTemp);
         menuLine_select->addSeparator();
-        menuLine_select->addAction(actionTemperatrue);
-        menuLine_select->addSeparator();
-        menuLine_select->addAction(actionMacCurrent);
+        menuLine_select->addAction(actionVol);
         menuDockwidget->addAction(actionSystem_config);
         menuDockwidget->addSeparator();
         menuDockwidget->addAction(actionCurve_config);
-        menu->addAction(actionDisplacement2);
-        menu->addAction(actionMotor_speed2);
-        menu->addAction(actionMotor_accel2);
-        menu->addAction(actionCurrent2);
-        menu->addAction(actionBus_voltage2);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -848,186 +476,24 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         actionAbout_how_to_use->setText(QApplication::translate("MainWindow", "about how to use", 0));
-        actionDisplacement->setText(QApplication::translate("MainWindow", "\344\275\215\347\247\273\346\233\262\347\272\277", 0));
         actionMotor_speed->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\350\275\254\351\200\237\346\233\262\347\272\277", 0));
-        actionMotor_accel->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\345\212\240\351\200\237\345\272\246\346\233\262\347\272\277", 0));
-        actionCurrent->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\345\216\213", 0));
-        actionBus_voltage->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\346\265\201", 0));
         actionSystem_config->setText(QApplication::translate("MainWindow", "system config", 0));
         actionCurve_config->setText(QApplication::translate("MainWindow", "curve config", 0));
-        actionDisplacement2->setText(QApplication::translate("MainWindow", "\344\275\215\347\247\273\346\233\262\347\272\277", 0));
-        actionMotor_speed2->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\350\275\254\351\200\237\346\233\262\347\272\277", 0));
-        actionMotor_accel2->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\345\212\240\351\200\237\345\272\246\346\233\262\347\272\277", 0));
-        actionCurrent2->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\346\265\201", 0));
-        actionBus_voltage2->setText(QApplication::translate("MainWindow", "\346\257\215\347\272\277\347\224\265\345\216\213", 0));
-        actionTemperatrue->setText(QApplication::translate("MainWindow", "Temperatrue", 0));
-        actionMacCurrent->setText(QApplication::translate("MainWindow", "\346\234\200\345\244\247\347\224\265\346\265\201", 0));
+        actionDuty->setText(QApplication::translate("MainWindow", "\345\275\223\345\211\215\345\215\240\347\251\272\346\257\224", 0));
+        actionTargetSpeed->setText(QApplication::translate("MainWindow", "\346\214\207\344\273\244\350\275\254\351\200\237", 0));
+        actionCurrent_2->setText(QApplication::translate("MainWindow", "\347\224\265\346\265\201", 0));
+        actionTemp->setText(QApplication::translate("MainWindow", "\346\270\251\345\272\246", 0));
+        actionVol->setText(QApplication::translate("MainWindow", "\347\224\265\345\216\213", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Tab 2", 0));
-        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "\344\277\257\344\273\260\345\217\202\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "\346\250\252\346\273\232\345\217\202\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->verticalHeaderItem(0);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\346\234\200\345\244\247\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->verticalHeaderItem(1);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2541\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem4 = tableWidget->verticalHeaderItem(2);
-        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2542\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->verticalHeaderItem(3);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2543\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem6 = tableWidget->verticalHeaderItem(4);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2544\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem7 = tableWidget->verticalHeaderItem(5);
-        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2545\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem8 = tableWidget->verticalHeaderItem(6);
-        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2546\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem9 = tableWidget->verticalHeaderItem(7);
-        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2547\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem10 = tableWidget->verticalHeaderItem(8);
-        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2548\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem11 = tableWidget->verticalHeaderItem(9);
-        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2549\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem12 = tableWidget->verticalHeaderItem(10);
-        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2541\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem13 = tableWidget->verticalHeaderItem(11);
-        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2542\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem14 = tableWidget->verticalHeaderItem(12);
-        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2543\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem15 = tableWidget->verticalHeaderItem(13);
-        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2544\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem16 = tableWidget->verticalHeaderItem(14);
-        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2545\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem17 = tableWidget->verticalHeaderItem(15);
-        ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2546\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem18 = tableWidget->verticalHeaderItem(16);
-        ___qtablewidgetitem18->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2547\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem19 = tableWidget->verticalHeaderItem(17);
-        ___qtablewidgetitem19->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2548\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem20 = tableWidget->verticalHeaderItem(18);
-        ___qtablewidgetitem20->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2549\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem21 = tableWidget->verticalHeaderItem(19);
-        ___qtablewidgetitem21->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\346\234\200\345\244\247\346\223\215\347\272\265\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem22 = tableWidget->verticalHeaderItem(20);
-        ___qtablewidgetitem22->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\346\234\200\345\244\247\346\223\215\344\275\234\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem23 = tableWidget->verticalHeaderItem(21);
-        ___qtablewidgetitem23->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2541\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem24 = tableWidget->verticalHeaderItem(22);
-        ___qtablewidgetitem24->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2542\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem25 = tableWidget->verticalHeaderItem(23);
-        ___qtablewidgetitem25->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2543\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem26 = tableWidget->verticalHeaderItem(24);
-        ___qtablewidgetitem26->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2544\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem27 = tableWidget->verticalHeaderItem(25);
-        ___qtablewidgetitem27->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2545\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem28 = tableWidget->verticalHeaderItem(26);
-        ___qtablewidgetitem28->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2546\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem29 = tableWidget->verticalHeaderItem(27);
-        ___qtablewidgetitem29->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2547\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem30 = tableWidget->verticalHeaderItem(28);
-        ___qtablewidgetitem30->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2548\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem31 = tableWidget->verticalHeaderItem(29);
-        ___qtablewidgetitem31->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\254\2549\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem32 = tableWidget->verticalHeaderItem(30);
-        ___qtablewidgetitem32->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2541\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem33 = tableWidget->verticalHeaderItem(31);
-        ___qtablewidgetitem33->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2542\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem34 = tableWidget->verticalHeaderItem(32);
-        ___qtablewidgetitem34->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2543\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem35 = tableWidget->verticalHeaderItem(33);
-        ___qtablewidgetitem35->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2544\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem36 = tableWidget->verticalHeaderItem(34);
-        ___qtablewidgetitem36->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2545\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem37 = tableWidget->verticalHeaderItem(35);
-        ___qtablewidgetitem37->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2546\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem38 = tableWidget->verticalHeaderItem(36);
-        ___qtablewidgetitem38->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2547\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem39 = tableWidget->verticalHeaderItem(37);
-        ___qtablewidgetitem39->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2548\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem40 = tableWidget->verticalHeaderItem(38);
-        ___qtablewidgetitem40->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\254\2549\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem41 = tableWidget->verticalHeaderItem(39);
-        ___qtablewidgetitem41->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\346\234\200\345\244\247\346\223\215\347\272\265\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem42 = tableWidget->verticalHeaderItem(40);
-        ___qtablewidgetitem42->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\345\220\257\345\212\250\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem43 = tableWidget->verticalHeaderItem(41);
-        ___qtablewidgetitem43->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\345\220\257\345\212\250\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem44 = tableWidget->verticalHeaderItem(42);
-        ___qtablewidgetitem44->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\345\214\272\345\237\237\345\211\215\346\216\250\346\221\251\346\223\246\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem45 = tableWidget->verticalHeaderItem(43);
-        ___qtablewidgetitem45->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\345\214\272\345\237\237\345\220\216\346\213\211\346\221\251\346\223\246\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem46 = tableWidget->verticalHeaderItem(44);
-        ___qtablewidgetitem46->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\345\214\272\345\237\237\345\211\215\346\216\250\346\221\251\346\223\246\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem47 = tableWidget->verticalHeaderItem(45);
-        ___qtablewidgetitem47->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\345\214\272\345\237\237\345\220\216\346\213\211\346\221\251\346\223\246\345\212\233", 0));
-        QTableWidgetItem *___qtablewidgetitem48 = tableWidget->verticalHeaderItem(46);
-        ___qtablewidgetitem48->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\347\251\272\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem49 = tableWidget->verticalHeaderItem(47);
-        ___qtablewidgetitem49->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\347\251\272\350\241\214\347\250\213", 0));
-        QTableWidgetItem *___qtablewidgetitem50 = tableWidget->verticalHeaderItem(48);
-        ___qtablewidgetitem50->setText(QApplication::translate("MainWindow", "\351\230\273\345\260\274\347\263\273\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem51 = tableWidget->verticalHeaderItem(49);
-        ___qtablewidgetitem51->setText(QApplication::translate("MainWindow", "\357\274\210\350\207\252\346\214\257\357\274\211\351\242\221\347\216\207", 0));
-        QTableWidgetItem *___qtablewidgetitem52 = tableWidget->verticalHeaderItem(50);
-        ___qtablewidgetitem52->setText(QApplication::translate("MainWindow", "\347\255\211\346\225\210\350\264\250\351\207\217\357\274\210\346\203\257\351\207\217\357\274\211", 0));
-        QTableWidgetItem *___qtablewidgetitem53 = tableWidget->verticalHeaderItem(51);
-        ___qtablewidgetitem53->setText(QApplication::translate("MainWindow", "\345\267\246\345\211\215\351\205\215\345\271\263\350\214\203\345\233\264", 0));
-        QTableWidgetItem *___qtablewidgetitem54 = tableWidget->verticalHeaderItem(52);
-        ___qtablewidgetitem54->setText(QApplication::translate("MainWindow", "\345\217\263\345\220\216\351\205\215\345\271\263\350\214\203\345\233\264", 0));
-        QTableWidgetItem *___qtablewidgetitem55 = tableWidget->verticalHeaderItem(53);
-        ___qtablewidgetitem55->setText(QApplication::translate("MainWindow", "\351\205\215\345\271\263\347\233\256\346\240\207\345\200\274", 0));
-        QTableWidgetItem *___qtablewidgetitem56 = tableWidget->verticalHeaderItem(54);
-        ___qtablewidgetitem56->setText(QApplication::translate("MainWindow", "\351\205\215\345\271\263/\346\224\271\345\271\263\346\214\207\344\273\244", 0));
-        QTableWidgetItem *___qtablewidgetitem57 = tableWidget->verticalHeaderItem(55);
-        ___qtablewidgetitem57->setText(QApplication::translate("MainWindow", "\346\227\266\351\227\264\345\273\266\350\277\237", 0));
-        QTableWidgetItem *___qtablewidgetitem58 = tableWidget->verticalHeaderItem(56);
-        ___qtablewidgetitem58->setText(QApplication::translate("MainWindow", "\347\212\266\346\200\201\346\214\207\344\273\244\357\274\210\351\232\217\345\212\250\357\274\214\345\206\260\345\206\273\357\274\214\344\270\273\345\212\250\357\274\211", 0));
-        QTableWidgetItem *___qtablewidgetitem59 = tableWidget->verticalHeaderItem(57);
-        ___qtablewidgetitem59->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260\344\270\212\351\231\220", 0));
-        QTableWidgetItem *___qtablewidgetitem60 = tableWidget->verticalHeaderItem(58);
-        ___qtablewidgetitem60->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260\344\270\212\351\231\220\345\257\271\345\272\224\350\257\257\345\267\256\351\227\250\351\231\220", 0));
-        QTableWidgetItem *___qtablewidgetitem61 = tableWidget->verticalHeaderItem(59);
-        ___qtablewidgetitem61->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\347\263\273\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem62 = tableWidget->verticalHeaderItem(60);
-        ___qtablewidgetitem62->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\345\276\256\345\210\206\347\263\273\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem63 = tableWidget->verticalHeaderItem(61);
-        ___qtablewidgetitem63->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\345\211\215\351\246\210\347\263\273\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem64 = tableWidget->verticalHeaderItem(62);
-        ___qtablewidgetitem64->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\350\265\267\345\247\213\350\257\257\345\267\256\344\270\213\351\231\220", 0));
-        QTableWidgetItem *___qtablewidgetitem65 = tableWidget->verticalHeaderItem(63);
-        ___qtablewidgetitem65->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\350\265\267\345\247\213\350\257\257\345\267\256\344\270\212\351\231\220", 0));
-        QTableWidgetItem *___qtablewidgetitem66 = tableWidget->verticalHeaderItem(64);
-        ___qtablewidgetitem66->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\351\245\261\345\222\214\344\270\212\351\231\220", 0));
-        QTableWidgetItem *___qtablewidgetitem67 = tableWidget->verticalHeaderItem(65);
-        ___qtablewidgetitem67->setText(QApplication::translate("MainWindow", "\345\206\205\347\216\257\347\247\257\345\210\206\351\245\261\345\222\214\344\270\213\351\231\220", 0));
-        QTableWidgetItem *___qtablewidgetitem68 = tableWidget->verticalHeaderItem(66);
-        ___qtablewidgetitem68->setText(QApplication::translate("MainWindow", "\344\270\255\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem69 = tableWidget->verticalHeaderItem(67);
-        ___qtablewidgetitem69->setText(QApplication::translate("MainWindow", "\344\270\255\347\216\257\347\247\257\345\210\206\347\263\273\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem70 = tableWidget->verticalHeaderItem(68);
-        ___qtablewidgetitem70->setText(QApplication::translate("MainWindow", "\344\270\255\347\216\257\345\276\256\345\210\206\347\263\273\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem71 = tableWidget->verticalHeaderItem(69);
-        ___qtablewidgetitem71->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\346\257\224\344\276\213\347\263\273\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem72 = tableWidget->verticalHeaderItem(70);
-        ___qtablewidgetitem72->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\347\247\257\345\210\206\347\263\273\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem73 = tableWidget->verticalHeaderItem(71);
-        ___qtablewidgetitem73->setText(QApplication::translate("MainWindow", "\345\244\226\347\216\257\345\276\256\345\210\206\346\264\227\346\274\261", 0));
-        targetimage->setText(QString());
-        label_18->setText(QApplication::translate("MainWindow", "\346\234\200\345\244\247\347\224\265\346\265\201", 0));
-        label_16->setText(QApplication::translate("MainWindow", "\346\270\251\345\272\246\357\274\210\347\240\201\345\200\274\357\274\211", 0));
-        label_17->setText(QApplication::translate("MainWindow", "\346\265\213\351\207\217\347\224\265\346\234\272\350\275\254\351\200\237", 0));
-        label_15->setText(QApplication::translate("MainWindow", "\346\212\245\350\255\246\344\277\241\346\201\257", 0));
-        label_13->setText(QApplication::translate("MainWindow", "RepeatPeriod", 0));
-        label_14->setText(QApplication::translate("MainWindow", "\347\233\256\346\240\207\350\275\254\351\200\237", 0));
+        label_17->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\350\275\254\351\200\237\345\217\215\351\246\210\346\230\276\347\244\272", 0));
+        label_6->setText(QApplication::translate("MainWindow", "\350\276\223\345\207\272\345\215\240\347\251\272\346\257\224\346\230\276\347\244\272", 0));
+        label_15->setText(QApplication::translate("MainWindow", "\346\212\245\350\255\246\344\277\241\346\201\257\346\230\276\347\244\272", 0));
+        label_14->setText(QApplication::translate("MainWindow", "\347\233\256\346\240\207\350\275\254\351\200\237\350\256\276\347\275\256", 0));
         SendBtn->setText(QApplication::translate("MainWindow", "Start", 0));
         clearButton->setText(QApplication::translate("MainWindow", "clear", 0));
-        repeateBtn->setText(QApplication::translate("MainWindow", "Repeat", 0));
-        label_11->setText(QApplication::translate("MainWindow", "Dutysetting", 0));
-        label_12->setText(QApplication::translate("MainWindow", "TargetSpeedSetting", 0));
         menuHelp->setTitle(QApplication::translate("MainWindow", "\345\270\256\345\212\251", 0));
-        menuLine_select->setTitle(QApplication::translate("MainWindow", "\344\277\257\344\273\260\346\233\262\347\272\277", 0));
+        menuLine_select->setTitle(QApplication::translate("MainWindow", "\346\233\262\347\272\277\351\200\211\346\213\251", 0));
         menuDockwidget->setTitle(QApplication::translate("MainWindow", "\346\265\256\345\212\250\347\252\227\345\217\243", 0));
-        menu->setTitle(QApplication::translate("MainWindow", "\346\250\252\346\273\232\346\233\262\347\272\277", 0));
         label->setText(QApplication::translate("MainWindow", "COM", 0));
         label_2->setText(QApplication::translate("MainWindow", "BAUD", 0));
         baudBox->clear();
@@ -1050,32 +516,10 @@ public:
          << QApplication::translate("MainWindow", "none", 0)
         );
         openButton->setText(QApplication::translate("MainWindow", "open", 0));
-        checkBox_2->setText(QApplication::translate("MainWindow", "\346\230\276\347\244\272\346\233\262\347\272\2771", 0));
-        checkBox_3->setText(QApplication::translate("MainWindow", "\346\230\276\347\244\272\346\233\262\347\272\2772", 0));
-        checkBox_4->setText(QApplication::translate("MainWindow", "\346\230\276\347\244\272\346\233\262\347\272\2773", 0));
-        checkBox_5->setText(QApplication::translate("MainWindow", "\346\230\276\347\244\272\346\233\262\347\272\2774", 0));
-        label_6->setText(QApplication::translate("MainWindow", "COM", 0));
-        label_7->setText(QApplication::translate("MainWindow", "BAUD", 0));
-        baudBox_2->clear();
-        baudBox_2->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "115200", 0)
-        );
-        label_8->setText(QApplication::translate("MainWindow", "BAUD", 0));
-        stopBox_2->clear();
-        stopBox_2->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "1", 0)
-        );
-        label_9->setText(QApplication::translate("MainWindow", "DATA", 0));
-        dataBox_2->clear();
-        dataBox_2->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "8", 0)
-        );
-        label_10->setText(QApplication::translate("MainWindow", "CHECK", 0));
-        checkBox_6->clear();
-        checkBox_6->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "none", 0)
-        );
-        openButton_2->setText(QApplication::translate("MainWindow", "open", 0));
+        checkBox_2->setText(QApplication::translate("MainWindow", "\346\230\276\347\244\272\347\224\265\346\265\201", 0));
+        checkBox_3->setText(QApplication::translate("MainWindow", "\346\230\276\347\244\272\350\275\254\351\200\237", 0));
+        checkBox_4->setText(QApplication::translate("MainWindow", "\346\230\276\347\244\272\347\233\256\346\240\207\350\275\254\351\200\237", 0));
+        checkBox_5->setText(QApplication::translate("MainWindow", "\346\230\276\347\244\272\345\215\240\347\251\272\346\257\224", 0));
     } // retranslateUi
 
 };

@@ -1,0 +1,15 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\singleton.o
+./release\subject.o
+./release\observer.o
+./release\client.o
+./release\serialport.o
+./release\qcustomplot.o
+./release\mythread.o
+./release\updateplot.o
+./release\moc_mainwindow.o
+./release\moc_serialport.o
+./release\moc_qcustomplot.o
+);

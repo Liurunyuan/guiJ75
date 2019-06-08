@@ -10,6 +10,8 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QThread>
+#include <QFileDialog>
+#include <QTextStream>
 
 #include "mythread.h"
 //char curve[12] = {0x5a,0x5a,0x01,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0xa5,0xa5};
@@ -26,10 +28,10 @@ typedef struct _Curve
 {
     qint16 maxCurrent: 1;
     qint16 speed: 1;
-    qint16 displacemet: 1;
-    qint16 current: 1;
-    qint16 voltage: 1;
-    qint16 ff: 1;
+    qint16 targetSpeed: 1;
+    qint16 duty: 1;
+    qint16 vol: 1;
+    qint16 temp: 1;
     qint16 temperature: 1;
     qint16 accel: 1;
 
@@ -74,7 +76,6 @@ public:
 
     void initTimer2();
 
-    void initRepeatTimer();
 
     void initCustomPlot();
     void initCustomPlot2();
@@ -86,16 +87,11 @@ public:
 
     void drawCurrentPosition(double x, double y);
 
-//    void initTxDataDisplay();
-
-//    void initRxDataDisplay();
-
     void configCuveMenu();
 
 public slots:
     void refreshLCD();
     void updatePlot();
-    void repeatTimerPlot();
 protected:
     void paintEvent(QPaintEvent *event);
     bool eventFilter(QObject *watched, QEvent *event);
@@ -116,47 +112,25 @@ private slots:
 
     void on_actionSystem_config_triggered();
 
-    void on_actionDisplacement_triggered();
-
     void on_actionMotor_speed_triggered();
 
-    void on_actionMotor_accel_triggered();
-
-    void on_actionCurrent_triggered();
-
-    void on_actionBus_voltage_triggered();
-
-    void on_openButton_2_clicked();
 
     void on_SendBtn_clicked();
 
-    void on_tableWidget_cellChanged(int row, int column);
-
-    void on_actionDisplacement2_triggered();
-
-    void on_actionMotor_speed2_triggered();
-
-    void on_actionMotor_accel2_triggered();
-
-    void on_actionCurrent2_triggered();
-
-    void on_actionBus_voltage2_triggered();
-
-    void on_duty_editingFinished();
-
-    void on_targetSpeed_editingFinished();
-
-    void on_dutySpinBox_editingFinished();
 
     void on_targetSpeedSpinBox_editingFinished();
 
     void on_clearButton_clicked();
 
-    void on_actionTemperatrue_triggered();
+    void on_actionDuty_triggered();
 
-    void on_actionMacCurrent_triggered();
+    void on_actionTargetSpeed_triggered();
 
-    void on_repeateBtn_clicked();
+    void on_actionCurrent_2_triggered();
+
+    void on_actionTemp_triggered();
+
+    void on_actionVol_triggered();
 
 private:
     static MainWindow* mainWindow;
@@ -165,7 +139,6 @@ private:
     Serialport* serialPortX;
     QTimer *timer1;
     QTimer *timer2;
-    QTimer *repeatTimer;
     qint16 curveCommand;
     int curveCount[2];
     QQueue<QByteArray> sendStringQ;
@@ -173,6 +146,7 @@ private:
     char curve2[12]     = {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x03,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
     char configPara[12] = {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
     char duty[12]       = {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x4f,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
+    char kp[12]         = {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x4b,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
     char targetSpeed[12]= {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x02,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
     char stateComm[12]  = {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x01,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
     char clearAlarm[12] = {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x04,(char)0x00,(char)0x01,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
@@ -183,6 +157,7 @@ private:
     int posX;
     int posY;
     int showTargetSpeed;
+    QFile* file;
 };
 
 
