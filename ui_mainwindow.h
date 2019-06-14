@@ -50,6 +50,7 @@ public:
     QAction *actionCurrent_2;
     QAction *actionTemp;
     QAction *actionVol;
+    QAction *actionLargeestCurrent;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QSplitter *splitter;
@@ -68,6 +69,8 @@ public:
     QLineEdit *lineEdit_6;
     QSpacerItem *horizontalSpacer;
     QVBoxLayout *verticalLayout_4;
+    QLabel *label_7;
+    QSpinBox *largestCurrent;
     QLabel *label_17;
     QSpinBox *MotorSpeed;
     QLabel *label_6;
@@ -149,6 +152,9 @@ public:
         actionVol = new QAction(MainWindow);
         actionVol->setObjectName(QStringLiteral("actionVol"));
         actionVol->setCheckable(true);
+        actionLargeestCurrent = new QAction(MainWindow);
+        actionLargeestCurrent->setObjectName(QStringLiteral("actionLargeestCurrent"));
+        actionLargeestCurrent->setCheckable(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -242,6 +248,18 @@ public:
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        label_7 = new QLabel(frame);
+        label_7->setObjectName(QStringLiteral("label_7"));
+
+        verticalLayout_4->addWidget(label_7);
+
+        largestCurrent = new QSpinBox(frame);
+        largestCurrent->setObjectName(QStringLiteral("largestCurrent"));
+        largestCurrent->setReadOnly(true);
+        largestCurrent->setMaximum(4096);
+
+        verticalLayout_4->addWidget(largestCurrent);
+
         label_17 = new QLabel(frame);
         label_17->setObjectName(QStringLiteral("label_17"));
 
@@ -460,6 +478,8 @@ public:
         menuLine_select->addAction(actionTemp);
         menuLine_select->addSeparator();
         menuLine_select->addAction(actionVol);
+        menuLine_select->addSeparator();
+        menuLine_select->addAction(actionLargeestCurrent);
         menuDockwidget->addAction(actionSystem_config);
         menuDockwidget->addSeparator();
         menuDockwidget->addAction(actionCurve_config);
@@ -484,7 +504,9 @@ public:
         actionCurrent_2->setText(QApplication::translate("MainWindow", "\347\224\265\346\265\201", 0));
         actionTemp->setText(QApplication::translate("MainWindow", "\346\270\251\345\272\246", 0));
         actionVol->setText(QApplication::translate("MainWindow", "\347\224\265\345\216\213", 0));
+        actionLargeestCurrent->setText(QApplication::translate("MainWindow", "\346\234\200\345\244\247\347\224\265\346\265\201", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", 0));
+        label_7->setText(QApplication::translate("MainWindow", "\346\234\200\345\244\247\347\224\265\346\265\201\347\240\201\345\200\274", 0));
         label_17->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\350\275\254\351\200\237\345\217\215\351\246\210\346\230\276\347\244\272", 0));
         label_6->setText(QApplication::translate("MainWindow", "\350\276\223\345\207\272\345\215\240\347\251\272\346\257\224\346\230\276\347\244\272", 0));
         label_15->setText(QApplication::translate("MainWindow", "\346\212\245\350\255\246\344\277\241\346\201\257\346\230\276\347\244\272", 0));

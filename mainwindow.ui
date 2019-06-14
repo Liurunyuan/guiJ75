@@ -139,6 +139,23 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>最大电流码值</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="largestCurrent">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="maximum">
+             <number>4096</number>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="label_17">
             <property name="text">
              <string>电机转速反馈显示</string>
@@ -270,6 +287,8 @@
     <addaction name="actionTemp"/>
     <addaction name="separator"/>
     <addaction name="actionVol"/>
+    <addaction name="separator"/>
+    <addaction name="actionLargeestCurrent"/>
    </widget>
    <widget class="QMenu" name="menuDockwidget">
     <property name="title">
@@ -551,6 +570,14 @@
    </property>
    <property name="text">
     <string>电压</string>
+   </property>
+  </action>
+  <action name="actionLargeestCurrent">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>最大电流</string>
    </property>
   </action>
  </widget>

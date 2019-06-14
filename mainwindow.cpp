@@ -31,6 +31,11 @@ MainWindow::MainWindow(QWidget *parent) :
     this->curveComm.all = 0;
     this->curveComm2.all = 0;
 
+    this->curveComm.bit.maxCurrent = 1;
+    this->curveComm.bit.speed = 1;
+    this->curveComm.bit.targetSpeed = 1;
+    this->curveComm.bit.duty = 1;
+
     this->curveCount[0] = 4;
     this->curveCount[1] = 0;
 
@@ -210,8 +215,8 @@ void MainWindow::initCustomPlot()
     ui->widget->graph(1)->setName("电机转速");
     ui->widget->graph(2)->setName("电机目标转速");
     ui->widget->graph(3)->setName("占空比");
-    ui->widget->graph(4)->setName("温度");
-    ui->widget->graph(5)->setName("电压");
+    ui->widget->graph(4)->setName("电压");
+    ui->widget->graph(5)->setName("温度");
 
 //    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
 //    timeTicker->setTimeFormat("%h:%m:%s");
@@ -315,7 +320,7 @@ void MainWindow::initTimer1()
 void MainWindow::initTimer2()
 {
     timer2 = new QTimer(this);
-    timer2->setInterval(40);
+    timer2->setInterval(0);
     connect(timer2, SIGNAL(timeout()), this, SLOT(updatePlot()));
     timer2->start();
 }
@@ -347,18 +352,20 @@ void MainWindow::updatePlot()
     static qint16 systemStatebak = -1;
     static QTime time(QTime::currentTime());
     double key = time.elapsed()/1000.0;
+    quint16 packnum = 0;
 
-    ct++;
+//    ct++;
 
-    if(ct > 5){
-        mutex.lock();
-        this->serialPort->clearReadQ();
-        mutex.unlock();
-        ct = 0;
-    }
+//    if(ct > 5){
+//        mutex.lock();
+//        this->serialPort->clearReadQ();
+//        mutex.unlock();
+//        ct = 0;
+//    }
 
     if(this->serialPort->isReadQEmpty() != 1)
     {
+
         file->open(QIODevice::ReadWrite|QIODevice::Append |QIODevice::Text );
         QTextStream stream(file);
         tmpbak = this->serialPort->getDisplayArray();
@@ -369,7 +376,13 @@ void MainWindow::updatePlot()
         y = (yh << 8) + yl;
         alarminfo = y;
 
+        yh = tmp[3];
+        yl = tmp[4];
+        y = (yh << 8) + yl;
+        packnum = (quint16)y;
+
         stream << "Time:" << key*1000;
+        stream << "     pack num:" << packnum;
         stream << "     Alarm:" << alarminfo;
         if(alarminfo != alarminfobak)
         {
@@ -514,16 +527,27 @@ void MainWindow::updatePlot()
 
                 ui->widget->graph(5)->addData(key,y);
                 break;
-                break;
+            case 6:
+                yh = tmp[6 + (i * 3)];
+                yl = tmp[7 + (i * 3)];
+                y = (qint16)((yh << 8) + yl);
+
+                ui->largestCurrent->setValue(y);
+
             default:
                 break;
             }
         }
         if(len > 2)
         {
-            ui->widget->xAxis->setRange(key, 8, Qt::AlignRight);
-            ui->widget->replot();
-//            ++key;
+            ct++;
+
+            if(ct > 5){
+                ui->widget->xAxis->setRange(key, 8, Qt::AlignRight);
+                ui->widget->replot();
+                 ct = 0;
+            }
+
         }
         stream << "\n";
         file->close();
@@ -1121,6 +1145,64 @@ void MainWindow::on_actionVol_triggered()
         }
         qDebug() << "cancle voltage";
         this->curveComm.bit.vol = 0;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
+    }
+
+}
+
+void MainWindow::on_actionLargeestCurrent_triggered()
+{
+    qint16 crc;
+    QByteArray send_data;
+    if(ui->actionLargeestCurrent->isChecked() == true)
+    {
+        if(curveCount[0] > MAXCURVE)
+        {
+            ui->actionLargeestCurrent->setChecked(false);
+            QMessageBox::about(NULL,"Warning","can not chooes more than 4 curves");
+            return;
+        }
+        else
+        {
+            curveCount[0]++;
+        }
+        qDebug() << "ask for largest current";
+
+        this->curveComm.bit.largestCurrent = 1;
+        curve[7] = this->curveComm.half.low8;
+        curve[6] = this->curveComm.half.high8;
+
+        crc = this->serialPort->calCrc(0, curve + 5, 3);
+
+        curve[9] = (char)crc;
+        curve[8] = (char)(crc >> 8);
+
+        send_data.append(curve,12);
+        qDebug() << send_data.toHex();
+        this->serialPort->sendData(send_data);
+        this->serialPort->sendData(send_data);
+
+    }
+    else
+    {
+        --curveCount[0];
+        if(curveCount[0] < 0)
+        {
+            curveCount[0] = 0;
+        }
+        qDebug() << "cancle largest current";
+        this->curveComm.bit.largestCurrent = 0;
         curve[7] = this->curveComm.half.low8;
         curve[6] = this->curveComm.half.high8;
 

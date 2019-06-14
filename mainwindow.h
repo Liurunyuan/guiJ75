@@ -15,7 +15,7 @@
 
 #include "mythread.h"
 //char curve[12] = {0x5a,0x5a,0x01,0x00,0x00,0x02,0x00,0x00,0x00,0x00,0xa5,0xa5};
-#define MAXCURVE 3
+#define MAXCURVE 5
 
 
 namespace Ui {
@@ -32,7 +32,7 @@ typedef struct _Curve
     qint16 duty: 1;
     qint16 vol: 1;
     qint16 temp: 1;
-    qint16 temperature: 1;
+    qint16 largestCurrent: 1;
     qint16 accel: 1;
 
     qint16 z: 1;
@@ -131,6 +131,8 @@ private slots:
     void on_actionTemp_triggered();
 
     void on_actionVol_triggered();
+
+    void on_actionLargeestCurrent_triggered();
 
 private:
     static MainWindow* mainWindow;
