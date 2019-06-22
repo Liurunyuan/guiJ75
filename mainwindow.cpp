@@ -368,7 +368,9 @@ void MainWindow::updatePlot()
 
         file->open(QIODevice::ReadWrite|QIODevice::Append |QIODevice::Text );
         QTextStream stream(file);
+        mutex.lock();
         tmpbak = this->serialPort->getDisplayArray();
+        mutex.unlock();
         tmp = tmpbak.data();
 
         yh = tmp[6];
@@ -451,21 +453,27 @@ void MainWindow::updatePlot()
             switch(systemState){
             case 0:
                 ui->lineEdit_6->setText("系统处于未知状态");
+                stream << "     State: Unknow";
                 break;
             case 1:
                 ui->lineEdit_6->setText("系统处于运行状态");
+                stream << "     State: Start";
                 break;
             case 2:
                 ui->lineEdit_6->setText("系统处于停止状态");
+                stream << "     State: Stop";
                 break;
             case 3:
                 ui->lineEdit_6->setText("系统处于报警状态");
+                stream << "     State: Alarm";
                 break;
             case 4:
                 ui->lineEdit_6->setText("系统处于 初始化状态");
+                stream << "     State: Init";
                 break;
             default:
                 ui->lineEdit_6->setText("系统处于未定义状态");
+                stream << "     State: Undefine";
                 break;
             }
 
