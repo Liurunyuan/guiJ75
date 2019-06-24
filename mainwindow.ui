@@ -141,7 +141,7 @@
           <item>
            <widget class="QLabel" name="label_7">
             <property name="text">
-             <string>最大电流码值</string>
+             <string>最大电流</string>
             </property>
            </widget>
           </item>

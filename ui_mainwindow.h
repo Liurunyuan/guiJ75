@@ -506,7 +506,7 @@ public:
         actionVol->setText(QApplication::translate("MainWindow", "\347\224\265\345\216\213", 0));
         actionLargeestCurrent->setText(QApplication::translate("MainWindow", "\346\234\200\345\244\247\347\224\265\346\265\201", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", 0));
-        label_7->setText(QApplication::translate("MainWindow", "\346\234\200\345\244\247\347\224\265\346\265\201\347\240\201\345\200\274", 0));
+        label_7->setText(QApplication::translate("MainWindow", "\346\234\200\345\244\247\347\224\265\346\265\201", 0));
         label_17->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\350\275\254\351\200\237\345\217\215\351\246\210\346\230\276\347\244\272", 0));
         label_6->setText(QApplication::translate("MainWindow", "\350\276\223\345\207\272\345\215\240\347\251\272\346\257\224\346\230\276\347\244\272", 0));
         label_15->setText(QApplication::translate("MainWindow", "\346\212\245\350\255\246\344\277\241\346\201\257\346\230\276\347\244\272", 0));

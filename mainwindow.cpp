@@ -91,6 +91,27 @@ void MainWindow::configCuveMenu()
     ui->actionMotor_speed->setChecked(true);
     ui->actionDuty->setChecked(true);
 }
+
+qint16 MainWindow::filterSpeed(qint16 speed)
+{
+    static int tmp[32] = {0};
+    static int i = 0;
+    int j;
+    int ret = 0;
+
+    tmp[i] = speed;
+    ++i;
+    if(i >= 32){
+        i = 0;
+    }
+
+    for(j = 0; j < 32; ++j){
+        ret = ret + tmp[j];
+    }
+    ret = ret/32;
+
+    return (qint16)ret;
+}
 void MainWindow::initCustomPlot()
 {
     ui->widget->show();
@@ -353,6 +374,8 @@ void MainWindow::updatePlot()
     static QTime time(QTime::currentTime());
     double key = time.elapsed()/1000.0;
     quint16 packnum = 0;
+    double percent = 0;
+    double currentmA = 0;
 
 //    ct++;
 
@@ -383,8 +406,8 @@ void MainWindow::updatePlot()
         y = (yh << 8) + yl;
         packnum = (quint16)y;
 
-        stream << "Time:" << key*1000;
-        stream << "     pack num:" << packnum;
+//        stream << "Time:" << key*1000;
+        stream << "     Pack num:" << packnum;
         stream << "     Alarm:" << alarminfo;
         if(alarminfo != alarminfobak)
         {
@@ -489,8 +512,10 @@ void MainWindow::updatePlot()
                 yh = tmp[6 + (i * 3)];
                 yl = tmp[7 + (i * 3)];
                 y = (yh << 8) + yl;
-                ui->widget->graph(0)->addData(key,y);
-                stream << "     Current:" << y;
+
+                currentmA = 28.9*y + 1284.9;
+                ui->widget->graph(0)->addData(key,currentmA);
+                stream << "     Current:" << currentmA;
                 break;
             case 1:
                 yh = tmp[6 + (i * 3)];
@@ -498,7 +523,7 @@ void MainWindow::updatePlot()
                 y = (yh << 8) + yl;
                 ui->MotorSpeed->setValue(y);
 
-                ui->widget->graph(1)->addData(key,y);
+                ui->widget->graph(1)->addData(key,filterSpeed(y));
                 stream << "     Speed:" << y;
                 break;
 
@@ -517,8 +542,10 @@ void MainWindow::updatePlot()
                 y = (qint16)((yh << 8) + yl);
                 ui->currentDuty->setValue(y);
 
-                ui->widget->graph(3)->addData(key,y);
-                stream << "     Duty:" << y;
+                percent = (double)y / 1495 * 100;
+
+                ui->widget->graph(3)->addData(key,percent * 100);
+                stream << "     Duty:" << percent << "%";
                 break;
             case 4:
                 yh = tmp[6 + (i * 3)];
@@ -540,7 +567,7 @@ void MainWindow::updatePlot()
                 yl = tmp[7 + (i * 3)];
                 y = (qint16)((yh << 8) + yl);
 
-                ui->largestCurrent->setValue(y);
+                ui->largestCurrent->setValue(28.9*y + 1284.9);
 
             default:
                 break;

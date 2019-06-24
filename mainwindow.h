@@ -89,6 +89,8 @@ public:
 
     void configCuveMenu();
 
+    qint16 filterSpeed(qint16 speed);
+
 public slots:
     void refreshLCD();
     void updatePlot();
