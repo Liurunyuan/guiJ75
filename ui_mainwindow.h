@@ -25,12 +25,14 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -67,7 +69,9 @@ public:
     QLineEdit *lineEdit_4;
     QLineEdit *lineEdit_5;
     QLineEdit *lineEdit_6;
-    QSpacerItem *horizontalSpacer;
+    QVBoxLayout *verticalLayout_6;
+    QTextBrowser *otaLog;
+    QProgressBar *otaprocess;
     QVBoxLayout *verticalLayout_4;
     QLabel *label_7;
     QSpinBox *largestCurrent;
@@ -81,6 +85,7 @@ public:
     QSpinBox *targetSpeedSpinBox;
     QVBoxLayout *verticalLayout_3;
     QPushButton *SendBtn;
+    QPushButton *otaBtn;
     QSpacerItem *verticalSpacer_3;
     QPushButton *clearButton;
     QMenuBar *menuBar;
@@ -241,9 +246,27 @@ public:
 
         horizontalLayout->addLayout(verticalLayout_5);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        otaLog = new QTextBrowser(frame);
+        otaLog->setObjectName(QStringLiteral("otaLog"));
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Minimum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(otaLog->sizePolicy().hasHeightForWidth());
+        otaLog->setSizePolicy(sizePolicy2);
 
-        horizontalLayout->addItem(horizontalSpacer);
+        verticalLayout_6->addWidget(otaLog);
+
+        otaprocess = new QProgressBar(frame);
+        otaprocess->setObjectName(QStringLiteral("otaprocess"));
+        otaprocess->setValue(24);
+
+        verticalLayout_6->addWidget(otaprocess);
+
+
+        horizontalLayout->addLayout(verticalLayout_6);
 
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setSpacing(6);
@@ -256,7 +279,7 @@ public:
         largestCurrent = new QSpinBox(frame);
         largestCurrent->setObjectName(QStringLiteral("largestCurrent"));
         largestCurrent->setReadOnly(true);
-        largestCurrent->setMaximum(4096);
+        largestCurrent->setMaximum(1000000);
 
         verticalLayout_4->addWidget(largestCurrent);
 
@@ -317,6 +340,11 @@ public:
 
         verticalLayout_3->addWidget(SendBtn);
 
+        otaBtn = new QPushButton(frame);
+        otaBtn->setObjectName(QStringLiteral("otaBtn"));
+
+        verticalLayout_3->addWidget(otaBtn);
+
         verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_3->addItem(verticalSpacer_3);
@@ -352,11 +380,11 @@ public:
         MainWindow->setStatusBar(statusBar);
         dockWidget = new QDockWidget(MainWindow);
         dockWidget->setObjectName(QStringLiteral("dockWidget"));
-        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
-        dockWidget->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
+        dockWidget->setSizePolicy(sizePolicy3);
         dockWidget->setMinimumSize(QSize(91, 42));
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QStringLiteral("dockWidgetContents"));
@@ -429,7 +457,7 @@ public:
         dockWidgetContents_2->setObjectName(QStringLiteral("dockWidgetContents_2"));
         layoutWidget1 = new QWidget(dockWidgetContents_2);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(0, 10, 101, 136));
+        layoutWidget1->setGeometry(QRect(0, 10, 107, 136));
         verticalLayout = new QVBoxLayout(layoutWidget1);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -512,6 +540,7 @@ public:
         label_15->setText(QApplication::translate("MainWindow", "\346\212\245\350\255\246\344\277\241\346\201\257\346\230\276\347\244\272", 0));
         label_14->setText(QApplication::translate("MainWindow", "\347\233\256\346\240\207\350\275\254\351\200\237\350\256\276\347\275\256", 0));
         SendBtn->setText(QApplication::translate("MainWindow", "Start", 0));
+        otaBtn->setText(QApplication::translate("MainWindow", "OTA", 0));
         clearButton->setText(QApplication::translate("MainWindow", "clear", 0));
         menuHelp->setTitle(QApplication::translate("MainWindow", "\345\270\256\345\212\251", 0));
         menuLine_select->setTitle(QApplication::translate("MainWindow", "\346\233\262\347\272\277\351\200\211\346\213\251", 0));

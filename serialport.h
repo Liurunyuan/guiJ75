@@ -32,6 +32,8 @@ public:
     int getRxQLength();
     bool needUnpackData();
     void unpackData();
+    QByteArray getOtaLog();
+    void clearOtaLog();
     
 private slots:
     void readData();
@@ -44,6 +46,7 @@ private:
     QByteArray packageHead;
     QByteArray packageTail;
     QMutex mutex;
+    QByteArray otaLog;
 };
 
 #endif // SERIALPORT_H

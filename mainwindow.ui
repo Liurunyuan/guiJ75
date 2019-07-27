@@ -124,17 +124,25 @@
          </layout>
         </item>
         <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QTextBrowser" name="otaLog">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QProgressBar" name="otaprocess">
+            <property name="value">
+             <number>24</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -151,7 +159,7 @@
              <bool>true</bool>
             </property>
             <property name="maximum">
-             <number>4096</number>
+             <number>1000000</number>
             </property>
            </widget>
           </item>
@@ -225,6 +233,13 @@
            <widget class="QPushButton" name="SendBtn">
             <property name="text">
              <string>Start</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="otaBtn">
+            <property name="text">
+             <string>OTA</string>
             </property>
            </widget>
           </item>
@@ -439,7 +454,7 @@
       <rect>
        <x>0</x>
        <y>10</y>
-       <width>101</width>
+       <width>107</width>
        <height>136</height>
       </rect>
      </property>

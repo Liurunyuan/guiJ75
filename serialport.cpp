@@ -69,6 +69,8 @@ void Serialport::sendStringEnquque(QByteArray sdata)
 void Serialport::readData()
 {
     QByteArray tmp = this->readAll();
+//    qDebug() << tmp;
+    otaLog.append(tmp);
     if(!tmp.isEmpty())
     {
            mutex.lock();
@@ -182,6 +184,16 @@ void Serialport::unpackData()
             return;
         }
     }
+}
+
+QByteArray Serialport::getOtaLog()
+{
+    return otaLog;
+}
+
+void Serialport::clearOtaLog()
+{
+    this->otaLog.clear();
 }
 
 int Serialport::calCrc(int crc, const char *buf, int len)

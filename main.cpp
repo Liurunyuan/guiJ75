@@ -9,6 +9,7 @@
 #include <QDebug>
 #include "serialport.h"
 #include "updateplot.h"
+#include "ota.h"
 
 
 int main(int argc, char *argv[])
@@ -19,6 +20,10 @@ int main(int argc, char *argv[])
 
     updatePlot updatePlotThread(&w);
     updatePlotThread.start();
+
+
+    ota otaThread(&w);
+    otaThread.start();
 
     return a.exec();
 }

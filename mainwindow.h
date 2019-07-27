@@ -76,6 +76,24 @@ public:
 
     void initTimer2();
 
+    void initOtaTimer();
+
+    int getOtaStatus();
+
+    int getOtaWaitingCmd();
+
+    int setOtaWaitingCmd(int state);
+
+    void setOtaStatus(int val);
+
+    void setOtaPercentage(double val);
+
+    QString getFile2();
+
+    void otaSerialSendData(QByteArray d);
+
+    void otaFlashDataEnqueue(QByteArray d);
+
 
     void initCustomPlot();
     void initCustomPlot2();
@@ -94,6 +112,7 @@ public:
 public slots:
     void refreshLCD();
     void updatePlot();
+    void otaSendData();
 protected:
     void paintEvent(QPaintEvent *event);
     bool eventFilter(QObject *watched, QEvent *event);
@@ -136,6 +155,8 @@ private slots:
 
     void on_actionLargeestCurrent_triggered();
 
+    void on_otaBtn_clicked();
+
 private:
     static MainWindow* mainWindow;
     Ui::MainWindow *ui;
@@ -143,6 +164,8 @@ private:
     Serialport* serialPortX;
     QTimer *timer1;
     QTimer *timer2;
+    QTimer *otaTimer;
+
     qint16 curveCommand;
     int curveCount[2];
     QQueue<QByteArray> sendStringQ;
@@ -154,6 +177,9 @@ private:
     char targetSpeed[12]= {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x02,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
     char stateComm[12]  = {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x01,(char)0x00,(char)0x00,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
     char clearAlarm[12] = {(char)0x5a,(char)0x5a,(char)0x01,(char)0x00,(char)0x00,(char)0x04,(char)0x00,(char)0x01,(char)0x00,(char)0x00,(char)0xa5,(char)0xa5};
+
+
+
     //QByteArray curve[12] = {0x5a, 0x5a, 0x01, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0xa5, 0xa5};
     //QByteArray configPara[12] = {0x5a, 0x5a, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xa5, 0xa5};
     CurveStr curveComm;
@@ -162,6 +188,12 @@ private:
     int posY;
     int showTargetSpeed;
     QFile* file;
+    QString fileName2;
+    int otaStatus;
+    int otaWatingCmd;
+    double otaPercentage;
+    QQueue<QByteArray> otaFlahDataQ;
+
 };
 
 

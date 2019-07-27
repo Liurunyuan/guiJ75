@@ -16,12 +16,21 @@ MainWindow::MainWindow(QWidget *parent) :
     this->posX = 0;
     this->posY = 0;
 
+    this->otaStatus = 0;
+    this->otaWatingCmd = 0;
+
+    this->otaPercentage = 0;
+
+    ui->otaprocess->setValue(0);
+
 
     initialUI();
 
     initTimer1();
 
     initTimer2();
+
+    initOtaTimer();
 
 
     updateSerialInfo();
@@ -72,6 +81,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->label_3->setStyleSheet("QLabel{color: red;}");
     ui->label_4->setStyleSheet("QLabel{color: red;}");
     ui->label_5->setStyleSheet("QLabel{color: red;}");
+    ui->otaBtn->setStyleSheet("QPushButton {background-color:green;}");
 }
 
 MainWindow::~MainWindow()
@@ -346,6 +356,55 @@ void MainWindow::initTimer2()
     timer2->start();
 }
 
+void MainWindow::initOtaTimer()
+{
+    otaTimer = new QTimer(this);
+    otaTimer->setInterval(20);
+    connect(otaTimer, SIGNAL(timeout()), this, SLOT(otaSendData()));
+}
+
+
+int MainWindow::getOtaStatus()
+{
+    return otaStatus;
+}
+
+int MainWindow::getOtaWaitingCmd()
+{
+    return this->otaWatingCmd;
+}
+
+int MainWindow::setOtaWaitingCmd(int state)
+{
+    this->otaWatingCmd = state;
+    return 1;
+}
+
+void MainWindow::setOtaStatus(int val)
+{
+    otaStatus = 0;
+}
+
+void MainWindow::setOtaPercentage(double val)
+{
+    this->otaPercentage = val;
+}
+
+QString MainWindow::getFile2()
+{
+    return fileName2;
+}
+
+void MainWindow::otaSerialSendData(QByteArray d)
+{
+    this->serialPort->sendData(d);
+}
+
+void MainWindow::otaFlashDataEnqueue(QByteArray d)
+{
+    otaFlahDataQ.enqueue(d);
+}
+
 
 
 void MainWindow::initialUI()
@@ -568,6 +627,41 @@ void MainWindow::updatePlot()
                 y = (qint16)((yh << 8) + yl);
 
                 ui->largestCurrent->setValue(28.9*y + 1284.9);
+            case 0x07:
+                qDebug() << "OTA waiting command from boot loader received";
+
+
+                if(this->otaStatus == 1){
+
+                    qDebug() << "send----";
+
+                    QByteArray ota;
+                    ota.append(0x55);
+                    ota.append(0x55);
+                    ota.append(0x55);
+                    ota.append(0x55);
+                    ota.append(0x55);
+                    ota.append(0x55);
+                    ota.append(0x55);
+                    ota.append(0x55);
+                    ota.append(0x55);
+                    ota.append(0x55);
+
+                    this->serialPort->sendData(ota);
+                    qDebug() << "5555";
+
+                }
+                break;
+            case 0x08:
+                qDebug() << "Received Erase Flash Status";
+                yh = tmp[6 + (i * 3)];
+                yl = tmp[7 + (i * 3)];
+                y = (qint16)((yh << 8) + yl);
+                if(y == 0){
+                        qDebug() << "Received Erase Flash Status success";
+                        this->otaWatingCmd = 1;
+                }
+                break;
 
             default:
                 break;
@@ -588,6 +682,50 @@ void MainWindow::updatePlot()
         file->close();
     }
 }
+
+void MainWindow::otaSendData()
+{
+//    qDebug() << "ota send data";
+
+    if(this->otaStatus == 0){
+        return;
+    }
+
+    if(this->serialPort->getOtaLog().length() != 0){
+        QByteArray tmp;
+        QByteArray head;
+        head.push_back(0x5a);
+        head.push_back(0x5a);
+        tmp = this->serialPort->getOtaLog();
+        if(tmp.indexOf(head) == -1){
+            ui->otaLog->append(tmp);
+        }
+        else{
+            tmp = tmp.left(tmp.indexOf(head));
+            ui->otaLog->append(tmp);
+        }
+    }
+
+    this->serialPort->clearOtaLog();
+
+    if(this->otaPercentage !=0){
+
+        int per;
+
+        per = this->otaPercentage * 100;
+        ui->otaprocess->setValue(per);
+
+    }
+
+    QByteArray tmpbak;
+
+    if(this->otaFlahDataQ.isEmpty() != 1)
+    {
+        tmpbak = this->otaFlahDataQ.dequeue();
+        this->serialPort->sendData(tmpbak);
+    }
+}
+
 
 void MainWindow::paintEvent(QPaintEvent *event)
 {
@@ -624,13 +762,14 @@ MainWindow* MainWindow::mainWindow = NULL;
 
 void MainWindow::on_openButton_clicked()
 {
-     QString fileName = QFileDialog::getOpenFileName(this,tr("选择日志文件"),"",tr("TXT(*.txt)")); //选择路径
+
+    QString fileName = QFileDialog::getOpenFileName(this,tr("选择日志文件"),"",tr("TXT(*.txt)")); //选择路径
     qDebug() << fileName;
     file = new QFile(fileName);
     if(file->open(QIODevice::ReadWrite|QIODevice::Append |QIODevice::Text ))
     {
        QTextStream stream(file);
-       stream << "current" << "     " << "temperature " << "\r\n";
+//       stream << "current" << "     " << "temperature " << "\r\n";
        file->close();
 
     }
@@ -822,6 +961,7 @@ void MainWindow::on_SendBtn_clicked()
         stateComm[8] = (char)(crc >> 8);
 
         send_data.append(stateComm,12);
+        qDebug() << send_data;
         qDebug() << send_data.toHex();
         this->serialPort->sendData(send_data);
         this->serialPort->sendData(send_data);
@@ -841,6 +981,7 @@ void MainWindow::on_SendBtn_clicked()
 
         send_data.append(stateComm,12);
         qDebug() << send_data.toHex();
+        qDebug() << send_data;
         this->serialPort->sendData(send_data);
         this->serialPort->sendData(send_data);
         this->serialPortX->sendData(send_data);
@@ -889,6 +1030,7 @@ void MainWindow::on_targetSpeedSpinBox_editingFinished()
 void MainWindow::on_clearButton_clicked()
 {
     qDebug() << "clear alarm info";
+    ui->otaLog->clear();
     qint16 crc;
     QByteArray send_data;
 
@@ -903,9 +1045,6 @@ void MainWindow::on_clearButton_clicked()
     this->serialPort->sendData(send_data);
 
 }
-
-
-
 
 void MainWindow::on_actionDuty_triggered()
 {
@@ -1252,4 +1391,36 @@ void MainWindow::on_actionLargeestCurrent_triggered()
         this->serialPort->sendData(send_data);
     }
 
+}
+
+void MainWindow::on_otaBtn_clicked()
+{
+    if(otaStatus == 1){
+        otaStatus = 0;
+        ui->otaBtn->setStyleSheet("QPushButton {background-color:green;}");
+         otaTimer->stop();
+        return;
+    }
+
+
+    ui->otaBtn->setStyleSheet("QPushButton {background-color:red;}");
+
+//    QByteArray ota;
+//    ota.append(0x55);
+//    ota.append(0x55);
+//    ota.append(0x55);
+//    ota.append(0x55);
+//    ota.append(0x55);
+//    ota.append(0x55);
+//    ota.append(0x55);
+//    ota.append(0x55);
+//    ota.append(0x55);
+//    this->serialPort->sendData(ota);
+
+
+    fileName2 = QFileDialog::getOpenFileName(this,tr("Open File"),QDir::currentPath(), tr("*.hex"));
+
+
+    otaStatus = 1;
+    otaTimer->start();
 }

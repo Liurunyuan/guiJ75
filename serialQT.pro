@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     serialport.cpp \
     qcustomplot.cpp \
     mythread.cpp \
-    updateplot.cpp
+    updateplot.cpp \
+    ota.cpp
 
 HEADERS  += mainwindow.h \
     singleton.h \
@@ -43,7 +44,8 @@ HEADERS  += mainwindow.h \
     serialport.h \
     qcustomplot.h \
     mythread.h \
-    updateplot.h
+    updateplot.h \
+    ota.h
 
 FORMS    += mainwindow.ui
 CONFIG += c++11

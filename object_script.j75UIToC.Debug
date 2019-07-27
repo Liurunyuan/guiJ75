@@ -9,6 +9,7 @@ INPUT(
 ./debug\qcustomplot.o
 ./debug\mythread.o
 ./debug\updateplot.o
+./debug\ota.o
 ./debug\moc_mainwindow.o
 ./debug\moc_serialport.o
 ./debug\moc_qcustomplot.o
