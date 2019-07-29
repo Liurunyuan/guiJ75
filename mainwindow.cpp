@@ -685,8 +685,6 @@ void MainWindow::updatePlot()
 
 void MainWindow::otaSendData()
 {
-//    qDebug() << "ota send data";
-
     if(this->otaStatus == 0){
         return;
     }
@@ -1423,4 +1421,65 @@ void MainWindow::on_otaBtn_clicked()
 
     otaStatus = 1;
     otaTimer->start();
+}
+
+void MainWindow::on_setAki_editingFinished()
+{
+    qDebug() << "set aki";
+    static int dutybak = -1;
+    qint16 crc;
+    QByteArray send_data;
+    CurveStr value;
+
+    value.all = ui->setAki->text().toInt();
+
+    if(value.all == dutybak){
+        qDebug() << "same value, don't setting";
+        return;
+    }
+
+    dutybak = value.all;
+
+    aki[7] = value.half.low8;
+    aki[6] = value.half.high8;
+    crc = this->serialPort->calCrc(0, aki + 5, 3);
+
+    aki[9] = (char)crc;
+    aki[8] = (char)(crc >> 8);
+
+    send_data.append(aki,12);
+    qDebug() << send_data.toHex();
+    this->serialPort->sendData(send_data);
+    this->serialPort->sendData(send_data);
+
+}
+
+void MainWindow::on_setAkp_editingFinished()
+{
+    qDebug() << "set akp";
+    static int dutybak = -1;
+    qint16 crc;
+    QByteArray send_data;
+    CurveStr value;
+
+    value.all = ui->setAkp->text().toInt();
+
+    if(value.all == dutybak){
+        qDebug() << "same value, don't setting";
+        return;
+    }
+
+    dutybak = value.all;
+
+    akp[7] = value.half.low8;
+    akp[6] = value.half.high8;
+    crc = this->serialPort->calCrc(0, akp + 5, 3);
+
+    akp[9] = (char)crc;
+    akp[8] = (char)(crc >> 8);
+
+    send_data.append(akp,12);
+    qDebug() << send_data.toHex();
+    this->serialPort->sendData(send_data);
+    this->serialPort->sendData(send_data);
 }

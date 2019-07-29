@@ -126,6 +126,40 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>AKI(积分调整系数设置)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="setAki">
+            <property name="minimum">
+             <number>100</number>
+            </property>
+            <property name="maximum">
+             <number>2000</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>AKP(比例调整系数设置）</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="setAkp">
+            <property name="minimum">
+             <number>100</number>
+            </property>
+            <property name="maximum">
+             <number>2000</number>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QTextBrowser" name="otaLog">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
@@ -277,7 +311,7 @@
      <x>0</x>
      <y>0</y>
      <width>1228</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">

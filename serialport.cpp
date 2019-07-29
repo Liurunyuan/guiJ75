@@ -69,13 +69,12 @@ void Serialport::sendStringEnquque(QByteArray sdata)
 void Serialport::readData()
 {
     QByteArray tmp = this->readAll();
-//    qDebug() << tmp;
     otaLog.append(tmp);
     if(!tmp.isEmpty())
     {
-           mutex.lock();
+        mutex.lock();
         readComData.append(tmp);
-           mutex.unlock();
+        mutex.unlock();
     }
 }
 
@@ -86,9 +85,7 @@ void Serialport::sendData(QByteArray data)
 
 QByteArray Serialport::getDisplayArray()
 {
-//    mutex.lock();
     return readStringQ.dequeue();
-//    mutex.unlock();
 }
 
 QVector<QString> Serialport::getAvailablePort()
@@ -151,7 +148,6 @@ void Serialport::unpackData()
                     if(readComData[headpos + length - 2] == (char)0xa5)
                     {
                         key = readComData.mid(headpos, length);
-//                        qDebug() << key;
                         mutex.lock();
                         readStringQ.enqueue(key);
                         readComData = readComData.right(readComData.length() - length - headpos);

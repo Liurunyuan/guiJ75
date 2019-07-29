@@ -70,6 +70,10 @@ public:
     QLineEdit *lineEdit_5;
     QLineEdit *lineEdit_6;
     QVBoxLayout *verticalLayout_6;
+    QLabel *label_8;
+    QSpinBox *setAki;
+    QLabel *label_9;
+    QSpinBox *setAkp;
     QTextBrowser *otaLog;
     QProgressBar *otaprocess;
     QVBoxLayout *verticalLayout_4;
@@ -249,6 +253,30 @@ public:
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setSpacing(6);
         verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        label_8 = new QLabel(frame);
+        label_8->setObjectName(QStringLiteral("label_8"));
+
+        verticalLayout_6->addWidget(label_8);
+
+        setAki = new QSpinBox(frame);
+        setAki->setObjectName(QStringLiteral("setAki"));
+        setAki->setMinimum(100);
+        setAki->setMaximum(2000);
+
+        verticalLayout_6->addWidget(setAki);
+
+        label_9 = new QLabel(frame);
+        label_9->setObjectName(QStringLiteral("label_9"));
+
+        verticalLayout_6->addWidget(label_9);
+
+        setAkp = new QSpinBox(frame);
+        setAkp->setObjectName(QStringLiteral("setAkp"));
+        setAkp->setMinimum(100);
+        setAkp->setMaximum(2000);
+
+        verticalLayout_6->addWidget(setAkp);
+
         otaLog = new QTextBrowser(frame);
         otaLog->setObjectName(QStringLiteral("otaLog"));
         QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -364,7 +392,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1228, 21));
+        menuBar->setGeometry(QRect(0, 0, 1228, 23));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuLine_select = new QMenu(menuBar);
@@ -534,6 +562,8 @@ public:
         actionVol->setText(QApplication::translate("MainWindow", "\347\224\265\345\216\213", 0));
         actionLargeestCurrent->setText(QApplication::translate("MainWindow", "\346\234\200\345\244\247\347\224\265\346\265\201", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Tab 1", 0));
+        label_8->setText(QApplication::translate("MainWindow", "AKI(\347\247\257\345\210\206\350\260\203\346\225\264\347\263\273\346\225\260\350\256\276\347\275\256)", 0));
+        label_9->setText(QApplication::translate("MainWindow", "AKP(\346\257\224\344\276\213\350\260\203\346\225\264\347\263\273\346\225\260\350\256\276\347\275\256\357\274\211", 0));
         label_7->setText(QApplication::translate("MainWindow", "\346\234\200\345\244\247\347\224\265\346\265\201", 0));
         label_17->setText(QApplication::translate("MainWindow", "\347\224\265\346\234\272\350\275\254\351\200\237\345\217\215\351\246\210\346\230\276\347\244\272", 0));
         label_6->setText(QApplication::translate("MainWindow", "\350\276\223\345\207\272\345\215\240\347\251\272\346\257\224\346\230\276\347\244\272", 0));
