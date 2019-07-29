@@ -249,10 +249,7 @@ void MainWindow::initCustomPlot()
     ui->widget->graph(4)->setName("电压");
     ui->widget->graph(5)->setName("温度");
 
-//    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
-//    timeTicker->setTimeFormat("%h:%m:%s");
-//    ui->widget->xAxis->setTicker(timeTicker);
-    //customPlot->axisRect()->setupFullAxesBox();
+
     ui->widget->replot();
 }
 
@@ -436,14 +433,7 @@ void MainWindow::updatePlot()
     double percent = 0;
     double currentmA = 0;
 
-//    ct++;
 
-//    if(ct > 5){
-//        mutex.lock();
-//        this->serialPort->clearReadQ();
-//        mutex.unlock();
-//        ct = 0;
-//    }
 
     if(this->serialPort->isReadQEmpty() != 1)
     {
@@ -767,7 +757,7 @@ void MainWindow::on_openButton_clicked()
     if(file->open(QIODevice::ReadWrite|QIODevice::Append |QIODevice::Text ))
     {
        QTextStream stream(file);
-//       stream << "current" << "     " << "temperature " << "\r\n";
+       stream << "Start" << "     " << "Recording " << "\r\n";
        file->close();
 
     }

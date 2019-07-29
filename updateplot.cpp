@@ -16,15 +16,15 @@ updatePlot::~updatePlot()
 
 void updatePlot::run()
 {
-//    QThread::msleep(20);
+    QThread::msleep(20);
     while(!isInterruptionRequested())
     {
-        QThread::msleep(20);
+//        QThread::msleep(20);
         if(MainWindow::getInstance()->needToUnpack() == true)
         {
-            mutex.lock();
+//            mutex.lock();
             MainWindow::getInstance()->unpack();
-            mutex.unlock();
+//            mutex.unlock();
         }
     }
 }
