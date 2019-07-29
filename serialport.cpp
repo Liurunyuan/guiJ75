@@ -72,7 +72,9 @@ void Serialport::readData()
     otaLog.append(tmp);
     if(!tmp.isEmpty())
     {
+        mutex.lock();
         readComData.append(tmp);
+        mutex.unlock();
     }
 }
 
