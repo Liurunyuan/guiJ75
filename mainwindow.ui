@@ -134,11 +134,23 @@
           </item>
           <item>
            <widget class="QSpinBox" name="setAki">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>306</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="minimum">
              <number>100</number>
             </property>
             <property name="maximum">
-             <number>2000</number>
+             <number>6000</number>
             </property>
            </widget>
           </item>
@@ -155,7 +167,7 @@
              <number>100</number>
             </property>
             <property name="maximum">
-             <number>2000</number>
+             <number>6000</number>
             </property>
            </widget>
           </item>

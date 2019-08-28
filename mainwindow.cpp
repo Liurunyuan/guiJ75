@@ -82,6 +82,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->label_4->setStyleSheet("QLabel{color: red;}");
     ui->label_5->setStyleSheet("QLabel{color: red;}");
     ui->otaBtn->setStyleSheet("QPushButton {background-color:green;}");
+
+    ui->otaLog->hide();
+    ui->otaprocess->hide();
+    ui->otaBtn->hide();
+
+    ui->setAki->setValue(3000);
+    ui->setAkp->setValue(3000);
 }
 
 MainWindow::~MainWindow()
@@ -616,7 +623,8 @@ void MainWindow::updatePlot()
                 yl = tmp[7 + (i * 3)];
                 y = (qint16)((yh << 8) + yl);
 
-                ui->largestCurrent->setValue(28.9*y + 1284.9);
+//                ui->largestCurrent->setValue(28.9*y + 1284.9);
+                ui->largestCurrent->setValue(y);
             case 0x07:
                 qDebug() << "OTA waiting command from boot loader received";
 

@@ -260,8 +260,14 @@ public:
 
         setAki = new QSpinBox(frame);
         setAki->setObjectName(QStringLiteral("setAki"));
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(setAki->sizePolicy().hasHeightForWidth());
+        setAki->setSizePolicy(sizePolicy2);
+        setAki->setMinimumSize(QSize(306, 0));
         setAki->setMinimum(100);
-        setAki->setMaximum(2000);
+        setAki->setMaximum(6000);
 
         verticalLayout_6->addWidget(setAki);
 
@@ -273,17 +279,17 @@ public:
         setAkp = new QSpinBox(frame);
         setAkp->setObjectName(QStringLiteral("setAkp"));
         setAkp->setMinimum(100);
-        setAkp->setMaximum(2000);
+        setAkp->setMaximum(6000);
 
         verticalLayout_6->addWidget(setAkp);
 
         otaLog = new QTextBrowser(frame);
         otaLog->setObjectName(QStringLiteral("otaLog"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Minimum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(otaLog->sizePolicy().hasHeightForWidth());
-        otaLog->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Minimum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(otaLog->sizePolicy().hasHeightForWidth());
+        otaLog->setSizePolicy(sizePolicy3);
 
         verticalLayout_6->addWidget(otaLog);
 
@@ -408,11 +414,11 @@ public:
         MainWindow->setStatusBar(statusBar);
         dockWidget = new QDockWidget(MainWindow);
         dockWidget->setObjectName(QStringLiteral("dockWidget"));
-        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
-        dockWidget->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy4(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
+        dockWidget->setSizePolicy(sizePolicy4);
         dockWidget->setMinimumSize(QSize(91, 42));
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QStringLiteral("dockWidgetContents"));
